@@ -268,7 +268,8 @@ a {
 .swatch-ink { background: var(--brand-ink); }
 .swatch-charcoal { background: var(--brand-charcoal); }
 .swatch-slate { background: var(--brand-slate); }
-.swatch-steel { background: var(--brand-steel); }
+.swatch-steel { color: #000; background: var(--brand-steel); }
+.swatch-steel code { opacity: 1; }
 .swatch-sage { background: var(--brand-sage); color: var(--brand-ink); }
 .swatch-mint { background: var(--brand-mint); color: var(--brand-ink); }
 
