@@ -29,3 +29,16 @@ app-stylr-macos-release-check \
 ```
 
 The command checks semantic and numeric versions, HTTPS feed configuration, the Sparkle public key, signed-feed requirements, archive name and signature metadata, and ZIP integrity. It validates local release artifacts only. It does not sign, upload, deploy, or fetch a public feed.
+
+## `app-stylr-reference`
+
+```sh
+app-stylr-reference \
+  --output out/app-stylr \
+  --canonical-url https://example.com/app-stylr \
+  [--base-path /app-stylr]
+```
+
+The command builds a self-contained copy of the App Stylr Reference from the installed package. It copies only the public adapters and assets required by the page, writes a machine-readable `app-stylr-reference.json` manifest, and rewrites URLs for the requested host path. When `--base-path` is omitted, the canonical URL pathname is used.
+
+Repository maintainers may omit all options to reproduce the root artifact in `.site/` for the existing standalone host. The output must be a dedicated child directory because the command replaces that directory on each run.
