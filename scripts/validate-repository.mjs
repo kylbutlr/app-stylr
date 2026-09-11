@@ -278,6 +278,10 @@ assert(
   "Visual contract must preserve the creator-signature text casing."
 );
 assert(
+  /\.swatch-steel\s*\{[^}]*color:\s*#000;[^}]*background:\s*var\(--brand-steel\);[^}]*\}[\s\S]*?\.swatch-steel code\s*\{[^}]*opacity:\s*1;/s.test(referenceCss),
+  "Steel palette labels must preserve readable contrast against the swatch."
+);
+assert(
   /\.task-check\.is-complete::after\s*\{[^}]*content:\s*"";[^}]*transform:\s*translateY\(-1px\) rotate\(45deg\);/s.test(referenceCss),
   "Visual contract completed checkbox must draw an optically centered checkmark."
 );
