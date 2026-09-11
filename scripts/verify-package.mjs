@@ -101,6 +101,18 @@ try {
     "Generated Reference canonical URL is incorrect."
   );
   assert(
+    referenceHtml.includes('<meta property="og:url" content="https://example.com/app-stylr" />') &&
+      referenceHtml.includes(
+        '<meta property="og:image" content="https://example.com/app-stylr/assets/platform-icons/reference/web/icon-512.png" />'
+      ) &&
+      referenceHtml.includes('"url":"https://example.com/app-stylr"'),
+    "Generated Reference sharing metadata does not use the requested canonical URL."
+  );
+  assert(
+    !referenceHtml.includes("__APP_STYLR_SOCIAL_IMAGE_URL__"),
+    "Generated Reference contains an unresolved metadata placeholder."
+  );
+  assert(
     referenceHtml.includes('href="/app-stylr/styles.css"') &&
       referenceHtml.includes('src="/app-stylr/assets/app-icon-gradient-base.svg"'),
     "Generated Reference HTML does not use the requested base path."

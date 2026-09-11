@@ -142,12 +142,14 @@ async function main() {
     readFile(path.join(referenceRoot, "index.html"), "utf8"),
     readFile(path.join(referenceRoot, "styles.css"), "utf8")
   ]);
+  const socialImageUrl = new URL(
+    publicPath(options.basePath, "assets/platform-icons/reference/web/icon-512.png"),
+    options.canonicalUrl
+  ).toString();
 
   const renderedHtml = referenceHtml
-    .replace(
-      /<link rel="canonical" href="[^"]+" \/>/u,
-      `<link rel="canonical" href="${options.canonicalUrl}" />`
-    )
+    .replaceAll(defaultCanonicalUrl, options.canonicalUrl)
+    .replaceAll("__APP_STYLR_SOCIAL_IMAGE_URL__", socialImageUrl)
     .replaceAll("../assets/", publicPath(options.basePath, "assets/"))
     .replaceAll("./styles.css", publicPath(options.basePath, "styles.css"));
   const renderedCss = referenceCss.replaceAll(

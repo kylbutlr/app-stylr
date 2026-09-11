@@ -265,6 +265,9 @@ assert(reference.includes("Geist Sans"), "Reference must identify Geist Sans as 
 assert(reference.includes("Geist Mono"), "Reference must identify Geist Mono as the technical typeface.");
 assert(reference.includes("Canonical tokens in practice"), "Reference must include the consolidated system specimen.");
 assert(reference.includes("One recognizable system across every small product"), "Reference must include the consolidated design direction.");
+assert(reference.includes('name="description"'), "Reference must include a search description.");
+assert(reference.includes('property="og:url"'), "Reference must include a share URL.");
+assert(reference.includes('type="application/ld+json"'), "Reference must include structured data.");
 assert(!/game interface|course builder|game profile/iu.test(reference), "Reference must not contain game-specific content.");
 assert(
   reference.includes('<span class="task-check is-complete" aria-hidden="true"></span>'),
