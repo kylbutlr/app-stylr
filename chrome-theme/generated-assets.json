@@ -1,0 +1,14 @@
+{
+  "rasterArtifactVersion": 1,
+  "rasterSourceHash": "d54c9b6292e37a517de1823115482627d3ef9ff46cb81c4700f1fc4d2223b0f3",
+  "outputs": {
+    "images/theme-ntp-background.png": {
+      "width": 2560,
+      "height": 1440
+    },
+    "preview.png": {
+      "width": 1440,
+      "height": 900
+    }
+  }
+}
