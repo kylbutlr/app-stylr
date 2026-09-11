@@ -54,6 +54,7 @@ const conventionsGuidePath = path.join(repoRoot, "docs", "conventions.md");
 const generatedFilesGuidePath = path.join(repoRoot, "docs", "generated-files.md");
 const privacyGuidePath = path.join(repoRoot, "docs", "privacy.md");
 const publicBoundaryGuidePath = path.join(repoRoot, "docs", "public-boundary.md");
+const publicReadmeGuidePath = path.join(repoRoot, "docs", "public-readmes.md");
 const migrationGuideRelativePath = `docs/migrations/v${tokens.version}.md`;
 const migrationGuidePath = path.join(repoRoot, migrationGuideRelativePath);
 const chromeThemeRoot = path.join(repoRoot, "chrome-theme");
@@ -67,6 +68,7 @@ const publishedGameInterfaceGuidePath = path.join(siteOutputPath, "docs", "games
 const consumerTemplatePath = path.join(repoRoot, "templates", "app-stylr.json");
 const consumerSchemaPath = path.join(repoRoot, "templates", "app-stylr.schema.json");
 const consumerAgentInstructionsPath = path.join(repoRoot, "templates", "consumer-agents.md");
+const publicReadmeTemplatePath = path.join(repoRoot, "templates", "public-product-readme.md");
 const chromeIconTemplatePath = path.join(repoRoot, "templates", "chrome-extension-icons.json");
 const webIconTemplatePath = path.join(repoRoot, "templates", "web-app-icons.json");
 const appleIconTemplatePath = path.join(repoRoot, "templates", "apple-touch-icons.html");
@@ -90,6 +92,8 @@ await validateRelativeLinks(conventionsGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(generatedFilesGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(privacyGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(publicBoundaryGuidePath, /\]\(([^)]+)\)/g);
+await validateRelativeLinks(publicReadmeGuidePath, /\]\(([^)]+)\)/g);
+await validateRelativeLinks(publicReadmeTemplatePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(path.join(repoRoot, "examples", "web", "README.md"), /\]\(([^)]+)\)/g);
 await validateRelativeLinks(path.join(repoRoot, "examples", "migration", "README.md"), /\]\(([^)]+)\)/g);
 await validateRelativeLinks(migrationGuidePath, /\]\(([^)]+)\)/g);
@@ -97,7 +101,15 @@ await validateRelativeLinks(migrationGuidePath, /\]\(([^)]+)\)/g);
 const consumerTemplate = await readJson(consumerTemplatePath);
 const consumerSchema = await readJson(consumerSchemaPath);
 const consumerAgentInstructions = await readFile(consumerAgentInstructionsPath, "utf8");
+const publicReadmeGuide = await readFile(publicReadmeGuidePath, "utf8");
+const publicReadmeTemplate = await readFile(publicReadmeTemplatePath, "utf8");
 const expectedRelease = `https://github.com/kylbutlr/app-stylr/tree/v${tokens.version}`;
+
+assert(publicReadmeGuide.includes("## Standard section order"), "Public README guide must define the standard section order.");
+assert(publicReadmeGuide.includes("## Verification checklist"), "Public README guide must include a verification checklist.");
+for (const heading of ["Status", "Highlights", "Quick start", "Privacy and permissions", "Known limitations", "Development", "App Stylr", "Support", "License"]) {
+  assert(publicReadmeTemplate.includes(`## ${heading}`), `Public README template must include the ${heading} section.`);
+}
 
 assert(consumerTemplate.name === "App Stylr", "Consumer template must use the App Stylr name.");
 assert(
@@ -190,6 +202,7 @@ const trackedTextFiles = [
   "docs/package-interface.md",
   "docs/privacy.md",
   "docs/public-boundary.md",
+  "docs/public-readmes.md",
   migrationGuideRelativePath,
   "docs/platform-icons.md",
   "docs/releases.md",
@@ -205,6 +218,7 @@ const trackedTextFiles = [
   "templates/apple-touch-icons.html",
   "templates/chrome-extension-icons.json",
   "templates/consumer-agents.md",
+  "templates/public-product-readme.md",
   "templates/app-stylr-exceptions.md",
   "templates/web-app-icons.json",
   "tokens/app-stylr.json"

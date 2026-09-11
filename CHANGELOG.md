@@ -2,6 +2,12 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Added
+
+- Public README guidelines and a reusable public-product README template for consistent product documentation.
+
 ## [1.0.0] - 2026-09-10
 
 ### Added

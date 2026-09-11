@@ -17,10 +17,11 @@ App Stylr is a public, framework-neutral design foundation for small web, browse
 3. Run `npm run icons` after changing the public example icon or icon export contract.
 4. Run `npm run chrome-theme` after changing tokens or the Chrome-theme contract.
 5. Update public documentation, examples, and migration guidance when the interface changes.
-6. Run `npm run site` after changing the reference pages or public site inputs.
-7. Run `npm test`, `npm run package:check`, and `swift build` before release preparation.
-8. Inspect the single Reference page at desktop and phone widths after visual changes.
-9. Update `CHANGELOG.md` for changes visible to consumers.
+6. Follow `docs/public-readmes.md` for public README changes and use `templates/public-product-readme.md` as the starting point for new products.
+7. Run `npm run site` after changing the reference pages or public site inputs.
+8. Run `npm test`, `npm run package:check`, and `swift build` before release preparation.
+9. Inspect the single Reference page at desktop and phone widths after visual changes.
+10. Update `CHANGELOG.md` for changes visible to consumers.
 
 ## Guardrails
 

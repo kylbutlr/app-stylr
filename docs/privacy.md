@@ -14,4 +14,4 @@ No secret values were found in the current tracked tree during the September 10,
 
 ## History warning
 
-Deleting private metadata from the current tree does not remove it from existing Git history, tags, or remote branches. Before changing repository visibility, either publish a new repository from the sanitized tree or complete an approved history rewrite and verify every remaining ref. The repository must stay private until that separate operation is complete.
+Deleting private metadata from the current tree does not remove it from existing Git history, tags, or remote branches. App Stylr was made public only after the published history was replaced with a verified sanitized tree. Any future visibility or history change must repeat the full ref and public-surface audit before publication.

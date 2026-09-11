@@ -6,7 +6,31 @@ App Stylr provides semantic design tokens, generated CSS and Swift adapters, bun
 
 [View the public Visual Reference](https://app-stylr.netlify.app/), a single-page guide to the system’s principles, tokens, typography, themes, components, responsive behavior, feedback, and icon direction.
 
-## What is public
+## Status
+
+App Stylr v1.0.0 is publicly available as a tagged GitHub release and supports pinned Node and Swift Package Manager installation. The npm package metadata is ready, but `app-stylr` has not been published to the npm registry.
+
+- **GitHub release:** [App Stylr v1.0.0](https://github.com/kylbutlr/app-stylr/releases/tag/v1.0.0)
+- **npm:** prepared but not published
+- **Swift Package Manager:** available from the public repository and semantic-version tag
+
+Do not install from `main`. Pin an immutable release.
+
+After the first approved npm release:
+
+```sh
+npm install app-stylr@1
+```
+
+From the current GitHub release tag:
+
+```sh
+npm install "github:kylbutlr/app-stylr#v1.0.0"
+```
+
+For Swift Package Manager, add `https://github.com/kylbutlr/app-stylr` with a dependency rule starting at `1.0.0`, then add the `AppStylr` product to your target.
+
+## What App Stylr provides
 
 - `tokens/app-stylr.json`, the canonical machine-readable token source
 - `adapters/css/app-stylr.css`, generated light and dark semantic CSS variables
@@ -14,6 +38,7 @@ App Stylr provides semantic design tokens, generated CSS and Swift adapters, bun
 - `adapters/swift/AppStylrTokens.swift`, the generated Swift and SwiftUI adapter
 - `assets/`, reusable fonts, an icon base, and public example exports
 - `templates/`, optional adoption, icon, manifest, and release templates
+- `docs/public-readmes.md` and `templates/public-product-readme.md`, a shared public README standard and starting point
 - `scripts/generate-icons.mjs`, the `app-stylr-icons` command
 - `scripts/build-chrome-theme.mjs`, the `app-stylr-chrome-theme` command
 - `scripts/validate-macos-release.mjs`, the `app-stylr-macos-release-check` command
@@ -22,27 +47,9 @@ App Stylr provides semantic design tokens, generated CSS and Swift adapters, bun
 
 Private family membership, consumer inventories, local checkout paths, rollout order, and per-application release operations are not part of App Stylr’s public interface. See [Public and private boundaries](./docs/public-boundary.md).
 
-## Installation status
+## Quick start
 
-App Stylr is prepared for three channels, but none should be treated as available until the repository is public and the corresponding release has been approved:
-
-- **GitHub release tags:** supported for Node package installs and source pinning after the repository is public.
-- **npm:** supported by the package metadata and packed artifact. The `app-stylr` name was unclaimed when checked on September 10, 2026, but the package has not been published.
-- **Swift Package Manager:** supported by `Package.swift` after the repository is public and a matching semantic-version tag exists.
-
-Do not install from `main`. Pin an immutable release.
-
-```sh
-# npm, after the first approved npm release
-npm install app-stylr@1
-
-# GitHub, after the repository and v1.0.0 tag are public
-npm install "github:kylbutlr/app-stylr#v1.0.0"
-```
-
-For Swift Package Manager, add `https://github.com/kylbutlr/app-stylr` with a dependency rule starting at `1.0.0`, then add the `AppStylr` product to your target.
-
-## Five-minute web quickstart
+### Web
 
 1. Install a pinned release.
 2. Import the fonts and token adapter once in your application stylesheet.
@@ -76,7 +83,7 @@ Dark mode is the default. Set `data-app-stylr-theme="light"` on the document or 
 
 Run the complete [public web example](./examples/web/README.md) to see installation, a minimal build, both themes, and semantic component styling.
 
-## Browser-extension quickstart
+### Browser extensions
 
 Extension pages can use the same CSS adapter. Because extension content security policy and injected pages should not depend on remote resources, bundle the App Stylr CSS and fonts with the extension.
 
@@ -93,7 +100,7 @@ Generate the standard Chrome extension and installable-web icon sizes from one s
 npx app-stylr-icons --source assets/app-icon.svg --output public/icons
 ```
 
-## Swift and SwiftUI quickstart
+### Swift and SwiftUI
 
 ```swift
 import AppStylr
@@ -179,7 +186,7 @@ The following are optional recommendations:
 
 Product requirements and native platform conventions may override recommendations. Record deliberate differences so upgrades remain reviewable. See [Mandatory and optional conventions](./docs/conventions.md).
 
-## Examples and migrations
+## Documentation
 
 - [Complete web example](./examples/web/README.md)
 - [Migration example from raw colors to semantic tokens](./examples/migration/README.md)
@@ -188,6 +195,8 @@ Product requirements and native platform conventions may override recommendation
 - [Platform icon exports](./docs/platform-icons.md)
 - [Game Interface profile](./docs/games.md)
 - [macOS Sparkle validation](./docs/macos-sparkle.md)
+- [Public README guidelines](./docs/public-readmes.md)
+- [Public product README template](./templates/public-product-readme.md)
 
 ## Versioning and upgrades
 
@@ -199,16 +208,7 @@ App Stylr follows semantic versioning:
 
 Consumers should pin a release, read the matching migration note and changelog, regenerate or refresh adopted artifacts, run their own tests, and visually compare affected states. See [Compatibility and upgrades](./docs/compatibility.md) and [Release process](./docs/releases.md).
 
-## Project policies
-
-- [License](./LICENSE)
-- [Changelog](./CHANGELOG.md)
-- [Contributing](./CONTRIBUTING.md)
-- [Security](./SECURITY.md)
-- [Support](./SUPPORT.md)
-- [Public-surface and privacy audit](./docs/privacy.md)
-
-## Local development
+## Development
 
 Requires Node.js 20 or newer. Swift verification requires an installed Swift 5.9-compatible toolchain.
 
@@ -226,3 +226,15 @@ npm run reference
 ```
 
 Open [http://localhost:4187/reference/](http://localhost:4187/reference/).
+
+## Support
+
+Use the [support guide](./SUPPORT.md) for help and the [issue tracker](https://github.com/kylbutlr/app-stylr/issues) for reproducible bugs or proposals. Follow [SECURITY.md](./SECURITY.md) for vulnerability reports, and review [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a change.
+
+Never include credentials, private repository details, or confidential application data in a public issue.
+
+Additional project references include the [changelog](./CHANGELOG.md) and [public-surface privacy audit](./docs/privacy.md).
+
+## License
+
+App Stylr is available under the [MIT License](./LICENSE).
