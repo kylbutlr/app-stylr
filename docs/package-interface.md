@@ -24,6 +24,8 @@ Swift tools 5.9 is the package floor. Declared platform floors are macOS 10.15, 
 
 ## Command interface
 
-The package installs three commands. Successful commands exit with status 0. Invalid arguments, missing inputs, stale generated files, or failed validation exit non-zero and write a specific error to standard error. Commands do not read private registries or sibling repositories.
+The package installs four commands. Successful commands exit with status 0. Invalid arguments, missing inputs, stale generated files, or failed validation exit non-zero and write a specific error to standard error. Commands do not read private registries or sibling repositories.
+
+`app-stylr-reference` is the supported interface for hosting the versioned public Reference below another site. Consumers must provide a dedicated output directory and may set the canonical URL and base path without copying or editing the Reference source.
 
 See [CLI reference](./cli.md).

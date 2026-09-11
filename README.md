@@ -42,6 +42,7 @@ For Swift Package Manager, add `https://github.com/kylbutlr/app-stylr` with a de
 - `scripts/generate-icons.mjs`, the `app-stylr-icons` command
 - `scripts/build-chrome-theme.mjs`, the `app-stylr-chrome-theme` command
 - `scripts/validate-macos-release.mjs`, the `app-stylr-macos-release-check` command
+- `scripts/build-site.mjs`, the `app-stylr-reference` command for producing a portable, versioned Reference artifact
 - `chrome-theme/`, a generated unpacked Chrome theme
 - `reference/`, the source for the public visual guide
 
@@ -141,6 +142,7 @@ The Swift module is distributed through Swift Package Manager as `AppStylr`; it 
 | `app-stylr-icons` | Generate extension, favicon, Apple touch, and PWA PNGs from one square source |
 | `app-stylr-chrome-theme` | Generate an unpacked App Stylr Chrome theme into a chosen directory |
 | `app-stylr-macos-release-check` | Validate a macOS `Info.plist`, Sparkle appcast, and signed archive as one release set |
+| `app-stylr-reference` | Build the versioned Reference for a chosen output directory and canonical URL |
 
 Run any command with `--help` for usage. See [CLI reference](./docs/cli.md) for inputs, outputs, and failure modes.
 
@@ -225,7 +227,7 @@ npm run site
 npm run reference
 ```
 
-Open [http://localhost:4187/reference/](http://localhost:4187/reference/).
+Open [http://localhost:4187/](http://localhost:4187/).
 
 ## Support
 

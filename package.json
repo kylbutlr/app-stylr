@@ -30,9 +30,11 @@
     "docs",
     "examples",
     "scripts/build-chrome-theme.mjs",
+    "scripts/build-site.mjs",
     "scripts/generate-icons.mjs",
     "scripts/token-utils.mjs",
     "scripts/validate-macos-release.mjs",
+    "reference",
     "templates",
     "tokens/app-stylr.json",
     "CHANGELOG.md",
@@ -54,7 +56,8 @@
   "bin": {
     "app-stylr-chrome-theme": "./scripts/build-chrome-theme.mjs",
     "app-stylr-icons": "./scripts/generate-icons.mjs",
-    "app-stylr-macos-release-check": "./scripts/validate-macos-release.mjs"
+    "app-stylr-macos-release-check": "./scripts/validate-macos-release.mjs",
+    "app-stylr-reference": "./scripts/build-site.mjs"
   },
   "style": "adapters/css/app-stylr.css",
   "scripts": {
@@ -71,7 +74,7 @@
     "validate:repo": "node scripts/validate-repository.mjs",
     "check": "npm run validate && npm run build:check && npm run icons:check && npm run chrome-theme:check && npm run site && npm run validate:repo && npm run privacy:check",
     "test": "npm run check",
-    "reference": "python3 -m http.server 4187"
+    "reference": "python3 -m http.server 4187 --directory .site"
   },
   "engines": {
     "node": ">=20"

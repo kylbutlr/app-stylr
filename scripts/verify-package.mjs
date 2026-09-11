@@ -37,9 +37,12 @@ try {
     "docs/package-interface.md",
     "examples/web/index.html",
     "scripts/build-chrome-theme.mjs",
+    "scripts/build-site.mjs",
     "scripts/generate-icons.mjs",
     "scripts/token-utils.mjs",
     "scripts/validate-macos-release.mjs",
+    "reference/index.html",
+    "reference/styles.css",
     "tokens/app-stylr.json"
   ];
 
@@ -77,9 +80,45 @@ try {
   `;
   await run(process.execPath, ["--input-type=module", "--eval", exportCheck], { cwd: fixtureRoot });
 
-  for (const command of ["app-stylr-icons", "app-stylr-chrome-theme", "app-stylr-macos-release-check"]) {
+  for (const command of ["app-stylr-icons", "app-stylr-chrome-theme", "app-stylr-macos-release-check", "app-stylr-reference"]) {
     await run(path.join(fixtureRoot, "node_modules", ".bin", command), ["--help"], { cwd: fixtureRoot });
   }
+
+  const referenceCommand = path.join(fixtureRoot, "node_modules", ".bin", "app-stylr-reference");
+  const referenceOutput = path.join(fixtureRoot, "public", "app-stylr");
+  await run(
+    referenceCommand,
+    ["--output", referenceOutput, "--canonical-url", "https://example.com/app-stylr"],
+    { cwd: fixtureRoot }
+  );
+  const referenceHtml = await readFile(path.join(referenceOutput, "index.html"), "utf8");
+  const referenceCss = await readFile(path.join(referenceOutput, "styles.css"), "utf8");
+  const referenceManifest = JSON.parse(
+    await readFile(path.join(referenceOutput, "app-stylr-reference.json"), "utf8")
+  );
+  assert(
+    referenceHtml.includes('<link rel="canonical" href="https://example.com/app-stylr" />'),
+    "Generated Reference canonical URL is incorrect."
+  );
+  assert(
+    referenceHtml.includes('href="/app-stylr/styles.css"') &&
+      referenceHtml.includes('src="/app-stylr/assets/app-icon-gradient-base.svg"'),
+    "Generated Reference HTML does not use the requested base path."
+  );
+  assert(
+    referenceCss.includes('@import "/app-stylr/adapters/css/fonts.css";'),
+    "Generated Reference CSS does not use the requested base path."
+  );
+  assert(
+    JSON.stringify(referenceManifest) ===
+      JSON.stringify({
+        name: "App Stylr Reference",
+        version: "1.0.0",
+        canonicalUrl: "https://example.com/app-stylr",
+        basePath: "/app-stylr"
+      }),
+    "Generated Reference manifest is incorrect."
+  );
 
   const iconsCommand = path.join(fixtureRoot, "node_modules", ".bin", "app-stylr-icons");
   const iconSource = path.join(fixtureRoot, "node_modules", "app-stylr", "assets", "example-app-icon.svg");
@@ -125,7 +164,7 @@ try {
   await readFile(path.join(fixtureRoot, "dist", "index.html"));
   await readFile(path.join(fixtureRoot, "dist", "vendor", "app-stylr", "adapters", "css", "app-stylr.css"));
 
-  console.log(`Verified ${packed.name}@${packed.version}: ${packed.entryCount} packed files, clean install, public exports, all three commands, generated outputs, and the complete web example.`);
+  console.log(`Verified ${packed.name}@${packed.version}: ${packed.entryCount} packed files, clean install, public exports, all four commands, generated outputs, and the complete web example.`);
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true });
 }

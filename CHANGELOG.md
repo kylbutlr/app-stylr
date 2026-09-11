@@ -7,6 +7,7 @@ All notable public changes to App Stylr are documented here. The project follows
 ### Added
 
 - Public README guidelines and a reusable public-product README template for consistent product documentation.
+- A portable `app-stylr-reference` command that builds the versioned Reference at a configurable canonical URL and base path without duplicating its source.
 
 ## [1.0.0] - 2026-09-10
 

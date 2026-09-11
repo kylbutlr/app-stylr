@@ -17,7 +17,7 @@ async function exists(filePath) {
   }
 }
 
-async function validateRelativeLinks(filePath, pattern) {
+async function validateRelativeLinks(filePath, pattern, publicRoot = null) {
   const source = await readFile(filePath, "utf8");
   const matches = [...source.matchAll(pattern)];
 
@@ -25,7 +25,9 @@ async function validateRelativeLinks(filePath, pattern) {
     const reference = match[1].split("#")[0].split("?")[0];
     if (!reference || reference.startsWith("http") || reference.startsWith("mailto:")) continue;
 
-    const targetPath = path.resolve(path.dirname(filePath), reference);
+    const targetPath = reference.startsWith("/") && publicRoot
+      ? path.join(publicRoot, reference.replace(/^\/+/, ""))
+      : path.resolve(path.dirname(filePath), reference);
     assert(
       await exists(targetPath),
       `${path.relative(repoRoot, filePath)} references missing file ${reference}.`
@@ -63,6 +65,7 @@ const netlifyConfigPath = path.join(repoRoot, "netlify.toml");
 const retiredPagesWorkflowPath = path.join(repoRoot, ".github", "workflows", "pages.yml");
 const siteBuildScriptPath = path.join(repoRoot, "scripts", "build-site.mjs");
 const siteOutputPath = path.join(repoRoot, ".site");
+const siteManifestPath = path.join(siteOutputPath, "app-stylr-reference.json");
 const publishedReferenceDirectoryPath = path.join(siteOutputPath, "reference");
 const publishedGameInterfaceGuidePath = path.join(siteOutputPath, "docs", "games.md");
 const consumerTemplatePath = path.join(repoRoot, "templates", "app-stylr.json");
@@ -316,6 +319,8 @@ assert(packageJson.files.includes("templates"), "Package files must include ever
 assert(packageJson.files.includes("scripts/generate-icons.mjs"), "Package files must include the icon generator.");
 assert(packageJson.files.includes("chrome-theme"), "Package files must include the installable Chrome theme.");
 assert(packageJson.files.includes("scripts/build-chrome-theme.mjs"), "Package files must include the Chrome theme generator.");
+assert(packageJson.files.includes("scripts/build-site.mjs"), "Package files must include the Reference generator.");
+assert(packageJson.files.includes("reference"), "Package files must include the Reference source.");
 assert(packageJson.files.includes("scripts/token-utils.mjs"), "Package files must include command implementation utilities.");
 assert(packageJson.exports?.["./fonts.css"] === "./adapters/css/fonts.css", "Package must export fonts.css.");
 assert(!Object.hasOwn(packageJson.exports ?? {}, "./family"), "Package must not export private family data.");
@@ -324,6 +329,7 @@ assert(packageJson.exports?.["./package.json"] === "./package.json", "Package mu
 assert(packageJson.bin?.["app-stylr-icons"] === "./scripts/generate-icons.mjs", "Package must expose the icon generator command.");
 assert(packageJson.bin?.["app-stylr-chrome-theme"] === "./scripts/build-chrome-theme.mjs", "Package must expose the Chrome theme command.");
 assert(packageJson.bin?.["app-stylr-macos-release-check"] === "./scripts/validate-macos-release.mjs", "Package must expose the macOS release checker.");
+assert(packageJson.bin?.["app-stylr-reference"] === "./scripts/build-site.mjs", "Package must expose the Reference generator.");
 assert(packageJson.license === "MIT", "Package must declare the MIT license.");
 assert(packageJson.publishConfig?.access === "public", "Package must declare public npm access.");
 assert(packageJson.dependencies?.sharp, "Icon generation requires Sharp as a runtime dependency.");
@@ -334,6 +340,10 @@ assert(
 );
 assert(packageJson.scripts?.check?.includes("chrome-theme:check"), "The repository check must verify Chrome theme currentness.");
 assert(packageJson.scripts?.site === "node scripts/build-site.mjs", "Package must expose the Netlify site artifact builder.");
+assert(
+  packageJson.scripts?.reference === "python3 -m http.server 4187 --directory .site",
+  "Local Reference preview must serve the generated artifact."
+);
 assert(packageJson.scripts?.check?.includes("npm run site"), "The repository check must build the scoped Netlify artifact.");
 assert(packageJson.scripts?.["privacy:check"] === "node scripts/audit-public-surface.mjs", "Package must expose the public privacy audit.");
 assert(packageJson.scripts?.["package:check"] === "node scripts/verify-package.mjs", "Package must expose clean package verification.");
@@ -461,18 +471,25 @@ for (const directory of ["adapters", "assets"]) {
 }
 assert(
   siteBuildScript.includes('path.join(repoRoot, "reference")') &&
-    siteBuildScript.includes('referenceHtml.replaceAll("../assets/", "./assets/")') &&
-    siteBuildScript.includes('referenceCss.replaceAll("../adapters/", "./adapters/")'),
-  "Site builder must place the transformed Reference HTML and CSS at the artifact root."
+    siteBuildScript.includes('"--base-path"') &&
+    siteBuildScript.includes('"--canonical-url"') &&
+    siteBuildScript.includes('"--output"') &&
+    siteBuildScript.includes('publicPath(options.basePath, "assets/")') &&
+    siteBuildScript.includes('publicPath(options.basePath, "adapters/")'),
+  "Site builder must support a portable output path, canonical URL, and base path."
 );
 
 const siteTopLevel = (await readdir(siteOutputPath)).sort();
 assert(
-  JSON.stringify(siteTopLevel) === JSON.stringify(["adapters", "assets", "index.html", "styles.css"]),
+  JSON.stringify(siteTopLevel) === JSON.stringify(["adapters", "app-stylr-reference.json", "assets", "index.html", "styles.css"]),
   "The public Netlify artifact must contain only the root Reference and its required assets."
 );
-await validateRelativeLinks(path.join(siteOutputPath, "index.html"), /(?:href|src)="([^"]+)"/g);
-await validateRelativeLinks(path.join(siteOutputPath, "styles.css"), /@import\s+"([^"]+)"/g);
+await validateRelativeLinks(path.join(siteOutputPath, "index.html"), /(?:href|src)="([^"]+)"/g, siteOutputPath);
+await validateRelativeLinks(path.join(siteOutputPath, "styles.css"), /@import\s+"([^"]+)"/g, siteOutputPath);
+const siteManifest = await readJson(siteManifestPath);
+assert(siteManifest.version === tokens.version, "Reference manifest version must match the canonical tokens.");
+assert(siteManifest.canonicalUrl === "https://app-stylr.netlify.app/", "Default Reference canonical URL is incorrect.");
+assert(siteManifest.basePath === "/", "Default Reference base path must be root.");
 
 const chromeIconTemplate = await readJson(chromeIconTemplatePath);
 assert(
