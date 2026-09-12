@@ -1,5 +1,6 @@
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
+import { formatCliError } from "./cli-errors.mjs";
 import { hexToRgb, readJson, readTokens, repoRoot } from "./token-utils.mjs";
 
 const errors = [];
@@ -136,8 +137,8 @@ assert(
   "Consumer template must include every field required by its schema."
 );
 assert(
-  consumerAgentInstructions.includes("https://app-stylr.netlify.app/") &&
-    !consumerAgentInstructions.includes("https://app-stylr.netlify.app/reference/"),
+  consumerAgentInstructions.includes("https://kylbutlr.com/app-stylr") &&
+    !consumerAgentInstructions.includes("https://app-stylr.netlify.app/"),
   "Consumer agent instructions must link the root Visual Reference."
 );
 assert(
@@ -265,6 +266,19 @@ assert(reference.includes("Geist Sans"), "Reference must identify Geist Sans as 
 assert(reference.includes("Geist Mono"), "Reference must identify Geist Mono as the technical typeface.");
 assert(reference.includes("Canonical tokens in practice"), "Reference must include the consolidated system specimen.");
 assert(reference.includes("One recognizable system across every small product"), "Reference must include the consolidated design direction.");
+assert(reference.includes("Use the tokens in three steps"), "Reference must give first-time users a concise adoption path.");
+assert(reference.includes('href="#start"'), "Reference hero must link to the first-use guidance.");
+assert(reference.includes('id="privacy"'), "Reference must include contextual privacy guidance.");
+assert(
+  reference.includes("No account or upload is required"),
+  "Reference must explain the data boundary before adoption."
+);
+assert(
+  reference.includes("Static examples: the controls below demonstrate appearance and states"),
+  "Reference must distinguish component specimens from working product controls."
+);
+assert(!reference.includes('href="#"'), "Reference specimens must not include misleading empty links.");
+assert(!/<(?:button|input|select)\b/iu.test(reference), "Reference specimens must not expose inert form controls.");
 assert(reference.includes('name="description"'), "Reference must include a search description.");
 assert(reference.includes('property="og:url"'), "Reference must include a share URL.");
 assert(reference.includes('type="application/ld+json"'), "Reference must include structured data.");
@@ -276,6 +290,10 @@ assert(
 assert(
   /\.creator-signature\s*\{[^}]*text-transform:\s*none;/s.test(referenceCss),
   "Visual contract must preserve the creator-signature text casing."
+);
+assert(
+  /a:focus-visible,[\s\S]*?summary:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--ui-focus\);/s.test(referenceCss),
+  "Reference links and progressive disclosure must have visible keyboard focus."
 );
 assert(
   /\.swatch-steel\s*\{[^}]*color:\s*#000;[^}]*background:\s*var\(--brand-steel\);[^}]*\}[\s\S]*?\.swatch-steel code\s*\{[^}]*opacity:\s*1;/s.test(referenceCss),
@@ -298,7 +316,7 @@ assert(
   "Visual contract completed checkbox must use the semantic success fill."
 );
 assert(
-  reference.includes('class="select-field"'),
+  /class="[^"]*\bselect-field\b[^"]*"/u.test(reference),
   "Visual contract selects must include the padded caret wrapper."
 );
 assert(
@@ -327,6 +345,7 @@ assert(packageJson.files.includes("scripts/generate-icons.mjs"), "Package files 
 assert(packageJson.files.includes("chrome-theme"), "Package files must include the installable Chrome theme.");
 assert(packageJson.files.includes("scripts/build-chrome-theme.mjs"), "Package files must include the Chrome theme generator.");
 assert(packageJson.files.includes("scripts/build-site.mjs"), "Package files must include the Reference generator.");
+assert(packageJson.files.includes("scripts/cli-errors.mjs"), "Package files must include shared plain-language CLI errors.");
 assert(packageJson.files.includes("reference"), "Package files must include the Reference source.");
 assert(packageJson.files.includes("scripts/token-utils.mjs"), "Package files must include command implementation utilities.");
 assert(packageJson.exports?.["./fonts.css"] === "./adapters/css/fonts.css", "Package must export fonts.css.");
@@ -354,6 +373,16 @@ assert(
 assert(packageJson.scripts?.check?.includes("npm run site"), "The repository check must build the scoped Netlify artifact.");
 assert(packageJson.scripts?.["privacy:check"] === "node scripts/audit-public-surface.mjs", "Package must expose the public privacy audit.");
 assert(packageJson.scripts?.["package:check"] === "node scripts/verify-package.mjs", "Package must expose clean package verification.");
+assert(
+  formatCliError({ code: "EACCES", path: "/example/output" }) ===
+    "Cannot access /example/output. Choose a file or folder you can access, then try again.",
+  "CLI permission failures must explain how to recover."
+);
+assert(
+  formatCliError({ code: "ENOENT", path: "/example/input" }) ===
+    "Could not find /example/input. Check the path and try again.",
+  "CLI missing-input failures must explain how to recover."
+);
 assert(
   (await readFile(referencePath, "utf8")).includes(`v${tokens.version}`),
   "Reference page must display the current App Stylr version."
@@ -495,7 +524,7 @@ await validateRelativeLinks(path.join(siteOutputPath, "index.html"), /(?:href|sr
 await validateRelativeLinks(path.join(siteOutputPath, "styles.css"), /@import\s+"([^"]+)"/g, siteOutputPath);
 const siteManifest = await readJson(siteManifestPath);
 assert(siteManifest.version === tokens.version, "Reference manifest version must match the canonical tokens.");
-assert(siteManifest.canonicalUrl === "https://app-stylr.netlify.app/", "Default Reference canonical URL is incorrect.");
+assert(siteManifest.canonicalUrl === "https://kylbutlr.com/app-stylr", "Default Reference canonical URL is incorrect.");
 assert(siteManifest.basePath === "/", "Default Reference base path must be root.");
 
 const chromeIconTemplate = await readJson(chromeIconTemplatePath);

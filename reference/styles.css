@@ -9,6 +9,7 @@
 
 html {
   min-width: 320px;
+  scroll-behavior: smooth;
   background: #090b0b;
 }
 
@@ -33,6 +34,12 @@ select {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--ui-focus);
+  outline-offset: 4px;
 }
 
 .page-width {
@@ -91,6 +98,27 @@ a {
   color: var(--ui-text-muted);
   font-size: clamp(20px, 2vw, 28px);
   line-height: 1.45;
+}
+
+.hero-actions {
+  margin-top: var(--space-32);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+}
+
+.privacy-summary {
+  max-width: 680px;
+  margin: var(--space-20, 20px) 0 0;
+  color: var(--ui-text-muted);
+  font-size: 14px;
+}
+
+.privacy-summary a,
+.start-links a,
+.privacy-detail a {
+  color: var(--ui-link);
+  font-weight: 600;
 }
 
 .hero-meta {
@@ -190,6 +218,91 @@ a {
 .section-heading > p {
   margin: 0;
   color: var(--ui-text-muted);
+}
+
+.start-grid {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-16);
+  list-style: none;
+}
+
+.start-grid li,
+.privacy-grid article {
+  min-width: 0;
+  padding: var(--space-24);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-card);
+  background: var(--ui-surface);
+}
+
+.start-grid h3,
+.privacy-grid h3 {
+  margin: var(--space-20, 20px) 0 var(--space-8);
+  font-size: var(--type-heading3-size);
+  line-height: var(--type-heading3-line-height);
+}
+
+.start-grid p,
+.privacy-grid p {
+  margin: var(--space-12) 0 0;
+  color: var(--ui-text-muted);
+}
+
+.start-grid pre {
+  margin: var(--space-16) 0 0;
+  padding: var(--space-16);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-control);
+  color: var(--ui-text);
+  background: var(--ui-canvas);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.start-grid code {
+  font: inherit;
+}
+
+.start-links {
+  margin-top: var(--space-24);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12) var(--space-24);
+}
+
+.learn-more {
+  margin-top: var(--space-32);
+  padding: var(--space-20, 20px) var(--space-24);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-card);
+  background: var(--ui-surface);
+}
+
+.learn-more summary {
+  width: fit-content;
+  color: var(--ui-text);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.learn-more p {
+  max-width: 760px;
+  margin: var(--space-16) 0 0;
+  color: var(--ui-text-muted);
+}
+
+.specimen-note {
+  margin: -24px 0 var(--space-24);
+  padding: var(--space-12) var(--space-16);
+  border-left: 3px solid var(--ui-accent);
+  color: var(--ui-text-muted);
+  background: var(--ui-surface);
 }
 
 .criteria-grid,
@@ -424,6 +537,8 @@ a {
 .icon-button {
   width: var(--size-control);
   height: var(--size-control);
+  display: grid;
+  place-items: center;
   border: 1px solid var(--ui-border);
   border-radius: var(--radius-control);
   color: var(--ui-text-muted);
@@ -467,10 +582,12 @@ a {
   padding: var(--space-16);
 }
 
-.composer label,
-.form-grid label {
+.sample-field {
   display: grid;
   gap: var(--space-8);
+}
+
+.sample-label {
   color: var(--ui-text-muted);
   font-size: 12px;
   font-weight: 500;
@@ -483,10 +600,13 @@ a {
 }
 
 input,
-select {
+select,
+.sample-input {
   width: 100%;
   min-height: var(--size-control);
   padding-inline: var(--space-12);
+  display: flex;
+  align-items: center;
   color: var(--ui-text);
   background: var(--ui-surface-raised);
   border: 1px solid var(--ui-border);
@@ -496,7 +616,7 @@ select {
 
 input:focus,
 select:focus,
-input.is-focused {
+.sample-input.is-focused {
   border-color: var(--ui-focus);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-focus), transparent 86%);
 }
@@ -535,11 +655,18 @@ input.is-focused {
 .button {
   min-height: var(--size-control);
   padding-inline: var(--space-16);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--radius-control);
   font-weight: 600;
   transition:
     background var(--motion-control) ease,
     border-color var(--motion-control) ease;
+}
+
+a.button {
+  text-decoration: none;
 }
 
 .button-primary {
@@ -548,7 +675,7 @@ input.is-focused {
   border: 1px solid var(--ui-accent);
 }
 
-.button-primary:hover {
+a.button-primary:hover {
   background: var(--ui-accent-strong);
   border-color: var(--ui-accent-strong);
 }
@@ -675,6 +802,22 @@ input.is-focused {
   color: var(--ui-selected-text);
   background: transparent;
   border-color: var(--ui-border-strong);
+}
+
+.privacy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-16);
+}
+
+.privacy-grid h3 {
+  margin-top: 0;
+}
+
+.privacy-detail {
+  max-width: 860px;
+  margin: var(--space-24) 0 0;
+  color: var(--ui-text-muted);
 }
 
 .type-grid {
@@ -1010,6 +1153,11 @@ footer {
     grid-template-columns: 220px 220px 1fr;
   }
 
+  .start-grid,
+  .privacy-grid {
+    grid-template-columns: 1fr;
+  }
+
   .platform-icon-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1039,6 +1187,14 @@ footer {
     .platform-icon-grid,
     .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    display: grid;
+  }
+
+  .hero-actions .button {
+    width: 100%;
   }
 
   .swatch {

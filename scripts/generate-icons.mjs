@@ -4,6 +4,7 @@ import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+import { formatCliError } from "./cli-errors.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const defaultSource = path.join(repoRoot, "assets", "example-app-icon.svg");
@@ -82,7 +83,12 @@ async function main() {
   const options = parseArguments(process.argv.slice(2));
   await access(options.source);
 
-  const metadata = await sharp(options.source).metadata();
+  let metadata;
+  try {
+    metadata = await sharp(options.source).metadata();
+  } catch {
+    throw new Error(`Could not read the source icon: ${options.source}. Choose a valid square SVG or PNG.`);
+  }
   if (!metadata.width || !metadata.height || metadata.width !== metadata.height) {
     throw new Error("The source icon must have equal, non-zero width and height.");
   }
@@ -116,6 +122,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(error.message);
+  console.error(formatCliError(error));
   process.exitCode = 1;
 });

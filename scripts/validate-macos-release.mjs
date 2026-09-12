@@ -3,6 +3,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { basename, resolve } from "node:path";
+import { formatCliError } from "./cli-errors.mjs";
 
 function usage(message) {
   if (message) console.error(`Error: ${message}`);
@@ -57,48 +58,57 @@ function requireText(contents, text, description) {
   if (!contents.includes(text)) throw new Error(`Appcast is missing ${description}.`);
 }
 
-const options = argumentsMap(process.argv.slice(2));
-const root = resolve(options.get("root") ?? process.cwd());
-const infoPlistPath = resolve(root, options.get("info-plist") ?? "");
-const appcastPath = resolve(root, options.get("appcast") ?? "");
-const archivePath = resolve(root, options.get("archive") ?? "");
+function main() {
+  const options = argumentsMap(process.argv.slice(2));
+  const root = resolve(options.get("root") ?? process.cwd());
+  const infoPlistPath = resolve(root, options.get("info-plist") ?? "");
+  const appcastPath = resolve(root, options.get("appcast") ?? "");
+  const archivePath = resolve(root, options.get("archive") ?? "");
 
-if (!options.has("info-plist") || !options.has("appcast") || !options.has("archive")) {
-  usage("--info-plist, --appcast, and --archive are required.");
+  if (!options.has("info-plist") || !options.has("appcast") || !options.has("archive")) {
+    usage("--info-plist, --appcast, and --archive are required.");
+  }
+
+  for (const [label, path] of [["Info.plist", infoPlistPath], ["appcast", appcastPath], ["archive", archivePath]]) {
+    if (!existsSync(path)) throw new Error(`${label} does not exist: ${path}`);
+  }
+
+  const infoPlist = readFileSync(infoPlistPath, "utf8");
+  const appcast = readFileSync(appcastPath, "utf8");
+  const version = plistString(infoPlist, "CFBundleShortVersionString");
+  const build = plistString(infoPlist, "CFBundleVersion");
+  const expected = expectedBuild(version);
+  const feedUrl = plistString(infoPlist, "SUFeedURL");
+  const publicKey = plistString(infoPlist, "SUPublicEDKey");
+  const archiveName = basename(archivePath);
+
+  if (build !== expected) throw new Error(`CFBundleVersion ${build} does not match ${version}'s expected build ${expected}.`);
+  if (!/^https:\/\//u.test(feedUrl)) throw new Error("SUFeedURL must use HTTPS.");
+  if (publicKey.includes("REPLACE_WITH") || !/^[A-Za-z0-9+/]+={0,2}$/u.test(publicKey)) throw new Error("SUPublicEDKey must contain a real base64 Sparkle public key.");
+  if (!plistBoolean(infoPlist, "SURequireSignedFeed")) throw new Error("SURequireSignedFeed must be true.");
+  if (statSync(archivePath).size === 0) throw new Error(`Release archive is empty: ${archivePath}`);
+
+  requireText(appcast, `<sparkle:shortVersionString>${version}</sparkle:shortVersionString>`, `version ${version}`);
+  requireText(appcast, `<sparkle:version>${build}</sparkle:version>`, `build ${build}`);
+  requireText(appcast, archiveName, `archive ${archiveName}`);
+  requireText(appcast, "sparkle:edSignature=", `archive signature for ${archiveName}`);
+  requireText(appcast, "<!-- sparkle-signatures:", "signed-feed metadata");
+
+  try {
+    execFileSync("unzip", ["-t", archivePath], { stdio: "pipe" });
+  } catch (error) {
+    const detail = error?.stderr?.toString().trim() || "invalid zip archive";
+    throw new Error(`Release archive failed zip validation: ${detail}`);
+  }
+
+  console.log(`Verified macOS ${version} (${build}) release metadata.`);
+  console.log(`Feed: ${feedUrl}`);
+  console.log(`Archive: ${archiveName}`);
 }
-
-for (const [label, path] of [["Info.plist", infoPlistPath], ["appcast", appcastPath], ["archive", archivePath]]) {
-  if (!existsSync(path)) throw new Error(`${label} does not exist: ${path}`);
-}
-
-const infoPlist = readFileSync(infoPlistPath, "utf8");
-const appcast = readFileSync(appcastPath, "utf8");
-const version = plistString(infoPlist, "CFBundleShortVersionString");
-const build = plistString(infoPlist, "CFBundleVersion");
-const expected = expectedBuild(version);
-const feedUrl = plistString(infoPlist, "SUFeedURL");
-const publicKey = plistString(infoPlist, "SUPublicEDKey");
-const archiveName = basename(archivePath);
-
-if (build !== expected) throw new Error(`CFBundleVersion ${build} does not match ${version}'s expected build ${expected}.`);
-if (!/^https:\/\//u.test(feedUrl)) throw new Error("SUFeedURL must use HTTPS.");
-if (publicKey.includes("REPLACE_WITH") || !/^[A-Za-z0-9+/]+={0,2}$/u.test(publicKey)) throw new Error("SUPublicEDKey must contain a real base64 Sparkle public key.");
-if (!plistBoolean(infoPlist, "SURequireSignedFeed")) throw new Error("SURequireSignedFeed must be true.");
-if (statSync(archivePath).size === 0) throw new Error(`Release archive is empty: ${archivePath}`);
-
-requireText(appcast, `<sparkle:shortVersionString>${version}</sparkle:shortVersionString>`, `version ${version}`);
-requireText(appcast, `<sparkle:version>${build}</sparkle:version>`, `build ${build}`);
-requireText(appcast, archiveName, `archive ${archiveName}`);
-requireText(appcast, "sparkle:edSignature=", `archive signature for ${archiveName}`);
-requireText(appcast, "<!-- sparkle-signatures:", "signed-feed metadata");
 
 try {
-  execFileSync("unzip", ["-t", archivePath], { stdio: "pipe" });
+  main();
 } catch (error) {
-  const detail = error?.stderr?.toString().trim() || "invalid zip archive";
-  throw new Error(`Release archive failed zip validation: ${detail}`);
+  console.error(formatCliError(error));
+  process.exitCode = 1;
 }
-
-console.log(`Verified macOS ${version} (${build}) release metadata.`);
-console.log(`Feed: ${feedUrl}`);
-console.log(`Archive: ${archiveName}`);

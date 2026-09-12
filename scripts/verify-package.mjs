@@ -38,6 +38,7 @@ try {
     "examples/web/index.html",
     "scripts/build-chrome-theme.mjs",
     "scripts/build-site.mjs",
+    "scripts/cli-errors.mjs",
     "scripts/generate-icons.mjs",
     "scripts/token-utils.mjs",
     "scripts/validate-macos-release.mjs",
@@ -133,6 +134,15 @@ try {
   );
 
   const iconsCommand = path.join(fixtureRoot, "node_modules", ".bin", "app-stylr-icons");
+  try {
+    await run(iconsCommand, ["--source", path.join(fixtureRoot, "missing-icon.svg"), "--output", path.join(fixtureRoot, "missing-output")], { cwd: fixtureRoot });
+    throw new Error("Icon generation should fail when the selected source is missing.");
+  } catch (error) {
+    assert(
+      error?.stderr?.includes("Could not find") && error.stderr.includes("Check the path and try again."),
+      "Installed icon command must explain how to recover from a missing source."
+    );
+  }
   const iconSource = path.join(fixtureRoot, "node_modules", "app-stylr", "assets", "example-app-icon.svg");
   const iconsOutput = path.join(fixtureRoot, "generated-icons");
   await run(iconsCommand, ["--source", iconSource, "--output", iconsOutput], { cwd: fixtureRoot });
