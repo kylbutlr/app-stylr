@@ -2,9 +2,10 @@
 
 import { cp, mkdir, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { formatCliError } from "./cli-errors.mjs";
 import { readTokens, repoRoot } from "./token-utils.mjs";
 
-const defaultCanonicalUrl = "https://app-stylr.netlify.app/";
+const defaultCanonicalUrl = "https://kylbutlr.com/app-stylr";
 
 function usage() {
   return `Build the portable App Stylr Reference site.
@@ -54,7 +55,8 @@ function parseArguments(argumentsList) {
   const options = {
     basePath: null,
     canonicalUrl: defaultCanonicalUrl,
-    output: path.join(repoRoot, ".site")
+    output: path.join(repoRoot, ".site"),
+    usesDefaultCanonicalUrl: true
   };
 
   for (let index = 0; index < argumentsList.length; index += 1) {
@@ -70,7 +72,10 @@ function parseArguments(argumentsList) {
       if (!value) throw new Error(`${argument} requires a value.`);
 
       if (argument === "--base-path") options.basePath = normalizeBasePath(value);
-      if (argument === "--canonical-url") options.canonicalUrl = normalizeCanonicalUrl(value);
+      if (argument === "--canonical-url") {
+        options.canonicalUrl = normalizeCanonicalUrl(value);
+        options.usesDefaultCanonicalUrl = false;
+      }
       if (argument === "--output") options.output = path.resolve(process.cwd(), value);
       index += 1;
       continue;
@@ -80,7 +85,8 @@ function parseArguments(argumentsList) {
   }
 
   const canonicalPath = normalizeBasePath(new URL(options.canonicalUrl).pathname);
-  options.basePath ??= canonicalPath;
+  options.basePath ??= options.usesDefaultCanonicalUrl ? "/" : canonicalPath;
+  delete options.usesDefaultCanonicalUrl;
 
   return options;
 }
@@ -187,6 +193,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(error.message);
+  console.error(formatCliError(error));
   process.exitCode = 1;
 });

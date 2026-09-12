@@ -58,7 +58,7 @@ State where generated artifacts go and whether the command publishes anything.
 
 ## App Stylr
 
-This product follows [App Stylr v1.0.0](https://github.com/kylbutlr/app-stylr/tree/v1.0.0). Review the [Visual Reference](https://app-stylr.netlify.app/) and record intentional differences in `docs/app-stylr-exceptions.md`.
+This product follows [App Stylr v1.0.0](https://github.com/kylbutlr/app-stylr/tree/v1.0.0). Review the [Visual Reference](https://kylbutlr.com/app-stylr) and record intentional differences in `docs/app-stylr-exceptions.md`.
 
 ## Support
 

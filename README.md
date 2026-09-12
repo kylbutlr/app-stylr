@@ -4,7 +4,7 @@ An opinionated design foundation for keeping small web, browser-extension, and m
 
 App Stylr provides semantic design tokens, generated CSS and Swift adapters, bundled Geist fonts, reusable icon assets, small command-line tools, public templates, and practical visual guidance. It deliberately does not provide a React component library, application state, authentication, deployment automation, or private product-fleet governance.
 
-[View the public Visual Reference](https://app-stylr.netlify.app/), a single-page guide to the system’s principles, tokens, typography, themes, components, responsive behavior, feedback, and icon direction.
+[View the public Visual Reference](https://kylbutlr.com/app-stylr), a single-page guide with a first-use CSS path, system principles, tokens, typography, themes, component specimens, responsive behavior, feedback, icon direction, and plain-language privacy details.
 
 ## Status
 

@@ -13,7 +13,7 @@ This application follows [App Stylr v1.0.0](https://github.com/kylbutlr/app-styl
 
 ### Recommended review
 
-Before interface work, review the pinned release and the rendered [Visual Reference](https://app-stylr.netlify.app/). The live reference may be newer than the application’s pin, so upgrade deliberately before using newer guidance.
+Before interface work, review the pinned release and the rendered [Visual Reference](https://kylbutlr.com/app-stylr). The live reference may be newer than the application’s pin, so upgrade deliberately before using newer guidance.
 
 Compare affected viewports and interaction states against the reference before completion. Product requirements and native platform conventions take priority over optional App Stylr recommendations; record meaningful differences in the exceptions file.
 

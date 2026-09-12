@@ -21,7 +21,7 @@ function checkText(relativePath, source) {
   const rules = [
     [/\/Users\/[A-Za-z0-9._-]+\//u, "contains an absolute macOS user path"],
     [/file:\/\//u, "contains a file URL"],
-    [/https:\/\/github\.com\/kylbutlr\/(?!app-stylr(?:\.git)?(?:[\s/#)"'`]|$))/u, "links to a repository outside the public App Stylr project"],
+    [/https:\/\/github\.com\/kylbutlr\/(?!(?:app-stylr|portfolio)(?:\.git)?(?:[\s/#)"'`]|$))/u, "links to a repository outside the approved public projects"],
     [/(?:family|consumers)\/registry\.json/u, "references a private registry path"],
     [/\bconsumers:audit\b|audit-consumers\.mjs/u, "references private fleet audit tooling"]
   ];

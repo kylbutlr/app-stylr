@@ -9,14 +9,14 @@
       content="App Stylr is an opinionated design foundation for consistent small web, browser-extension, and macOS products."
     />
     <title>App Stylr Reference</title>
-    <link rel="canonical" href="https://app-stylr.netlify.app/" />
+    <link rel="canonical" href="https://kylbutlr.com/app-stylr" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="App Stylr Reference" />
     <meta
       property="og:description"
       content="An opinionated design foundation for consistent small web, browser-extension, and macOS products."
     />
-    <meta property="og:url" content="https://app-stylr.netlify.app/" />
+    <meta property="og:url" content="https://kylbutlr.com/app-stylr" />
     <meta property="og:image" content="__APP_STYLR_SOCIAL_IMAGE_URL__" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="App Stylr Reference" />
@@ -25,7 +25,7 @@
       content="An opinionated design foundation for consistent small web, browser-extension, and macOS products."
     />
     <meta name="twitter:image" content="__APP_STYLR_SOCIAL_IMAGE_URL__" />
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"App Stylr Reference","description":"An opinionated design foundation for consistent small web, browser-extension, and macOS products.","url":"https://app-stylr.netlify.app/","creator":{"@type":"Person","name":"Kyle Butler","url":"https://kylbutlr.com"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"App Stylr Reference","description":"An opinionated design foundation for consistent small web, browser-extension, and macOS products.","url":"https://kylbutlr.com/app-stylr","creator":{"@type":"Person","name":"Kyle Butler","url":"https://kylbutlr.com"}}</script>
     <link rel="icon" href="../assets/app-icon-gradient-base.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -35,8 +35,16 @@
         <p class="eyebrow creator-signature">Public design foundation</p>
         <h1>App Stylr</h1>
         <p class="hero-description">
-          A calm, precise, and useful foundation for independent products. One
-          token interface across web, browser extensions, and native Apple experiences.
+          A small set of design tokens, fonts, and practical patterns for keeping
+          independent web, browser-extension, and macOS products visually consistent.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#start">Start with CSS</a>
+          <a class="button button-secondary" href="https://github.com/kylbutlr/app-stylr">View on GitHub</a>
+        </div>
+        <p class="privacy-summary">
+          No account or upload is required. This static reference has no analytics code,
+          cookies, or browser storage. <a href="#privacy">How App Stylr handles data</a>
         </p>
         <div class="hero-meta" aria-label="Reference metadata">
           <span>v1.0.0</span>
@@ -66,6 +74,59 @@
     </header>
 
     <main class="page-width">
+      <section class="section start-section" id="start" aria-labelledby="start-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Getting started</p>
+            <h2 id="start-title">Use the tokens in three steps</h2>
+          </div>
+          <p>
+            Start with CSS for a web page or extension. App Stylr provides values and
+            assets, not application components or behavior.
+          </p>
+        </div>
+
+        <ol class="start-grid">
+          <li>
+            <span class="principle-number">01</span>
+            <h3>Install a pinned release</h3>
+            <pre><code>npm install "github:kylbutlr/app-stylr#v1.0.0"</code></pre>
+            <p>Pinning keeps token changes deliberate and reviewable.</p>
+          </li>
+          <li>
+            <span class="principle-number">02</span>
+            <h3>Import fonts and tokens</h3>
+            <pre><code>@import "app-stylr/fonts.css";
+@import "app-stylr/css";</code></pre>
+            <p>Import both once in your application stylesheet.</p>
+          </li>
+          <li>
+            <span class="principle-number">03</span>
+            <h3>Use semantic roles</h3>
+            <pre><code>.panel {
+  color: var(--ui-text);
+  background: var(--ui-surface);
+}</code></pre>
+            <p>Use roles such as text and surface instead of copying palette values.</p>
+          </li>
+        </ol>
+
+        <div class="start-links" aria-label="More ways to get started">
+          <a href="https://github.com/kylbutlr/app-stylr/tree/v1.0.0/examples/web">Complete web example</a>
+          <a href="https://github.com/kylbutlr/app-stylr/blob/v1.0.0/docs/browser-extensions.md">Browser-extension guide</a>
+          <a href="https://github.com/kylbutlr/app-stylr#swift-and-swiftui">Swift and SwiftUI setup</a>
+        </div>
+
+        <details class="learn-more">
+          <summary>What App Stylr does and does not change</summary>
+          <p>
+            App Stylr supplies reusable visual values, generated adapters, fonts, icon
+            tools, and optional guidance. It does not add accounts, save application data,
+            send project files over the network, replace native controls, or manage your releases.
+          </p>
+        </details>
+      </section>
+
       <section class="section" aria-labelledby="principles-title">
         <div class="section-heading">
           <div>
@@ -134,6 +195,11 @@
           <p>Typography, controls, status, spacing, and radius stay coherent while semantic theme values change.</p>
         </div>
 
+        <p class="specimen-note">
+          Static examples: the controls below demonstrate appearance and states. They do
+          not save, sync, open settings, or change application data.
+        </p>
+
         <div class="theme-grid">
           <article
             class="theme-preview"
@@ -155,15 +221,15 @@
                   <strong>Daily Flow</strong>
                 </div>
                 <nav>
-                  <a href="#" class="nav-item is-active">
+                  <span class="nav-item is-active">
                     <span class="nav-icon">✓</span>Today
-                  </a>
-                  <a href="#" class="nav-item">
+                  </span>
+                  <span class="nav-item">
                     <span class="nav-icon">○</span>Upcoming
-                  </a>
-                  <a href="#" class="nav-item">
+                  </span>
+                  <span class="nav-item">
                     <span class="nav-icon">◇</span>Archive
-                  </a>
+                  </span>
                 </nav>
                 <div class="sync-status">
                   <span class="status-dot is-synced" aria-hidden="true"></span>
@@ -177,7 +243,7 @@
                     <p class="app-kicker">Saturday, August 15</p>
                     <h3>Good afternoon</h3>
                   </div>
-                  <button class="icon-button" aria-label="Open settings">•••</button>
+                  <span class="icon-button" aria-hidden="true">•••</span>
                 </header>
 
                 <div class="metric-row">
@@ -192,19 +258,14 @@
                   </article>
                 </div>
 
-                <form class="composer">
-                  <label for="dark-task">Quick add</label>
+                <div class="composer">
+                  <span class="sample-label">Quick add</span>
                   <div class="input-row">
-                    <input
-                      id="dark-task"
-                      class="is-focused"
-                      value="Review App Stylr tokens"
-                      aria-describedby="dark-task-help"
-                    />
-                    <button type="button" class="button button-primary">Add task</button>
+                    <span class="sample-input is-focused">Review App Stylr tokens</span>
+                    <span class="button button-primary">Add task</span>
                   </div>
-                  <small id="dark-task-help">Press Return to save</small>
-                </form>
+                  <small>Press Return to save</small>
+                </div>
 
                 <div class="task-list" aria-label="Example tasks">
                   <div class="task-row is-selected">
@@ -244,27 +305,23 @@
                   spacing, borders, and typography.
                 </p>
                 <div class="button-row">
-                  <button class="button button-primary">Save changes</button>
-                  <button class="button button-secondary">Cancel</button>
+                  <span class="button button-primary">Save changes</span>
+                  <span class="button button-secondary">Cancel</span>
                 </div>
               </article>
 
               <div class="form-grid">
-                <label>
-                  Workspace name
-                  <input value="Example Studio" />
-                </label>
-                <label>
-                  Default view
-                  <span class="select-field">
-                    <select>
-                      <option>Today</option>
-                    </select>
-                  </span>
-                </label>
+                <div class="sample-field">
+                  <span class="sample-label">Workspace name</span>
+                  <span class="sample-input">Example Studio</span>
+                </div>
+                <div class="sample-field">
+                  <span class="sample-label">Default view</span>
+                  <span class="select-field sample-input">Today</span>
+                </div>
               </div>
 
-              <a class="text-link" href="#">Review account activity</a>
+              <span class="text-link">Review account activity</span>
 
               <div class="selection-row">
                 <span class="selection-icon">✓</span>
@@ -328,19 +385,19 @@
         <div class="feedback-grid" data-app-stylr-theme="dark">
           <article class="feedback-card feedback-success">
             <span class="feedback-icon">✓</span>
-            <div><strong>All changes saved</strong><p>Your workspace is up to date.</p></div>
+            <div><strong>Icons generated</strong><p>The new files are ready in your chosen folder.</p></div>
           </article>
           <article class="feedback-card feedback-warning">
             <span class="feedback-icon">!</span>
-            <div><strong>Connection is slow</strong><p>Changes will sync automatically.</p></div>
+            <div><strong>Unsupported image</strong><p>Choose a square SVG or PNG and try again.</p></div>
           </article>
           <article class="feedback-card feedback-danger">
             <span class="feedback-icon">×</span>
-            <div><strong>Could not save</strong><p>Check your connection and try again.</p></div>
+            <div><strong>Cannot write to this folder</strong><p>Choose a folder you can edit, then run the command again.</p></div>
           </article>
           <article class="feedback-card feedback-info">
             <span class="feedback-icon">i</span>
-            <div><strong>Update available</strong><p>App Stylr v1.0.0 is ready.</p></div>
+            <div><strong>Check only</strong><p>No files will change while the command verifies generated output.</p></div>
           </article>
         </div>
       </section>
@@ -453,6 +510,40 @@
             <p>Use Geist Sans for the interface and Geist Mono for technical metadata and identifiers.</p>
           </article>
         </div>
+      </section>
+
+      <section class="section privacy-section" id="privacy" aria-labelledby="privacy-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Privacy</p>
+            <h2 id="privacy-title">Your product files stay on your device.</h2>
+          </div>
+          <p>
+            App Stylr has no account, cloud service, telemetry, or upload feature. Its
+            commands read and write only the local files and folders you choose.
+          </p>
+        </div>
+
+        <div class="privacy-grid">
+          <article>
+            <h3>On this page</h3>
+            <p>No form data, cookies, analytics code, or browser storage is used.</p>
+          </article>
+          <article>
+            <h3>In the command-line tools</h3>
+            <p>Selected inputs are processed locally. Nothing is uploaded by App Stylr.</p>
+          </article>
+          <article>
+            <h3>When you install</h3>
+            <p>Your package provider handles the download. App Stylr code sends no install event.</p>
+          </article>
+        </div>
+
+        <p class="privacy-detail">
+          This page’s web host may process ordinary request data needed to deliver it.
+          Read the <a href="https://github.com/kylbutlr/app-stylr/blob/main/docs/privacy.md">complete privacy details</a>
+          for storage, deletion, hosting, and command-specific behavior.
+        </p>
       </section>
     </main>
 

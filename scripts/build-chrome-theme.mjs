@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
+import { formatCliError } from "./cli-errors.mjs";
 import { hexToRgb, readTokens, repoRoot } from "./token-utils.mjs";
 
 const themeVersion = "1.0.1";
@@ -312,6 +313,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(error.message);
+  console.error(formatCliError(error));
   process.exitCode = 1;
 });

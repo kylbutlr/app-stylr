@@ -4,7 +4,7 @@
   "description": "An opinionated design foundation for consistent small web, browser-extension, and macOS products.",
   "license": "MIT",
   "author": "Kyle Butler",
-  "homepage": "https://app-stylr.netlify.app/",
+  "homepage": "https://kylbutlr.com/app-stylr",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kylbutlr/app-stylr.git"
@@ -31,6 +31,7 @@
     "examples",
     "scripts/build-chrome-theme.mjs",
     "scripts/build-site.mjs",
+    "scripts/cli-errors.mjs",
     "scripts/generate-icons.mjs",
     "scripts/token-utils.mjs",
     "scripts/validate-macos-release.mjs",

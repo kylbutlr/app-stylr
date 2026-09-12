@@ -8,6 +8,14 @@ All notable public changes to App Stylr are documented here. The project follows
 
 - Public README guidelines and a reusable public-product README template for consistent product documentation.
 - A portable `app-stylr-reference` command that builds the versioned Reference at a configurable canonical URL and base path without duplicating its source.
+- A concise first-use CSS path, progressive help, and contextual privacy guidance in the public Reference.
+- Plain-language data handling, local storage, deletion, permission, and hosting details for the Reference and command-line tools.
+
+### Changed
+
+- Made the portfolio `/app-stylr` route the canonical product and Reference URL.
+- Marked visual component examples as static specimens so inert controls no longer create misleading keyboard stops.
+- Replaced sync-oriented sample feedback with local generation, unsupported-input, permission, and check-only examples.
 
 ### Fixed
 
