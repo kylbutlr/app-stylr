@@ -34,6 +34,7 @@ try {
     "adapters/css/fonts.css",
     "adapters/swift/AppStylrTokens.swift",
     "assets/example-app-icon.svg",
+    "docs/design-practice.md",
     "docs/package-interface.md",
     "examples/web/index.html",
     "scripts/build-chrome-theme.mjs",
@@ -74,7 +75,7 @@ try {
     import { readFile } from "node:fs/promises";
     const require = createRequire(import.meta.url);
     const tokens = require("app-stylr/tokens");
-    if (tokens.version !== "1.0.0") throw new Error("Token export version mismatch");
+    if (tokens.version !== "${packed.version}") throw new Error("Token export version mismatch");
     for (const name of ["app-stylr/css", "app-stylr/fonts.css", "app-stylr/assets/example-app-icon.svg", "app-stylr/templates/app-stylr.json", "app-stylr/chrome-theme/manifest.json", "app-stylr/package.json"]) {
       await readFile(require.resolve(name));
     }
@@ -126,7 +127,7 @@ try {
     JSON.stringify(referenceManifest) ===
       JSON.stringify({
         name: "App Stylr Reference",
-        version: "1.0.0",
+        version: packed.version,
         canonicalUrl: "https://example.com/app-stylr",
         basePath: "/app-stylr"
       }),

@@ -1,6 +1,6 @@
 # App Stylr
 
-An opinionated design foundation for keeping small web, browser-extension, and macOS products visually consistent without adopting a heavyweight component framework.
+An opinionated, adaptable design foundation for giving small web, browser-extension, and macOS products shared character without forcing them into one layout.
 
 App Stylr provides semantic design tokens, generated CSS and Swift adapters, bundled Geist fonts, reusable icon assets, small command-line tools, public templates, and practical visual guidance. It deliberately does not provide a React component library, application state, authentication, deployment automation, or private product-fleet governance.
 
@@ -8,9 +8,9 @@ App Stylr provides semantic design tokens, generated CSS and Swift adapters, bun
 
 ## Status
 
-App Stylr v1.0.0 is publicly available as a tagged GitHub release and supports pinned Node and Swift Package Manager installation. The npm package metadata is ready, but `app-stylr` has not been published to the npm registry.
+App Stylr v1.1.0 is the current source version. It preserves the v1 package interface while separating shared semantic foundations from product-owned composition. GitHub and Swift Package Manager installation require the matching immutable release tag. The npm package metadata is ready, but `app-stylr` has not been published to the npm registry.
 
-- **GitHub release:** [App Stylr v1.0.0](https://github.com/kylbutlr/app-stylr/releases/tag/v1.0.0)
+- **GitHub releases:** [App Stylr releases](https://github.com/kylbutlr/app-stylr/releases)
 - **npm:** prepared but not published
 - **Swift Package Manager:** available from the public repository and semantic-version tag
 
@@ -25,10 +25,10 @@ npm install app-stylr@1
 From the current GitHub release tag:
 
 ```sh
-npm install "github:kylbutlr/app-stylr#v1.0.0"
+npm install "github:kylbutlr/app-stylr#v1.1.0"
 ```
 
-For Swift Package Manager, add `https://github.com/kylbutlr/app-stylr` with a dependency rule starting at `1.0.0`, then add the `AppStylr` product to your target.
+For Swift Package Manager, add `https://github.com/kylbutlr/app-stylr` with a dependency rule starting at `1.1.0`, then add the `AppStylr` product to your target.
 
 ## What App Stylr provides
 
@@ -45,6 +45,7 @@ For Swift Package Manager, add `https://github.com/kylbutlr/app-stylr` with a de
 - `scripts/build-site.mjs`, the `app-stylr-reference` command for producing a portable, versioned Reference artifact
 - `chrome-theme/`, a generated unpacked Chrome theme
 - `reference/`, the source for the public visual guide
+- `docs/design-practice.md`, guidance for adapting the foundation without copying a canonical layout
 
 Private family membership, consumer inventories, local checkout paths, rollout order, and per-application release operations are not part of App Stylr’s public interface. See [Public and private boundaries](./docs/public-boundary.md).
 
@@ -76,7 +77,7 @@ Private family membership, consumer inventories, local checkout paths, rollout o
 }
 ```
 
-Dark mode is the default. Set `data-app-stylr-theme="light"` on the document or on a subtree to use the light semantic values.
+The generated CSS falls back to dark semantic values when no theme is set. That is implementation behavior, not a recommendation that every product begin in dark mode. Choose the initial theme from the use scene, and set `data-app-stylr-theme="light"` on the document or a subtree when light is the intended appearance.
 
 ```html
 <html lang="en" data-app-stylr-theme="light">
@@ -175,23 +176,26 @@ The small mandatory contract is:
 - use semantic roles such as `--ui-text`, `--ui-surface`, and `--ui-accent`;
 - keep the App Stylr version pinned and upgrade deliberately;
 - regenerate adapters instead of editing generated files;
-- preserve equivalent semantic roles in light and dark themes;
+- preserve equivalent semantic meanings when exposing both light and dark themes;
 - meet the documented contrast and non-color communication requirements.
 
 The following are optional recommendations:
 
-- use the dark theme as the initial appearance for compact utility products;
-- use the bundled Geist fonts;
+- choose an initial theme from the product's real use scene;
+- use the bundled Geist fonts when they suit the product voice;
+- use the supplied spacing, radius, size, and motion scales as coordinated starting points;
 - use the charcoal-to-mint icon construction;
 - adopt the Game Interface profile for canvas-first browser games;
 - use the provided Chrome theme and Sparkle release checks.
 
-Product requirements and native platform conventions may override recommendations. Record deliberate differences so upgrades remain reviewable. See [Mandatory and optional conventions](./docs/conventions.md).
+Product requirements and native platform conventions may override recommendations. Layouts, components, breakpoints, and navigation belong to the product and are not exceptions. Record only deliberate changes to shared semantic or compatibility contracts. See [Mandatory and optional conventions](./docs/conventions.md) and [Design practice](./docs/design-practice.md).
 
 ## Documentation
 
 - [Complete web example](./examples/web/README.md)
 - [Migration example from raw colors to semantic tokens](./examples/migration/README.md)
+- [Design practice: shared foundation, product-owned composition](./docs/design-practice.md)
+- [Migrating to the adaptive v1.1 guidance](./docs/migrations/v1.1.0.md)
 - [Migrating to the public v1 interface](./docs/migrations/v1.0.0.md)
 - [Browser-extension adoption](./docs/browser-extensions.md)
 - [Platform icon exports](./docs/platform-icons.md)

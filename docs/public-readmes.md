@@ -4,7 +4,7 @@ A public README should help three audiences in order: a visitor deciding whether
 
 These guidelines are a content standard, not a claim that every product has the same features or release process. Omit sections that genuinely do not apply, and add product-specific sections where they improve understanding.
 
-## Standard section order
+## Recommended information sequence
 
 1. **Name and promise**
    - Start with one H1 containing the product name.
@@ -45,7 +45,7 @@ These guidelines are a content standard, not a claim that every product has the 
 11. **License**
     - Name and link the repository's actual license.
 
-Libraries and shared foundations may adapt the middle of the sequence to document installation, exports, commands, and compatibility. They should still lead with status and value, provide a verified quick start, and end with development, support, and license information.
+Adapt this sequence to the product and its audience. Libraries and shared foundations often need installation, exports, commands, and compatibility before feature detail. The outcome matters more than matching a template: a new visitor should understand the value, current availability, safe first step, data handling, limitations, and support path without hunting.
 
 ## Writing rules
 

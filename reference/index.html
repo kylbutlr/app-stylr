@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="dark light" />
     <meta
       name="description"
-      content="App Stylr is an opinionated design foundation for consistent small web, browser-extension, and macOS products."
+      content="App Stylr is an opinionated, adaptable design foundation for small web, browser-extension, and macOS products."
     />
     <title>App Stylr Reference</title>
     <link rel="canonical" href="https://kylbutlr.com/app-stylr" />
@@ -14,7 +14,7 @@
     <meta property="og:title" content="App Stylr Reference" />
     <meta
       property="og:description"
-      content="An opinionated design foundation for consistent small web, browser-extension, and macOS products."
+      content="An opinionated, adaptable design foundation for shared product character without prescribed layouts."
     />
     <meta property="og:url" content="https://kylbutlr.com/app-stylr" />
     <meta property="og:image" content="__APP_STYLR_SOCIAL_IMAGE_URL__" />
@@ -22,21 +22,20 @@
     <meta name="twitter:title" content="App Stylr Reference" />
     <meta
       name="twitter:description"
-      content="An opinionated design foundation for consistent small web, browser-extension, and macOS products."
+      content="An opinionated, adaptable design foundation for shared product character without prescribed layouts."
     />
     <meta name="twitter:image" content="__APP_STYLR_SOCIAL_IMAGE_URL__" />
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"App Stylr Reference","description":"An opinionated design foundation for consistent small web, browser-extension, and macOS products.","url":"https://kylbutlr.com/app-stylr","creator":{"@type":"Person","name":"Kyle Butler","url":"https://kylbutlr.com"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"App Stylr Reference","description":"An opinionated, adaptable design foundation for shared product character without prescribed layouts.","url":"https://kylbutlr.com/app-stylr","creator":{"@type":"Person","name":"Kyle Butler","url":"https://kylbutlr.com"}}</script>
     <link rel="icon" href="../assets/app-icon-gradient-base.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header class="hero page-width">
       <div class="hero-copy">
-        <p class="eyebrow creator-signature">Public design foundation</p>
         <h1>App Stylr</h1>
         <p class="hero-description">
-          A small set of design tokens, fonts, and practical patterns for keeping
-          independent web, browser-extension, and macOS products visually consistent.
+          Shared visual infrastructure for independent products that should feel related,
+          not identical. Keep the semantic foundation. Shape the interface around its task.
         </p>
         <div class="hero-actions">
           <a class="button button-primary" href="#start">Start with CSS</a>
@@ -47,9 +46,9 @@
           cookies, or browser storage. <a href="#privacy">How App Stylr handles data</a>
         </p>
         <div class="hero-meta" aria-label="Reference metadata">
-          <span>v1.0.0</span>
-          <span>Dark first</span>
-          <span>Geist</span>
+          <span>v1.1.0</span>
+          <span>Layout agnostic</span>
+          <span>Theme flexible</span>
           <span>WCAG checked</span>
         </div>
       </div>
@@ -59,16 +58,15 @@
             src="../assets/app-icon-gradient-base.svg"
             alt="App Stylr charcoal-to-mint gradient icon base"
           />
-          <figcaption>Quiet structure. Clear action.</figcaption>
+          <figcaption>Shared character, product-owned composition.</figcaption>
         </figure>
         <aside class="system-card" aria-labelledby="system-title">
-          <p class="eyebrow">System posture</p>
-          <h2 id="system-title">Geist is the App Stylr voice.</h2>
+          <h2 id="system-title">A foundation, not a formula.</h2>
           <p>
-            Precise enough for dense utility interfaces, approachable enough for
-            everyday use, and naturally paired with Geist Mono for technical context.
+            App Stylr coordinates meaning, contrast, and visual character. Your product
+            still owns its layout, components, density, breakpoints, and platform behavior.
           </p>
-          <span class="status-chip">Canonical tokens in practice</span>
+          <span class="status-chip">Compatible without looking cloned</span>
         </aside>
       </div>
     </header>
@@ -77,7 +75,6 @@
       <section class="section start-section" id="start" aria-labelledby="start-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Getting started</p>
             <h2 id="start-title">Use the tokens in three steps</h2>
           </div>
           <p>
@@ -90,7 +87,7 @@
           <li>
             <span class="principle-number">01</span>
             <h3>Install a pinned release</h3>
-            <pre><code>npm install "github:kylbutlr/app-stylr#v1.0.0"</code></pre>
+            <pre><code>npm install "github:kylbutlr/app-stylr#v1.1.0"</code></pre>
             <p>Pinning keeps token changes deliberate and reviewable.</p>
           </li>
           <li>
@@ -112,8 +109,9 @@
         </ol>
 
         <div class="start-links" aria-label="More ways to get started">
-          <a href="https://github.com/kylbutlr/app-stylr/tree/v1.0.0/examples/web">Complete web example</a>
-          <a href="https://github.com/kylbutlr/app-stylr/blob/v1.0.0/docs/browser-extensions.md">Browser-extension guide</a>
+          <a href="https://github.com/kylbutlr/app-stylr/tree/v1.1.0/examples/web">Complete web example</a>
+          <a href="https://github.com/kylbutlr/app-stylr/blob/v1.1.0/docs/design-practice.md">Design practice</a>
+          <a href="https://github.com/kylbutlr/app-stylr/blob/v1.1.0/docs/browser-extensions.md">Browser-extension guide</a>
           <a href="https://github.com/kylbutlr/app-stylr#swift-and-swiftui">Swift and SwiftUI setup</a>
         </div>
 
@@ -130,27 +128,23 @@
       <section class="section" aria-labelledby="principles-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Design principles</p>
-            <h2 id="principles-title">Three qualities to preserve</h2>
+            <h2 id="principles-title">What stays shared</h2>
           </div>
-          <p>Each application can vary in function while keeping the same product character.</p>
+          <p>Compatibility lives in meaning and quality, not screenshot resemblance.</p>
         </div>
 
         <div class="criteria-grid">
           <article>
-            <span class="principle-number">01</span>
-            <h3>Density</h3>
-            <p>Fit useful information without making the interface feel crowded.</p>
+            <h3>Semantics</h3>
+            <p>Roles such as text, surface, accent, and status keep their meaning across products.</p>
           </article>
           <article>
-            <span class="principle-number">02</span>
-            <h3>Hierarchy</h3>
-            <p>Separate headings, labels, body copy, and controls at a glance.</p>
+            <h3>Access</h3>
+            <p>Contrast, focus, motion preferences, and non-color cues remain dependable.</p>
           </article>
           <article>
-            <span class="principle-number">03</span>
             <h3>Character</h3>
-            <p>Stay calm, precise, useful, and warm without becoming decorative.</p>
+            <p>Color, type, and rhythm create a family resemblance without fixing the composition.</p>
           </article>
         </div>
       </section>
@@ -158,7 +152,6 @@
       <section class="section" aria-labelledby="palette-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Foundation</p>
             <h2 id="palette-title">Brand palette</h2>
           </div>
           <p>Charcoal structure moves toward a restrained mint signal.</p>
@@ -189,15 +182,15 @@
       <section class="section" aria-labelledby="themes-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">System specimen</p>
-            <h2 id="themes-title">Canonical tokens in practice</h2>
+            <h2 id="themes-title">Examples, not templates</h2>
           </div>
-          <p>Typography, controls, status, spacing, and radius stay coherent while semantic theme values change.</p>
+          <p>These compositions demonstrate token behavior. They are not required product layouts.</p>
         </div>
 
         <p class="specimen-note">
           Static examples: the controls below demonstrate appearance and states. They do
-          not save, sync, open settings, or change application data.
+          not prescribe navigation, component structure, or responsive behavior, and they
+          do not save, sync, open settings, or change application data.
         </p>
 
         <div class="theme-grid">
@@ -209,7 +202,7 @@
             <header class="theme-preview-header">
               <div>
                 <span class="theme-dot" aria-hidden="true"></span>
-                <strong id="dark-title">Dark default</strong>
+                <strong id="dark-title">Dark theme example</strong>
               </div>
               <span class="mono-label">data-theme="dark"</span>
             </header>
@@ -291,7 +284,7 @@
             <header class="theme-preview-header">
               <div>
                 <span class="theme-dot" aria-hidden="true"></span>
-                <strong id="light-title">Light option</strong>
+                <strong id="light-title">Light theme example</strong>
               </div>
               <span class="mono-label">data-theme="light"</span>
             </header>
@@ -301,8 +294,8 @@
                 <p class="app-kicker">Account</p>
                 <h3>Project workspace</h3>
                 <p>
-                  Keep secondary surfaces quiet and let hierarchy come from
-                  spacing, borders, and typography.
+                  This specimen uses spacing, borders, and typography to create hierarchy.
+                  Another product may choose a completely different composition.
                 </p>
                 <div class="button-row">
                   <span class="button button-primary">Save changes</span>
@@ -325,7 +318,7 @@
 
               <div class="selection-row">
                 <span class="selection-icon">✓</span>
-                <span><strong>App Stylr enabled</strong><small>Following v1.0.0</small></span>
+                <span><strong>App Stylr enabled</strong><small>Following v1.1.0</small></span>
                 <span class="status-pill">Active</span>
               </div>
             </div>
@@ -336,10 +329,9 @@
       <section class="section type-section" aria-labelledby="type-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Typography</p>
-            <h2 id="type-title">Geist, with purpose</h2>
+            <h2 id="type-title">Geist, when it fits</h2>
           </div>
-          <p>Sans for interaction and reading. Mono for precise metadata.</p>
+          <p>Geist Sans and Geist Mono are bundled and coordinated, but optional. The product voice still leads.</p>
         </div>
 
         <div class="type-grid">
@@ -364,7 +356,7 @@
           </article>
           <article class="type-specimen mono-specimen">
             <span class="type-meta">Mono metadata · 12/16 · 500</span>
-            <p>SYNCED 14:32 · APP-STYLR@1.0.0</p>
+            <p>SYNCED 14:32 · APP-STYLR@1.1.0</p>
           </article>
           <article class="type-specimen character-specimen">
             <span class="type-meta">Characters</span>
@@ -376,7 +368,6 @@
       <section class="section" aria-labelledby="feedback-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Feedback</p>
             <h2 id="feedback-title">Status with language</h2>
           </div>
           <p>Color reinforces meaning. Text and symbols carry it.</p>
@@ -405,10 +396,9 @@
       <section class="section" aria-labelledby="responsive-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Responsive chrome</p>
-            <h2 id="responsive-title">One hierarchy, three shapes</h2>
+            <h2 id="responsive-title">Adapt the task, not a screenshot</h2>
           </div>
-          <p>Panels change placement without changing their semantic role.</p>
+          <p>These are possible responses to available space, not linked breakpoint rules.</p>
         </div>
 
         <div class="responsive-grid">
@@ -418,7 +408,7 @@
               <span class="diagram-workspace"></span>
               <span class="diagram-detail"></span>
             </div>
-            <figcaption><strong>Wide</strong><span>Persistent detail panel</span></figcaption>
+            <figcaption><strong>Wide example</strong><span>Keep related context visible</span></figcaption>
           </figure>
           <figure class="device-example tablet-example">
             <div class="device-screen">
@@ -427,7 +417,7 @@
               <span class="diagram-scrim"></span>
               <span class="diagram-drawer"></span>
             </div>
-            <figcaption><strong>Medium</strong><span>Right-side drawer</span></figcaption>
+            <figcaption><strong>Medium example</strong><span>Reveal detail when needed</span></figcaption>
           </figure>
           <figure class="device-example phone-example">
             <div class="device-screen">
@@ -435,7 +425,7 @@
               <span class="diagram-scrim"></span>
               <span class="diagram-sheet"></span>
             </div>
-            <figcaption><strong>Phone</strong><span>Bottom detail sheet</span></figcaption>
+            <figcaption><strong>Compact example</strong><span>Prioritize the current step</span></figcaption>
           </figure>
         </div>
       </section>
@@ -443,10 +433,9 @@
       <section class="section icon-section" aria-labelledby="icon-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Brand expression</p>
-            <h2 id="icon-title">One silhouette, one clear symbol</h2>
+            <h2 id="icon-title">An optional icon recipe</h2>
           </div>
-          <p>Every export begins with the same 1024px master construction.</p>
+          <p>Use the gradient base for shared brand expression, or bring your own square master.</p>
         </div>
 
         <div class="icon-grid">
@@ -494,20 +483,19 @@
       <section class="section takeaway" aria-labelledby="takeaway-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Design direction</p>
-            <h2 id="takeaway-title">One recognizable system across every small product.</h2>
+            <h2 id="takeaway-title">A recognizable foundation, not a prescribed product.</h2>
           </div>
-          <p>Keep the interface direct, useful, and recognizable without flattening product-specific needs.</p>
+          <p>Consistency should reduce repeated decisions without erasing product-specific needs.</p>
         </div>
 
         <div class="takeaway-grid">
           <article>
-            <h3>Product voice</h3>
-            <p>Keep language concise, direct, and warm. Make the next action easy to understand.</p>
+            <h3>The foundation owns</h3>
+            <p>Semantic meaning, accessible contrast, generated adapters, and versioned shared assets.</p>
           </article>
           <article>
-            <h3>Typography rule</h3>
-            <p>Use Geist Sans for the interface and Geist Mono for technical metadata and identifiers.</p>
+            <h3>The product owns</h3>
+            <p>Layout, navigation, density, components, breakpoints, platform behavior, and expressive direction.</p>
           </article>
         </div>
       </section>
@@ -515,7 +503,6 @@
       <section class="section privacy-section" id="privacy" aria-labelledby="privacy-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Privacy</p>
             <h2 id="privacy-title">Your product files stay on your device.</h2>
           </div>
           <p>
@@ -548,7 +535,7 @@
     </main>
 
     <footer class="page-width">
-      <span>App Stylr v1.0.0</span>
+      <span>App Stylr v1.1.0</span>
       <span>Open design foundation</span>
     </footer>
   </body>

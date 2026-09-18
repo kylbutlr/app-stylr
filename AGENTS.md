@@ -18,15 +18,16 @@ App Stylr is a public, framework-neutral design foundation for small web, browse
 4. Run `npm run chrome-theme` after changing tokens or the Chrome-theme contract.
 5. Update public documentation, examples, and migration guidance when the interface changes.
 6. Follow `docs/public-readmes.md` for public README changes and use `templates/public-product-readme.md` as the starting point for new products.
-7. Run `npm run site` after changing the reference pages or public site inputs.
-8. Run `npm test`, `npm run package:check`, and `swift build` before release preparation.
-9. Inspect the single Reference page at desktop and phone widths after visual changes.
-10. Update `CHANGELOG.md` for changes visible to consumers.
+7. Follow `docs/design-practice.md` when deciding whether guidance belongs to the shared foundation or the product.
+8. Run `npm run site` after changing the reference pages or public site inputs.
+9. Run `npm test`, `npm run package:check`, and `swift build` before release preparation.
+10. Inspect the single Reference page at desktop and phone widths after visual changes.
+11. Update `CHANGELOG.md` for changes visible to consumers.
 
 ## Guardrails
 
 - Use semantic theme roles in examples.
-- Keep light and dark themes structurally equivalent.
+- Keep semantic meanings equivalent when a product exposes both light and dark themes.
 - Preserve at least 4.5:1 contrast for normal text and 3:1 for large text and meaningful graphics.
 - Keep the core interface framework-neutral.
 - Add an adapter only when a real external use case requires it.

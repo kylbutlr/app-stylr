@@ -2,7 +2,7 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## [1.1.0] - 2026-09-17
 
 ### Added
 
@@ -10,12 +10,18 @@ All notable public changes to App Stylr are documented here. The project follows
 - A portable `app-stylr-reference` command that builds the versioned Reference at a configurable canonical URL and base path without duplicating its source.
 - A concise first-use CSS path, progressive help, and contextual privacy guidance in the public Reference.
 - Plain-language data handling, local storage, deletion, permission, and hosting details for the Reference and command-line tools.
+- A design-practice guide that separates shared semantic foundations from product-owned composition.
+- Migration guidance for adopting the less prescriptive v1.1 design contract.
 
 ### Changed
 
 - Made the portfolio `/app-stylr` route the canonical product and Reference URL.
 - Marked visual component examples as static specimens so inert controls no longer create misleading keyboard stops.
 - Replaced sync-oriented sample feedback with local generation, unsupported-input, permission, and check-only examples.
+- Reframed the Reference specimens as examples rather than canonical layouts.
+- Made initial theme, typography, spacing, radius, icon construction, responsive composition, and the Game Interface recipe explicitly optional product decisions.
+- Limited consumer exception tracking to shared semantic and compatibility changes instead of ordinary layout differences.
+- Reworked consumer and public README guidance around outcomes rather than screenshot or template resemblance.
 
 ### Fixed
 

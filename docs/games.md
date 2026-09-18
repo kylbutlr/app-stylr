@@ -1,12 +1,10 @@
-# Game interfaces
+# Optional game-interface recipe
 
-App Stylr games use the same semantic colors, Geist typography, accessibility rules, and platform icon contract as utility apps. The Game Interface profile is an opt-in layer for browser games that need larger glanceable controls and must preserve a playable canvas while setup or editing controls remain available.
+The Game Interface profile is a backward-compatible set of values for browser games that want larger controls and compact supporting text around a continuously rendered world. It is an optional recipe, not an App Stylr compatibility requirement or a canonical game layout.
 
-It is guidance and tokens, not a shared component library. Each game still owns its mechanics, information architecture, world rendering, and responsive implementation.
+Each game owns its mechanics, information architecture, world rendering, chrome, input model, and responsive composition. New games should adopt this profile only when its values fit their real use scene.
 
-## Opt in deliberately
-
-Use the Game Interface profile when the primary experience is a continuously rendered game canvas, arena, map, board, or world. Do not apply it to dashboards or ordinary forms merely to make them feel more dramatic.
+## Profile values
 
 The generated CSS adapter exposes:
 
@@ -22,52 +20,49 @@ The generated CSS adapter exposes:
 --profile-game-disclosure-toggle-size: 32px;
 ```
 
-These values enlarge controls and compact supporting text without replacing the canonical App Stylr color, radius, spacing, or motion tokens.
+These values are starting points retained for existing consumers. A game may alias, extend, or ignore them. Changing them locally is not an exception unless the product also changes a shared semantic role or accessibility requirement.
 
-## Canvas-first hierarchy
+## Shape the interface around play
 
-1. Keep the game world visually primary. Application chrome should frame the canvas rather than make it feel like a dashboard with a game embedded inside it.
-2. Put the most common action first. Randomize, Play, Continue, or Retry should be more prominent than advanced construction or tuning controls.
-3. Separate stable session settings from contextual editing. Display, sound, input, and opponent settings belong in setup. Track, map, terrain, and object controls belong beside the editing state they affect.
-4. On wide screens, one or two floating rails may frame the canvas when a useful section of the world remains visible between them. At the supported minimum width, verify that the world is still legible and interactive.
-5. Below the supported game width, collapse rails into drawers, sheets, or document flow. Do not preserve a desktop rail by shrinking text or controls below the profile values.
-6. Gameplay HUD elements may use more expressive scale and placement than application chrome, but they must remain readable, non-blocking, and safe-area aware.
+Start from the immediate player decision and the supported input methods.
 
-## Menus and disclosures
+- Keep required information and actions reachable without obscuring active play.
+- Separate setup choices from controls that matter during the current state.
+- Use persistent panels, drawers, sheets, overlays, or document flow only when each pattern fits the available space and interaction.
+- Let the game world use product-specific visual language while application chrome keeps semantic meaning clear.
+- Preserve legible text, safe-area spacing, reliable close actions, and usable targets at every supported size.
 
-Use progressive disclosure for options that are important but not needed every run.
+There is no required rail count, panel side, drawer direction, disclosure structure, or desktop-to-mobile transformation.
 
-- A closed summary should contain a short category label, a clear title, a one-line explanation, and a fixed square toggle.
-- Rotate or replace the toggle glyph when open. Keep its surrounding control square so the target does not visually change shape.
-- Use selected surface, border emphasis, and an accent edge to distinguish an open category. Do not rely on color alone.
-- Keep the open summary visible while its long contents scroll.
-- When a lower category opens, reveal its first controls immediately instead of leaving the new content below the viewport.
-- Allow one open category per semantic rail. Independent rails may each keep one category open.
-- Use the canonical panel motion duration and respect `prefers-reduced-motion`.
-- Preserve a visible `:focus-visible` treatment on the full summary.
+## Optional disclosure pattern
 
-Native `details` and `summary` elements are a strong browser baseline when their focus, toggle, scrolling, and open-state behavior are tested explicitly.
+Progressive disclosure can help when settings are important but not needed every run. Native `details` and `summary` elements are one useful browser baseline, not a required component.
+
+If the product uses disclosures:
+
+- give each summary a clear label and state;
+- keep focus visible and the toggle target stable;
+- make newly revealed controls discoverable without unexpected scrolling;
+- test long content, keyboard behavior, and reduced motion;
+- decide whether multiple groups may remain open from the product's task model, not from this recipe.
 
 ## Typography and controls
 
-- Use Geist Sans for instructions, headings, menu descriptions, and buttons.
-- Use Geist Mono for telemetry, key prompts, lap times, world seeds, compact category labels, and other technical metadata.
-- Use sentence case for player-facing copy. Reserve uppercase mono text for brief utility labels and HUD metadata.
-- Standard game controls use the 48px profile height. Primary play or generation actions use 58px.
-- Supporting menu copy uses the 14px / 21px reading pair. Compact technical labels use 12px / 16px.
-- Do not shrink essential controls to fit more settings at once. Collapse secondary groups or make a rail scroll instead.
+The bundled Geist fonts and profile sizes can provide a coherent starting point. A game may use another type system or larger controls when its world, audience, input method, or platform calls for them.
+
+Whatever values it chooses, the product should keep essential controls readable and operable instead of shrinking them to preserve a particular composition.
 
 ## Color and world rendering
 
-Application chrome should use App Stylr semantic roles. The rendered game world may use product-specific colors for terrain, teams, vehicles, enemies, danger zones, racing lines, and other mechanics.
+Use App Stylr semantic roles when their meanings fit application chrome. The rendered world can use product-specific colors for terrain, teams, vehicles, enemies, danger zones, racing lines, and other mechanics.
 
-Record those differences in `docs/app-stylr-exceptions.md`. Gameplay color exceptions still need adequate contrast and a non-color cue wherever state or meaning would otherwise be ambiguous.
+Meaningful gameplay color still needs adequate contrast and a non-color cue when color alone would make state ambiguous.
 
 ## Completion checklist
 
-- Test every closed and open menu state at the game’s normal desktop size and its declared minimum width.
-- Verify keyboard focus, toggle behavior, sticky summaries, scrolling, and reduced motion.
-- Verify setup, editor, active play, pause, result, error, and empty states when they exist.
-- Confirm that opening chrome never hides the immediate gameplay decision or traps access to a close action.
-- Compare application chrome against the App Stylr Visual Reference.
-- Document intentional gameplay-world and layout exceptions before release.
+- Test every supported input method and viewport class with real game content.
+- Verify focus, pause, resume, close, scrolling, and reduced-motion behavior where applicable.
+- Verify setup, active play, result, error, and empty states that the game actually has.
+- Confirm that chrome does not hide the current decision or trap access to a safe exit.
+- Compare the result with the game's product brief and use scene.
+- Document only changes to shared App Stylr semantic or compatibility contracts.

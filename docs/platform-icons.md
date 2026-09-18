@@ -1,6 +1,6 @@
 # Platform icon exports
 
-App Stylr generates browser-extension and installable-site icons from one square product master. Keep the charcoal-to-mint silhouette and product symbol consistent across every export.
+App Stylr generates browser-extension and installable-site icons from one square product master. The included charcoal-to-mint base is an optional brand recipe, not a requirement for using the generator.
 
 ## Generate the assets
 
@@ -10,7 +10,7 @@ Install the pinned App Stylr release, then run the packaged generator from the c
 npx app-stylr-icons --source assets/app-icon.svg --output public/icons
 ```
 
-The source may be SVG, PNG, or another format supported by Sharp. It must be square. Start from [`app-icon-gradient-base.svg`](../assets/app-icon-gradient-base.svg), add one recognizable product glyph, and preserve the transparent outer space.
+The source may be SVG, PNG, or another format supported by Sharp. It must be square because every generated target is square. A product may start from [`app-icon-gradient-base.svg`](../assets/app-icon-gradient-base.svg) or supply its own artwork. Keep any intentional transparent space consistent across exports.
 
 The generator creates:
 
@@ -50,7 +50,7 @@ See Chrome's official [extension icon configuration](https://developer.chrome.co
 
 Generate into the deployed site's public icon directory, then add the links in [`apple-touch-icons.html`](../templates/apple-touch-icons.html) to the document `<head>`. The unsuffixed `apple-touch-icon.png` is the 180px iPhone asset.
 
-The included `152`, `167`, and `180` pixel files cover the iPad and iPhone sizes documented by Apple. Use PNG, keep transparency around the App Stylr rounded square, and let the operating system apply its platform presentation.
+The included `152`, `167`, and `180` pixel files cover the iPad and iPhone sizes documented by Apple. Use PNG and let the operating system apply its platform presentation. Products using the optional App Stylr rounded-square recipe should preserve its transparent outer space.
 
 See Apple's official [web application configuration](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html).
 

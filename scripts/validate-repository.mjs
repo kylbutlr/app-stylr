@@ -54,6 +54,7 @@ const packageInterfaceGuidePath = path.join(repoRoot, "docs", "package-interface
 const cliGuidePath = path.join(repoRoot, "docs", "cli.md");
 const compatibilityGuidePath = path.join(repoRoot, "docs", "compatibility.md");
 const conventionsGuidePath = path.join(repoRoot, "docs", "conventions.md");
+const designPracticeGuidePath = path.join(repoRoot, "docs", "design-practice.md");
 const generatedFilesGuidePath = path.join(repoRoot, "docs", "generated-files.md");
 const privacyGuidePath = path.join(repoRoot, "docs", "privacy.md");
 const publicBoundaryGuidePath = path.join(repoRoot, "docs", "public-boundary.md");
@@ -93,6 +94,7 @@ await validateRelativeLinks(packageInterfaceGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(cliGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(compatibilityGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(conventionsGuidePath, /\]\(([^)]+)\)/g);
+await validateRelativeLinks(designPracticeGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(generatedFilesGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(privacyGuidePath, /\]\(([^)]+)\)/g);
 await validateRelativeLinks(publicBoundaryGuidePath, /\]\(([^)]+)\)/g);
@@ -109,7 +111,7 @@ const publicReadmeGuide = await readFile(publicReadmeGuidePath, "utf8");
 const publicReadmeTemplate = await readFile(publicReadmeTemplatePath, "utf8");
 const expectedRelease = `https://github.com/kylbutlr/app-stylr/tree/v${tokens.version}`;
 
-assert(publicReadmeGuide.includes("## Standard section order"), "Public README guide must define the standard section order.");
+assert(publicReadmeGuide.includes("## Recommended information sequence"), "Public README guide must define an adaptable information sequence.");
 assert(publicReadmeGuide.includes("## Verification checklist"), "Public README guide must include a verification checklist.");
 for (const heading of ["Status", "Highlights", "Quick start", "Privacy and permissions", "Known limitations", "Development", "App Stylr", "Support", "License"]) {
   assert(publicReadmeTemplate.includes(`## ${heading}`), `Public README template must include the ${heading} section.`);
@@ -146,8 +148,12 @@ assert(
   "Consumer agent instructions must require visual review before UI work."
 );
 assert(
-  consumerAgentInstructions.includes("Compare affected viewports and interaction states against the reference"),
-  "Consumer agent instructions must require comparison before completion."
+  consumerAgentInstructions.includes("Compare affected viewports and interaction states against the product's own requirements"),
+  "Consumer agent instructions must route comparison through product requirements."
+);
+assert(
+  consumerAgentInstructions.includes("compositions are examples, not required layouts"),
+  "Consumer agent instructions must distinguish Reference examples from layout requirements."
 );
 assert(
   consumerAgentInstructions.includes("Do not silently follow `main` or mix files from different releases"),
@@ -201,6 +207,7 @@ const trackedTextFiles = [
   "docs/chrome-theme.md",
   "docs/compatibility.md",
   "docs/conventions.md",
+  "docs/design-practice.md",
   "docs/deployment.md",
   "docs/generated-files.md",
   "docs/package-interface.md",
@@ -261,12 +268,14 @@ assert(fontLicense.includes("SIL OPEN FONT LICENSE Version 1.1"), "Bundled Geist
 
 const reference = await readFile(referencePath, "utf8");
 const referenceCss = await readFile(referenceCssPath, "utf8");
-assert(reference.includes("Three qualities to preserve"), "Reference must include the consolidated design principles.");
+assert(reference.includes("What stays shared"), "Reference must explain the shared design foundation.");
 assert(reference.includes("Geist Sans"), "Reference must identify Geist Sans as the interface typeface.");
 assert(reference.includes("Geist Mono"), "Reference must identify Geist Mono as the technical typeface.");
-assert(reference.includes("Canonical tokens in practice"), "Reference must include the consolidated system specimen.");
-assert(reference.includes("One recognizable system across every small product"), "Reference must include the consolidated design direction.");
+assert(reference.includes("Examples, not templates"), "Reference must distinguish specimens from required layouts.");
+assert(reference.includes("A recognizable foundation, not a prescribed product"), "Reference must explain the adaptable design direction.");
+assert(reference.includes("Adapt the task, not a screenshot"), "Reference must make responsive composition product-owned.");
 assert(reference.includes("Use the tokens in three steps"), "Reference must give first-time users a concise adoption path.");
+assert(!reference.includes('class="eyebrow'), "Reference must not use eyebrow labels as page scaffolding.");
 assert(reference.includes('href="#start"'), "Reference hero must link to the first-use guidance.");
 assert(reference.includes('id="privacy"'), "Reference must include contextual privacy guidance.");
 assert(
@@ -277,6 +286,9 @@ assert(
   reference.includes("Static examples: the controls below demonstrate appearance and states"),
   "Reference must distinguish component specimens from working product controls."
 );
+for (const retiredMandate of ["Dark default", "One hierarchy, three shapes", "Canonical tokens in practice", "One recognizable system across every small product"]) {
+  assert(!reference.includes(retiredMandate), `Reference contains retired layout guidance: ${retiredMandate}.`);
+}
 assert(!reference.includes('href="#"'), "Reference specimens must not include misleading empty links.");
 assert(!/<(?:button|input|select)\b/iu.test(reference), "Reference specimens must not expose inert form controls.");
 assert(reference.includes('name="description"'), "Reference must include a search description.");
@@ -286,10 +298,6 @@ assert(!/game interface|course builder|game profile/iu.test(reference), "Referen
 assert(
   reference.includes('<span class="task-check is-complete" aria-hidden="true"></span>'),
   "Visual contract completed checkbox must not depend on a font glyph."
-);
-assert(
-  /\.creator-signature\s*\{[^}]*text-transform:\s*none;/s.test(referenceCss),
-  "Visual contract must preserve the creator-signature text casing."
 );
 assert(
   /a:focus-visible,[\s\S]*?summary:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--ui-focus\);/s.test(referenceCss),

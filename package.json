@@ -1,7 +1,7 @@
 {
   "name": "app-stylr",
-  "version": "1.0.0",
-  "description": "An opinionated design foundation for consistent small web, browser-extension, and macOS products.",
+  "version": "1.1.0",
+  "description": "An opinionated, adaptable design foundation for small web, browser-extension, and macOS products.",
   "license": "MIT",
   "author": "Kyle Butler",
   "homepage": "https://kylbutlr.com/app-stylr",
