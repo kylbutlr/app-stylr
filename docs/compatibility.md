@@ -16,7 +16,7 @@ Frameworks are not part of the compatibility contract. React, Vue, Svelte, plain
 3. Update package and manifest pins together.
 4. Refresh any copied templates or vendored generated files deliberately.
 5. Run the consumer’s tests and build.
-6. Inspect affected light, dark, responsive, focus, error, and reduced-motion states.
-7. Record intentional differences from optional recommendations.
+6. Inspect affected themes, responsive states, focus, errors, and reduced-motion behavior that the product actually supports.
+7. Record intentional changes to shared semantic or compatibility contracts. Product-owned layouts do not need exceptions.
 
 Patch and minor releases do not remove existing public tokens or exports. A major release may remove or rename them and must include a migration note.

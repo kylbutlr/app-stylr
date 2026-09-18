@@ -1,7 +1,7 @@
 # App Stylr exceptions
 
-This file records intentional differences from the pinned App Stylr release. An empty table means the app follows the design system without known exceptions.
+This file records intentional changes to the pinned App Stylr semantic or compatibility contract. Product-owned layouts, components, breakpoints, navigation, and platform-native behavior are not exceptions.
 
-| Area | App Stylr default | Local requirement | Reason | Owner | Review trigger |
+| Area | Shared contract | Local requirement | Reason | Owner | Review trigger |
 | --- | --- | --- | --- | --- | --- |
-| None | None | None | No current exceptions | N/A | Next App Stylr upgrade |
+| None | None | None | No compatibility exceptions | N/A | Next App Stylr upgrade |

@@ -14,7 +14,7 @@
 
 Imports outside these exports are unsupported. Repository validation rejects the return of private registry exports.
 
-The CSS adapter defines tokens on `:root` and the dark theme selector. The light selector overrides semantic values without changing token names. The JSON token document is useful for generators and validation, but applications should prefer an adapter rather than duplicating conversion logic.
+The CSS adapter defines dark semantic values on `:root` and the dark theme selector. This fallback is implementation behavior, not a recommendation that every product begin in dark mode. The light selector overrides semantic values without changing token names. Applications should choose an initial theme from their use scene and set it explicitly when that choice matters. The JSON token document is useful for generators and validation, but applications should prefer an adapter rather than duplicating conversion logic.
 
 ## Swift interface
 

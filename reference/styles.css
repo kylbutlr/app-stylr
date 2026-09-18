@@ -10,7 +10,9 @@
 html {
   min-width: 320px;
   scroll-behavior: smooth;
+  color-scheme: dark;
   background: #090b0b;
+  scrollbar-color: var(--ui-border-strong) var(--ui-canvas);
 }
 
 body {
@@ -23,6 +25,12 @@ body {
   font-family: var(--font-sans);
   font-size: var(--type-body-size);
   line-height: var(--type-body-line-height);
+  caret-color: var(--ui-accent);
+}
+
+::selection {
+  color: var(--ui-selected-text);
+  background: var(--ui-selected);
 }
 
 button,
@@ -66,7 +74,6 @@ summary:focus-visible {
   gap: var(--space-24);
 }
 
-.eyebrow,
 .app-kicker,
 .type-meta,
 .mono-label {
@@ -80,16 +87,12 @@ summary:focus-visible {
   text-transform: uppercase;
 }
 
-.creator-signature {
-  text-transform: none;
-}
-
 .hero h1 {
   margin: 0;
-  font-size: clamp(64px, 9vw, 124px);
+  font-size: clamp(56px, 8vw, 96px);
   font-weight: 700;
-  letter-spacing: -0.065em;
-  line-height: 0.9;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
 }
 
 .hero-description {
@@ -166,7 +169,6 @@ summary:focus-visible {
   border: 1px solid var(--ui-border-strong);
   border-radius: var(--radius-dialog);
   background: color-mix(in srgb, var(--ui-surface) 92%, transparent);
-  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.2);
 }
 
 .system-card h2 {
@@ -176,7 +178,7 @@ summary:focus-visible {
   letter-spacing: var(--type-heading2-letter-spacing);
 }
 
-.system-card > p:not(.eyebrow) {
+.system-card > p {
   margin: var(--space-12) 0 0;
   color: var(--ui-text-muted);
 }
@@ -232,10 +234,8 @@ summary:focus-visible {
 .start-grid li,
 .privacy-grid article {
   min-width: 0;
-  padding: var(--space-24);
-  border: 1px solid var(--ui-border);
-  border-radius: var(--radius-card);
-  background: var(--ui-surface);
+  padding: var(--space-24) 0;
+  border-top: 1px solid var(--ui-border-strong);
 }
 
 .start-grid h3,
@@ -300,7 +300,8 @@ summary:focus-visible {
 .specimen-note {
   margin: -24px 0 var(--space-24);
   padding: var(--space-12) var(--space-16);
-  border-left: 3px solid var(--ui-accent);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-control);
   color: var(--ui-text-muted);
   background: var(--ui-surface);
 }
@@ -321,10 +322,8 @@ summary:focus-visible {
 
 .criteria-grid article,
 .takeaway-grid article {
-  padding: var(--space-24);
-  border: 1px solid var(--ui-border);
-  border-radius: var(--radius-card);
-  background: var(--ui-surface);
+  padding: var(--space-24) 0;
+  border-top: 1px solid var(--ui-border-strong);
 }
 
 .principle-number {
@@ -335,13 +334,9 @@ summary:focus-visible {
 
 .criteria-grid h3,
 .takeaway-grid h3 {
-  margin: var(--space-24) 0 var(--space-8);
+  margin: 0 0 var(--space-8);
   font-size: var(--type-heading3-size);
   line-height: var(--type-heading3-line-height);
-}
-
-.takeaway-grid h3 {
-  margin-top: 0;
 }
 
 .criteria-grid p,
@@ -388,7 +383,7 @@ summary:focus-visible {
 
 .theme-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  grid-template-columns: 1fr;
   gap: var(--space-24);
   align-items: stretch;
 }
@@ -737,7 +732,8 @@ a.button-primary:hover {
 }
 
 .component-stack {
-  min-height: 560px;
+  width: min(100%, 760px);
+  margin-inline: auto;
   padding: var(--space-24);
   display: flex;
   flex-direction: column;
@@ -771,7 +767,6 @@ a.button-primary:hover {
 }
 
 .selection-row {
-  margin-top: auto;
   min-height: 68px;
   padding: var(--space-12);
   display: grid;
