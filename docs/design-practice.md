@@ -71,3 +71,7 @@ Before shipping, verify that:
 - motion respects reduced-motion preferences;
 - important meaning does not rely on color alone;
 - deliberate changes to shared semantic roles are documented for the next upgrade.
+
+## Optional Balanced motion recipe
+
+The [Balanced motion and dark media recipe](balanced-motion.md) shows a transparent-to-charcoal header reveal with stable navigation and a restrained media treatment. It is product-owned composition guidance, not a new shared token requirement.

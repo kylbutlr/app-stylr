@@ -120,3 +120,7 @@ Preserve the Reference's labels, guides, assets, both theme specimens, and focus
 - Don't require consuming products to copy the Reference layout.
 - Don't replace the unchanged mint brand or light palette when extending the neutral dark surfaces.
 - Don't describe prepared source as a published tag or npm release.
+
+## Optional product motion
+
+The [Balanced motion recipe](docs/balanced-motion.md) documents transparent-to-charcoal headers and asset-specific media grading. These are opt-in product patterns, not Reference layout requirements or changes to shared tokens.

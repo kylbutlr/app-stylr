@@ -195,6 +195,7 @@ Product requirements and native platform conventions may override recommendation
 - [Complete web example](./examples/web/README.md)
 - [Migration example from raw colors to semantic tokens](./examples/migration/README.md)
 - [Design practice: shared foundation, product-owned composition](./docs/design-practice.md)
+- [Balanced motion: transparent headers and darker media](./docs/balanced-motion.md)
 - [Migrating to the charcoal and mint v1.2 styling](./docs/migrations/v1.2.0.md)
 - [Migrating to the adaptive v1.1 guidance](./docs/migrations/v1.1.0.md)
 - [Migrating to the public v1 interface](./docs/migrations/v1.0.0.md)

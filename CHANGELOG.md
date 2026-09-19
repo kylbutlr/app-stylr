@@ -2,6 +2,12 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Added
+
+- Optional Balanced composition guidance for transparent headers, charcoal surface reveals, stable navigation, darker background media, and reduced-motion behavior. Shared tokens and generated adapters are unchanged.
+
 ## [1.2.0] - 2026-09-19
 
 ### Added
