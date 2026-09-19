@@ -171,15 +171,15 @@
       "stops": [
         {
           "offset": 0,
-          "color": "#0E0E10"
+          "color": "#0D0D0D"
         },
         {
-          "offset": 72,
-          "color": "#202023"
+          "offset": 48,
+          "color": "#3B4145"
         },
         {
           "offset": 100,
-          "color": "#A9CEC2"
+          "color": "#899F98"
         }
       ]
     }

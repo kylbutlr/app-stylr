@@ -4,7 +4,7 @@ App Stylr generates browser-extension and installable-site icons from one square
 
 ## Charcoal and mint icon treatment
 
-Preserve the existing product silhouette and recognizable glyph. The optional Balanced base keeps the 1024px canvas, 840px square, 92px transparent inset, and 190px corner radius. Use dark canvas `#0E0E10` at 0%, raised charcoal `#202023` at 72%, and mint `#A9CEC2` at 100%, running from lower left to upper right. Charcoal dominates; mint is a concentrated corner highlight. These stops are recorded in `tokens/app-stylr.json` and the source SVGs.
+Preserve the existing product silhouette and recognizable glyph. The optional Balanced base keeps the 1024px canvas, 840px square, 92px transparent inset, and 190px corner radius. Use the approved C / Evening treatment: `#0D0D0D` at 0%, `#3B4145` at 48%, and `#899F98` at 100%, running from lower left to upper right. Preserve the original broad gradient. These icon-specific colors apply 78% brightness and 75% saturation to the original icon palette; they do not replace semantic UI colors. These stops are recorded in `tokens/app-stylr.json` and the source SVGs.
 
 Do not apply the hero video's CSS filter to icon artwork. Export the intended colors into the master so browser tabs, platform exports, and screenshots remain consistent. The icon's proportional corner radius is independent of the 12px card and 9px button radii.
 

@@ -114,9 +114,9 @@ for (let index = 1; index < gradientStops.length; index += 1) {
   );
 }
 
-assert(gradientStops[0]?.color === tokens.themes.dark.canvas, "The icon gradient must begin with the dark canvas.");
-assert(gradientStops[1]?.color === tokens.themes.dark.surfaceRaised, "The icon gradient midpoint must use the raised charcoal surface.");
-assert(gradientStops.at(-1)?.color === tokens.brand.mint, "The icon gradient must end with Brand Mint.");
+assert(gradientStops[0]?.color === "#0D0D0D", "The icon gradient must begin with Evening charcoal.");
+assert(gradientStops[1]?.offset === 48 && gradientStops[1]?.color === "#3B4145", "The icon gradient midpoint must use Evening slate at 48%.");
+assert(gradientStops.at(-1)?.color === "#899F98", "The icon gradient must end with Evening mint.");
 
 for (const pair of tokens.accessibility?.contrastPairs ?? []) {
   const foreground = getPath(tokens, pair.foreground);

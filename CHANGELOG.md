@@ -10,7 +10,7 @@ All notable public changes to App Stylr are documented here. The project follows
 
 ### Changed
 
-- Updated the optional icon gradient and generated exports to a charcoal-dominant base with a restrained mint corner highlight. Added self-contained favicon and small-size guidance.
+- Updated the optional icon gradient and generated exports to the approved C / Evening treatment, retaining the original broad gradient with darker, less saturated colors. Added self-contained favicon and small-size guidance.
 
 ## [1.2.0] - 2026-09-19
 
