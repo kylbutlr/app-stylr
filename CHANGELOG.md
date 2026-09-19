@@ -2,6 +2,21 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-09-19
+
+### Added
+
+- A 9px button radius token in the CSS and Swift adapters, retaining the 8px input/control and 12px card radii.
+- Migration guidance for the charcoal and mint visual update.
+
+### Changed
+
+- Refined dark semantic colors to neutral charcoal surfaces, warmer primary text, and clearer strong borders while preserving the mint accent and all semantic roles.
+- Applied the charcoal panel composition to the public Reference with compact introductions, grouped sections, and responsive layouts.
+- Regenerated the CSS, Swift, and Chrome-theme artifacts from the canonical tokens. Light theme colors remain unchanged.
+
+This source version is prepared for release. A main-branch update does not publish a tag or an npm package.
+
 ## [1.1.0] - 2026-09-17
 
 ### Added

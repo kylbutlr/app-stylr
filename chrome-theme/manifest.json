@@ -22,9 +22,9 @@
         53
       ],
       "background_tab_inactive": [
-        17,
-        21,
-        21
+        18,
+        18,
+        20
       ],
       "background_tab_incognito": [
         38,
@@ -32,14 +32,14 @@
         57
       ],
       "background_tab_incognito_inactive": [
-        17,
-        21,
-        21
+        18,
+        18,
+        20
       ],
       "bookmark_text": [
-        169,
-        181,
-        178
+        167,
+        167,
+        174
       ],
       "button_background": [
         38,
@@ -47,14 +47,14 @@
         57
       ],
       "frame": [
-        29,
-        34,
-        34
+        32,
+        32,
+        35
       ],
       "frame_inactive": [
-        17,
-        21,
-        21
+        18,
+        18,
+        20
       ],
       "frame_incognito": [
         38,
@@ -62,19 +62,19 @@
         57
       ],
       "frame_incognito_inactive": [
-        17,
-        21,
-        21
+        18,
+        18,
+        20
       ],
       "ntp_background": [
-        13,
-        16,
+        14,
+        14,
         16
       ],
       "ntp_header": [
-        169,
-        181,
-        178
+        167,
+        167,
+        174
       ],
       "ntp_link": [
         169,
@@ -82,24 +82,24 @@
         194
       ],
       "ntp_text": [
-        243,
-        247,
-        245
+        245,
+        244,
+        243
       ],
       "omnibox_background": [
-        29,
-        34,
-        34
+        32,
+        32,
+        35
       ],
       "omnibox_text": [
-        243,
-        247,
-        245
+        245,
+        244,
+        243
       ],
       "tab_background_text": [
-        169,
-        181,
-        178
+        167,
+        167,
+        174
       ],
       "tab_background_text_inactive": [
         131,
@@ -107,9 +107,9 @@
         163
       ],
       "tab_background_text_incognito": [
-        169,
-        181,
-        178
+        167,
+        167,
+        174
       ],
       "tab_background_text_incognito_inactive": [
         131,
@@ -117,14 +117,14 @@
         163
       ],
       "tab_text": [
-        243,
-        247,
-        245
+        245,
+        244,
+        243
       ],
       "toolbar": [
-        23,
-        27,
-        27
+        21,
+        21,
+        23
       ],
       "toolbar_button_icon": [
         169,
@@ -132,9 +132,9 @@
         194
       ],
       "toolbar_text": [
-        243,
-        247,
-        245
+        245,
+        244,
+        243
       ]
     },
     "properties": {

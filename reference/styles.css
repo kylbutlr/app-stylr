@@ -1233,3 +1233,52 @@ footer {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Charcoal panel composition; shared values come from the generated adapter. */
+html:root {
+  background: var(--ui-canvas);
+  & body { background: var(--ui-canvas); }
+  & .page-width { width: min(1280px, calc(100% - 48px)); }
+  & .hero { min-height: 0; padding-block: 48px 32px; gap: 48px; grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr); }
+  & .hero h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1.05; letter-spacing: -0.03em; }
+  & .hero-description { font-size: 20px; line-height: 1.5; margin-top: 24px; max-width: 60ch; }
+  & .hero-mark { grid-template-columns: 64px 1fr; gap: 16px; align-items: center; text-align: left; }
+  & .hero-mark img { width: 64px; filter: none; }
+  & .hero-mark figcaption { font-family: var(--font-sans); font-size: 14px; }
+  & .hero-aside { gap: 24px; }
+  & .system-card { border: 1px solid var(--ui-border); background: var(--ui-surface); border-radius: var(--radius-card); box-shadow: none; }
+  & .system-card h2 { margin-top: 0; font-size: 22px; }
+  & .section { margin-top: 24px; padding: 24px; background: var(--ui-surface); border: 1px solid var(--ui-border); border-radius: var(--radius-card); }
+  & .section-heading { padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--ui-border); grid-template-columns: minmax(0, 1fr) minmax(240px, .8fr); }
+  & .section-heading h2 { font-size: clamp(24px, 2.5vw, 32px); line-height: 1.2; letter-spacing: -0.025em; }
+  & .start-grid li { border-top: 0; padding-block: 0; }
+  & .start-grid { gap: 24px; }
+  & .start-grid h3 { font-size: 18px; }
+  & .button { border-radius: var(--radius-button); }
+  & .button-primary { background: var(--ui-accent); color: var(--ui-accent-text); }
+  & .button-secondary { background: var(--ui-surface-raised); border-color: var(--ui-border-strong); }
+  & .status-chip { border-radius: 6px; }
+  & .theme-preview, & .metric-card { box-shadow: none; }
+  & .theme-preview { border-color: var(--ui-border); border-radius: var(--radius-card); }
+  & .sample-input, & .select-field { border-color: var(--ui-border-strong); }
+  & .hero-meta span { background: transparent; border-radius: 6px; }
+  & :is(a, button, summary, select):focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 4px; }
+  & ::selection { background: var(--ui-accent); color: var(--ui-accent-text); }
+}
+@media (max-width: 800px) {
+  html:root {
+    & .hero { grid-template-columns: 1fr; gap: 24px; }
+    & .hero-aside { grid-template-columns: 1fr; }
+    & .section-heading { grid-template-columns: 1fr; gap: 16px; }
+    & .start-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+}
+@media (max-width: 480px) {
+  html:root {
+    & .page-width { width: calc(100% - 32px); }
+    & .hero { padding-top: 32px; }
+    & .section { padding: 20px; }
+    & .hero-description { font-size: 18px; }
+    & .hero-meta { margin-top: 24px; }
+  }
+}

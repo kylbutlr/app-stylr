@@ -3,7 +3,7 @@
 import SwiftUI
 
 public enum AppStylrTokens {
-  public static let version = "1.1.0"
+  public static let version = "1.2.0"
 
   public enum Brand {
     public static let ink = Color(red: 0.066667, green: 0.066667, blue: 0.066667)
@@ -41,21 +41,21 @@ public enum AppStylrTokens {
   }
 
   public static let dark = Theme(
-      canvas: Color(red: 0.05098, green: 0.062745, blue: 0.062745),
-      sidebar: Color(red: 0.066667, green: 0.082353, blue: 0.082353),
-      surface: Color(red: 0.090196, green: 0.105882, blue: 0.105882),
-      surfaceRaised: Color(red: 0.113725, green: 0.133333, blue: 0.133333),
-      border: Color(red: 0.188235, green: 0.219608, blue: 0.219608),
-      borderStrong: Color(red: 0.27451, green: 0.32549, blue: 0.317647),
-      text: Color(red: 0.952941, green: 0.968627, blue: 0.960784),
-      textMuted: Color(red: 0.662745, green: 0.709804, blue: 0.698039),
+      canvas: Color(red: 0.054902, green: 0.054902, blue: 0.062745),
+      sidebar: Color(red: 0.070588, green: 0.070588, blue: 0.078431),
+      surface: Color(red: 0.082353, green: 0.082353, blue: 0.090196),
+      surfaceRaised: Color(red: 0.12549, green: 0.12549, blue: 0.137255),
+      border: Color(red: 0.164706, green: 0.164706, blue: 0.180392),
+      borderStrong: Color(red: 0.454902, green: 0.454902, blue: 0.47451),
+      text: Color(red: 0.960784, green: 0.956863, blue: 0.952941),
+      textMuted: Color(red: 0.654902, green: 0.654902, blue: 0.682353),
       accent: Color(red: 0.662745, green: 0.807843, blue: 0.760784),
       accentText: Color(red: 0.066667, green: 0.066667, blue: 0.066667),
       accentStrong: Color(red: 0.764706, green: 0.890196, blue: 0.85098),
       link: Color(red: 0.662745, green: 0.807843, blue: 0.760784),
       focus: Color(red: 0.662745, green: 0.807843, blue: 0.760784),
       selected: Color(red: 0.14902, green: 0.239216, blue: 0.223529),
-      selectedText: Color(red: 0.952941, green: 0.968627, blue: 0.960784),
+      selectedText: Color(red: 0.960784, green: 0.956863, blue: 0.952941),
       success: Color(red: 0.509804, green: 0.827451, blue: 0.654902),
       successSurface: Color(red: 0.090196, green: 0.192157, blue: 0.14902),
       warning: Color(red: 0.94902, green: 0.768627, blue: 0.435294),
@@ -172,6 +172,7 @@ public enum AppStylrTokens {
   }
 
   public enum Radius {
+    public static let button: CGFloat = 9
     public static let control: CGFloat = 8
     public static let card: CGFloat = 12
     public static let dialog: CGFloat = 16

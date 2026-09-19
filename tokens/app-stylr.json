@@ -1,7 +1,7 @@
 {
   "$schema": "./app-stylr.schema.json",
   "name": "App Stylr",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Reusable visual and interaction tokens for small web, browser-extension, and macOS products.",
   "brand": {
     "ink": "#111111",
@@ -38,21 +38,21 @@
       "infoSurface": "#E6F2EF"
     },
     "dark": {
-      "canvas": "#0D1010",
-      "sidebar": "#111515",
-      "surface": "#171B1B",
-      "surfaceRaised": "#1D2222",
-      "border": "#303838",
-      "borderStrong": "#465351",
-      "text": "#F3F7F5",
-      "textMuted": "#A9B5B2",
+      "canvas": "#0E0E10",
+      "sidebar": "#121214",
+      "surface": "#151517",
+      "surfaceRaised": "#202023",
+      "border": "#2A2A2E",
+      "borderStrong": "#747479",
+      "text": "#F5F4F3",
+      "textMuted": "#A7A7AE",
       "accent": "#A9CEC2",
       "accentText": "#111111",
       "accentStrong": "#C3E3D9",
       "link": "#A9CEC2",
       "focus": "#A9CEC2",
       "selected": "#263D39",
-      "selectedText": "#F3F7F5",
+      "selectedText": "#F5F4F3",
       "success": "#82D3A7",
       "successSurface": "#173126",
       "warning": "#F2C46F",
@@ -134,7 +134,8 @@
   "radius": {
     "control": 8,
     "card": 12,
-    "dialog": 16
+    "dialog": 16,
+    "button": 9
   },
   "size": {
     "control": 44,

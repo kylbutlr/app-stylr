@@ -210,6 +210,7 @@ ${spacing}
   }
 
   public enum Radius {
+    public static let button: CGFloat = ${tokens.radius.button}
     public static let control: CGFloat = ${tokens.radius.control}
     public static let card: CGFloat = ${tokens.radius.card}
     public static let dialog: CGFloat = ${tokens.radius.dialog}

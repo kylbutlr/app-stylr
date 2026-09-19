@@ -8,7 +8,7 @@ App Stylr provides semantic design tokens, generated CSS and Swift adapters, bun
 
 ## Status
 
-App Stylr v1.1.0 is the current source version. It preserves the v1 package interface while separating shared semantic foundations from product-owned composition. GitHub and Swift Package Manager installation require the matching immutable release tag. The npm package metadata is ready, but `app-stylr` has not been published to the npm registry.
+App Stylr v1.2.0 is the current source version, prepared for release. The installation examples below remain on v1.1.0 until a v1.2.0 tag is published. It preserves the v1 package interface while separating shared semantic foundations from product-owned composition. GitHub and Swift Package Manager installation require the matching immutable release tag. The npm package metadata is ready, but `app-stylr` has not been published to the npm registry.
 
 - **GitHub releases:** [App Stylr releases](https://github.com/kylbutlr/app-stylr/releases)
 - **npm:** prepared but not published
@@ -73,7 +73,7 @@ Private family membership, consumer inventories, local checkout paths, rollout o
   min-height: var(--size-control);
   color: var(--ui-accent-text);
   background: var(--ui-accent);
-  border-radius: var(--radius-control);
+  border-radius: var(--radius-button, var(--radius-control));
 }
 ```
 
@@ -195,6 +195,7 @@ Product requirements and native platform conventions may override recommendation
 - [Complete web example](./examples/web/README.md)
 - [Migration example from raw colors to semantic tokens](./examples/migration/README.md)
 - [Design practice: shared foundation, product-owned composition](./docs/design-practice.md)
+- [Migrating to the charcoal and mint v1.2 styling](./docs/migrations/v1.2.0.md)
 - [Migrating to the adaptive v1.1 guidance](./docs/migrations/v1.1.0.md)
 - [Migrating to the public v1 interface](./docs/migrations/v1.0.0.md)
 - [Browser-extension adoption](./docs/browser-extensions.md)

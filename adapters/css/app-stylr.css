@@ -1,7 +1,7 @@
 /* Generated from tokens/app-stylr.json by npm run build. Do not edit. */
 
 :root {
-  --app-stylr-version: "1.1.0";
+  --app-stylr-version: "1.2.0";
 
   --brand-ink: #111111;
   --brand-charcoal: #2E3135;
@@ -57,6 +57,7 @@
   --radius-control: 8px;
   --radius-card: 12px;
   --radius-dialog: 16px;
+  --radius-button: 9px;
   --size-control: 44px;
   --size-control-compact: 40px;
   --size-reading-width: 68ch;
@@ -83,21 +84,21 @@
 
 :root,
 [data-app-stylr-theme="dark"] {
-  --ui-canvas: #0D1010;
-  --ui-sidebar: #111515;
-  --ui-surface: #171B1B;
-  --ui-surface-raised: #1D2222;
-  --ui-border: #303838;
-  --ui-border-strong: #465351;
-  --ui-text: #F3F7F5;
-  --ui-text-muted: #A9B5B2;
+  --ui-canvas: #0E0E10;
+  --ui-sidebar: #121214;
+  --ui-surface: #151517;
+  --ui-surface-raised: #202023;
+  --ui-border: #2A2A2E;
+  --ui-border-strong: #747479;
+  --ui-text: #F5F4F3;
+  --ui-text-muted: #A7A7AE;
   --ui-accent: #A9CEC2;
   --ui-accent-text: #111111;
   --ui-accent-strong: #C3E3D9;
   --ui-link: #A9CEC2;
   --ui-focus: #A9CEC2;
   --ui-selected: #263D39;
-  --ui-selected-text: #F3F7F5;
+  --ui-selected-text: #F5F4F3;
   --ui-success: #82D3A7;
   --ui-success-surface: #173126;
   --ui-warning: #F2C46F;
