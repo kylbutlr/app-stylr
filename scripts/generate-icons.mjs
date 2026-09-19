@@ -114,6 +114,20 @@ async function main() {
     console.log(`Generated ${path.relative(repoRoot, destination)} (${iconExport.size}x${iconExport.size}).`);
   }
 
+  // The Reference favicon uses the glyph-free brand base, not the example checkmark.
+  if (options.source === defaultSource && options.output === defaultOutput) {
+    const destination = path.join(repoRoot, "assets", "favicon-32.png");
+    const rendered = await renderIcon(path.join(repoRoot, "assets", "app-icon-gradient-base.svg"), 32);
+    if (options.check) {
+      try {
+        if (!(await readFile(destination)).equals(rendered)) mismatches.push("assets/favicon-32.png");
+      } catch { mismatches.push("assets/favicon-32.png"); }
+    } else {
+      await writeFile(destination, rendered);
+      console.log("Generated assets/favicon-32.png (32x32).");
+    }
+  }
+
   if (mismatches.length > 0) {
     throw new Error(`Generated platform icons are stale or missing:\n- ${mismatches.join("\n- ")}`);
   }

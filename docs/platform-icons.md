@@ -2,6 +2,19 @@
 
 App Stylr generates browser-extension and installable-site icons from one square product master. The included charcoal-to-mint base is an optional brand recipe, not a requirement for using the generator.
 
+## Charcoal and mint icon treatment
+
+Preserve the existing product silhouette and recognizable glyph. The optional Balanced base keeps the 1024px canvas, 840px square, 92px transparent inset, and 190px corner radius. Use dark canvas `#0E0E10` at 0%, raised charcoal `#202023` at 72%, and mint `#A9CEC2` at 100%, running from lower left to upper right. Charcoal dominates; mint is a concentrated corner highlight. These stops are recorded in `tokens/app-stylr.json` and the source SVGs.
+
+Do not apply the hero video's CSS filter to icon artwork. Export the intended colors into the master so browser tabs, platform exports, and screenshots remain consistent. The icon's proportional corner radius is independent of the 12px card and 9px button radii.
+
+### Favicons
+
+- Use a self-contained SVG master with an explicit square viewBox. Convert letterforms to vector outlines instead of relying on external fonts, stylesheets, or linked images.
+- Keep the existing identifying symbol, generous transparent padding, and sufficient contrast at actual 16px and 32px sizes on light and dark browser chrome.
+- Add a PNG fallback generated from the same master. Serve icon assets with stable paths and update the asset URL revision when changing them so cached favicons refresh.
+- Preserve font licensing and attribution when outlining a glyph. Outlining should preserve the chosen typeface, not substitute a look-alike letter.
+
 ## Generate the assets
 
 Install the pinned App Stylr release, then run the packaged generator from the consuming app root:

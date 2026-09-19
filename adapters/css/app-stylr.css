@@ -79,7 +79,7 @@
   --icon-inset: 92px;
   --icon-radius: 190px;
   --icon-safe-area: 9%;
-  --icon-gradient: linear-gradient(135deg, #111111 0%, #49545B 48%, #A9CEC2 100%);
+  --icon-gradient: linear-gradient(135deg, #0E0E10 0%, #202023 72%, #A9CEC2 100%);
 }
 
 :root,

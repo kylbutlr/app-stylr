@@ -8,6 +8,10 @@ All notable public changes to App Stylr are documented here. The project follows
 
 - Optional Balanced composition guidance for transparent headers, charcoal surface reveals, stable navigation, darker background media, and reduced-motion behavior. Shared tokens and generated adapters are unchanged.
 
+### Changed
+
+- Updated the optional icon gradient and generated exports to a charcoal-dominant base with a restrained mint corner highlight. Added self-contained favicon and small-size guidance.
+
 ## [1.2.0] - 2026-09-19
 
 ### Added

@@ -3,8 +3,8 @@
   <desc id="description">A rounded charcoal-to-mint gradient square with a white checkmark.</desc>
   <defs>
     <linearGradient id="icon-gradient" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#111111" />
-      <stop offset="0.48" stop-color="#49545B" />
+      <stop offset="0" stop-color="#0E0E10" />
+      <stop offset="0.72" stop-color="#202023" />
       <stop offset="1" stop-color="#A9CEC2" />
     </linearGradient>
   </defs>

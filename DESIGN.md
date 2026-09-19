@@ -124,3 +124,5 @@ Preserve the Reference's labels, guides, assets, both theme specimens, and focus
 ## Optional product motion
 
 The [Balanced motion recipe](docs/balanced-motion.md) documents transparent-to-charcoal headers and asset-specific media grading. These are opt-in product patterns, not Reference layout requirements or changes to shared tokens.
+
+The optional icon base uses dark canvas at 0%, raised charcoal at 72%, and mint at 100%. Preserve silhouette, transparent inset, and vector glyph identity; see [platform icon guidance](docs/platform-icons.md).
