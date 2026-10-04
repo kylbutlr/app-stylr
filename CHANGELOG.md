@@ -6,6 +6,7 @@ All notable public changes to App Stylr are documented here. The project follows
 
 ### Added
 
+- Optional web text-wrapping guidance using a global `text-wrap-style: pretty` default, editable-text exceptions, and responsive, browser, performance, and print checks.
 - Optional Balanced composition guidance for transparent headers, charcoal surface reveals, stable navigation, darker background media, and reduced-motion behavior. Shared tokens and generated adapters are unchanged.
 
 ### Changed

@@ -16,6 +16,7 @@ These rules keep shared meanings stable across adapters and make an App Stylr ve
 
 - Choose the initial theme from the product's use scene. The generated CSS falls back to dark values only as an implementation default.
 - Use bundled Geist Sans and Geist Mono when they suit the product voice.
+- Use the [web text-wrapping default](#web-text-wrapping) to reduce awkwardly short final lines, with stable wrapping for editable text.
 - Use the provided spacing, radius, size, and motion scales as coordinated starting points.
 - Build product icons from the charcoal-to-mint base.
 - Adopt the Game Interface profile for canvas-first browser games.
@@ -24,3 +25,28 @@ These rules keep shared meanings stable across adapters and make an App Stylr ve
 Applications own their components, layouts, breakpoints, density, navigation, naming, authentication, deployment, and release automation. Product requirements and native platform conventions take priority over optional recommendations.
 
 The [design-practice guide](./design-practice.md) explains how to preserve shared character without copying a canonical layout.
+
+## Web text wrapping
+
+For web apps, browser-extension interfaces, and game UI rendered as HTML, use `text-wrap-style: pretty` on `body` as an optional default. The property inherits, so individual components can override it. Apply it in the product stylesheet; the generated token adapter does not set global element styles.
+
+```css
+body {
+  text-wrap-style: pretty;
+}
+
+textarea,
+[contenteditable=""],
+[contenteditable="true"],
+[contenteditable="plaintext-only"] {
+  text-wrap-style: stable;
+}
+```
+
+The longhand changes the wrapping algorithm without resetting the wrap/nowrap mode. Keep `stable` on editable text so earlier lines do not rearrange as users type. Also consider a scoped `stable` override for text that repeatedly reflows during animation or frequent updates. Use `balance` only on headings or captions where roughly equal line lengths suit the product's design.
+
+`pretty` is a browser-controlled improvement, not a guarantee of two words on the final line or identical breaks across browsers. Unsupported declarations fall back to existing wrapping. It does not style text drawn into a canvas or native text views.
+
+Before adopting the default, check real headings, body copy, compact or clamped components, editing, and print output at supported viewport sizes and in supported browsers. Assess performance for unusually long unbroken text blocks or frequently reflowing text. Normal paragraphs are suitable for the default; product requirements may override it.
+
+See the [CSS wrapping specification](https://drafts.csswg.org/css-text-4/#text-wrap-style) and [WebKit's typography and performance guidance](https://webkit.org/blog/16547/better-typography-with-text-wrap-pretty/).
