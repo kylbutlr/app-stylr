@@ -183,6 +183,7 @@ The following are optional recommendations:
 
 - choose an initial theme from the product's real use scene;
 - use the bundled Geist fonts when they suit the product voice;
+- use the [web text-wrapping default](./docs/conventions.md#web-text-wrapping), with `pretty` on the body and `stable` on editable text;
 - use the supplied spacing, radius, size, and motion scales as coordinated starting points;
 - use the charcoal-to-mint icon construction;
 - adopt the Game Interface profile for canvas-first browser games;
