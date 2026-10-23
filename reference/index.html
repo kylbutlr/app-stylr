@@ -45,7 +45,7 @@
           <a class="button button-secondary" href="https://github.com/kylbutlr/app-stylr">View on GitHub</a>
         </div>
         <div class="hero-meta" aria-label="Reference metadata">
-          <span>v1.2.0</span>
+          <span>v1.3.0</span>
           <a href="https://github.com/kylbutlr/app-stylr/blob/main/CHANGELOG.md">Release notes</a>
         </div>
       </div>
@@ -72,6 +72,7 @@
       <a href="#palette">Colors</a>
       <a href="#themes">Themes</a>
       <a href="#typography">Typography</a>
+      <a href="#controls">Dropdowns &amp; inputs</a>
       <a href="#feedback">Feedback</a>
       <a href="#icons">Icons</a>
       <a href="#privacy">Privacy</a>
@@ -88,7 +89,7 @@
           </p>
         </div>
 
-        <p class="release-note">The install command uses the v1.2.0 GitHub tag.
+        <p class="release-note">The install command uses the v1.3.0 GitHub tag.
           Publication to the npm registry is a separate release channel.
           <a href="https://github.com/kylbutlr/app-stylr/releases">Published releases</a></p>
 
@@ -96,7 +97,7 @@
           <li>
             <span class="principle-number">01</span>
             <h3>Install App Stylr</h3>
-            <pre><code>npm install "github:kylbutlr/app-stylr#v1.2.0"</code></pre>
+            <pre><code>npm install "github:kylbutlr/app-stylr#v1.3.0"</code></pre>
             <p>Requires Node.js 20 or newer for command-line tools.</p>
           </li>
           <li>
@@ -324,7 +325,7 @@
 
               <div class="selection-row">
                 <span class="selection-icon">✓</span>
-                <span><strong>App Stylr enabled</strong><small>Following v1.2.0</small></span>
+                <span><strong>App Stylr enabled</strong><small>Following v1.3.0</small></span>
                 <span class="status-pill">Active</span>
               </div>
             </div>
@@ -362,7 +363,7 @@
           </article>
           <article class="type-specimen mono-specimen">
             <span class="type-meta">Mono metadata · 12/16 · 500</span>
-            <p>SYNCED 14:32 · APP-STYLR@1.2.0</p>
+            <p>SYNCED 14:32 · APP-STYLR@1.3.0</p>
           </article>
           <article class="type-specimen character-specimen">
             <span class="type-meta">Characters</span>
@@ -371,7 +372,23 @@
         </div>
       </section>
 
-      <section class="section" id="feedback" aria-labelledby="feedback-title">
+      <section class="reference-section" id="controls" aria-labelledby="controls-title"><h2 id="controls-title">Dropdowns and form controls</h2><p>Comfortable hit areas, readable labels, clear focus, and enough room for the selected value and its chevron. These native examples are interactive; changes are not saved or submitted.</p><div class="control-theme" data-app-stylr-theme="dark" data-app-stylr-controls><h3>Dark mode</h3><div class="control-examples">
+<label for="dark-view">Default view<select id="dark-view"><option>Project swimlanes</option><option>Kanban</option><option>Ranked queue</option></select><small>Tab to focus. Use arrow keys and Enter to select.</small></label>
+<label for="dark-long">Long labels<select id="dark-long"><option>Design systems and interface implementation</option><option>Release preparation</option></select><small>The text and chevron have separate padding.</small></label>
+<label for="dark-disabled">Unavailable setting<select id="dark-disabled" disabled><option>Connection unavailable</option></select><small>A disabled state still communicates its value.</small></label>
+<label for="dark-name">Workspace name<input id="dark-name" value="Fieldnotes" maxlength="64"><small>Labels stay visible after entering a value.</small></label>
+<label for="dark-invalid">Required choice<select id="dark-invalid" aria-invalid="true" aria-describedby="dark-error"><option value="">Choose a destination</option><option>Fieldnotes</option></select><small id="dark-error" class="invalid-help">Choose a destination before continuing.</small></label>
+<label for="dark-grouped">Grouped choices<select id="dark-grouped"><optgroup label="Active"><option>Fieldnotes</option><option>Atlas</option></optgroup><optgroup label="Archived"><option disabled>Earlier research</option></optgroup></select><small>Group labels and disabled options retain their meaning.</small></label>
+</div><div class="picker-anatomy" aria-label="Open picker spacing specimen"><p class="selected">Project swimlanes, selected</p><p>Kanban</p><p>Ranked queue</p></div><p class="section-note">Open-picker spacing specimen. The live select above uses the enhanced picker when supported and the system picker elsewhere.</p></div><div class="control-theme" data-app-stylr-theme="light" data-app-stylr-controls><h3>Light mode</h3><div class="control-examples">
+<label for="light-view">Default view<select id="light-view"><option>Project swimlanes</option><option>Kanban</option><option>Ranked queue</option></select><small>Tab to focus. Use arrow keys and Enter to select.</small></label>
+<label for="light-long">Long labels<select id="light-long"><option>Design systems and interface implementation</option><option>Release preparation</option></select><small>The text and chevron have separate padding.</small></label>
+<label for="light-disabled">Unavailable setting<select id="light-disabled" disabled><option>Connection unavailable</option></select><small>A disabled state still communicates its value.</small></label>
+<label for="light-name">Workspace name<input id="light-name" value="Fieldnotes" maxlength="64"><small>Labels stay visible after entering a value.</small></label>
+<label for="light-invalid">Required choice<select id="light-invalid" aria-invalid="true" aria-describedby="light-error"><option value="">Choose a destination</option><option>Fieldnotes</option></select><small id="light-error" class="invalid-help">Choose a destination before continuing.</small></label>
+<label for="light-grouped">Grouped choices<select id="light-grouped"><optgroup label="Active"><option>Fieldnotes</option><option>Atlas</option></optgroup><optgroup label="Archived"><option disabled>Earlier research</option></optgroup></select><small>Group labels and disabled options retain their meaning.</small></label>
+</div><div class="picker-anatomy" aria-label="Open picker spacing specimen"><p class="selected">Project swimlanes, selected</p><p>Kanban</p><p>Ranked queue</p></div><p class="section-note">Open-picker spacing specimen. The live select above uses the enhanced picker when supported and the system picker elsewhere.</p></div><p>Opt in with <code>data-app-stylr-controls</code> and import <code>app-stylr/controls.css</code> after the tokens. Keep labels, helper text, and validation in your product. Compact spacing is optional with <code>data-app-stylr-density="compact"</code>; touch controls retain a 44px minimum.</p><p>Keyboard behavior stays native. Browsers supporting <code>appearance: base-select</code> receive the themed option picker. Other browsers, including mobile system pickers, keep platform-owned option menus; their open-menu padding cannot be guaranteed by page CSS.</p></section>
+
+<section class="section" id="feedback" aria-labelledby="feedback-title">
         <div class="section-heading">
           <div>
             <h2 id="feedback-title">Feedback and status</h2>
@@ -525,10 +542,11 @@
           for storage, deletion, hosting, and command-specific behavior.
         </p>
       </section>
+
     </main>
 
     <footer class="page-width">
-      <span>App Stylr v1.2.0</span>
+      <span>App Stylr v1.3.0</span>
       <span>By <a href="https://kylbutlr.com">Kyle Butler</a> · <a href="https://github.com/kylbutlr/app-stylr/blob/main/LICENSE">MIT License</a></span>
     </footer>
   </body>

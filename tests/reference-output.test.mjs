@@ -9,7 +9,7 @@ import { repoRoot } from "../scripts/token-utils.mjs";
 async function fixture(run) {
   const root = await mkdtemp(path.join(os.tmpdir(), "app-stylr-output-"));
   try {
-    for (const directory of ["scripts", "tokens", "reference", "adapters", "assets"]) {
+    for (const directory of ["scripts", "tokens", "reference", "adapters", "assets", "styles"]) {
       await cp(path.join(repoRoot, directory), path.join(root, directory), { recursive: true });
     }
     const build = (output) => spawnSync(process.execPath, ["scripts/build-site.mjs", "--output", output], {

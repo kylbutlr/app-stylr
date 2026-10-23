@@ -251,7 +251,7 @@ assert(fontLicense.includes("SIL OPEN FONT LICENSE Version 1.1"), "Bundled Geist
 
 const reference = await readFile(referencePath, "utf8");
 const referenceCss = await readFile(referenceCssPath, "utf8");
-const requiredSections = ["main", "start", "palette", "themes", "typography", "feedback", "icons", "privacy"];
+const requiredSections = ["main", "start", "palette", "themes", "typography", "controls", "feedback", "icons", "privacy"];
 const referenceIds = [...reference.matchAll(/\bid="([^"]+)"/gu)].map((match) => match[1]);
 assert(new Set(referenceIds).size === referenceIds.length, "Reference element IDs must be unique.");
 for (const id of requiredSections) assert(referenceIds.includes(id), `Reference is missing the ${id} section.`);
@@ -264,7 +264,9 @@ assert(reference.includes('class="skip-link"'), "Reference must provide a skip l
 assert(reference.includes(`github:kylbutlr/app-stylr#${installRef}`), "README and Reference install revisions must match.");
 assert(reference.includes('data-app-stylr-theme="light"') && reference.includes('data-app-stylr-theme="dark"'), "Reference must show both themes.");
 assert(!reference.includes('href="#"'), "Reference must not contain empty links.");
-assert(!/<(?:button|input|select)\b/iu.test(reference), "Static specimens must not expose inert form controls.");
+const controlsSection = reference.match(/<section[^>]+id="controls"[\s\S]*?<\/section>/u)?.[0];
+assert(controlsSection?.includes('<select') && controlsSection.includes('disabled') && controlsSection.includes('aria-invalid="true"'), "Reference must demonstrate working native selects and their states.");
+assert(!/<(?:button|input|select)\b/iu.test(reference.replace(controlsSection, '')), "Static specimens outside the interactive controls section must remain non-interactive.");
 for (const metadata of ['name="description"', 'property="og:url"', 'type="application/ld+json"']) {
   assert(reference.includes(metadata), `Reference is missing ${metadata}.`);
 }
@@ -459,7 +461,7 @@ assert(
 
 const siteTopLevel = (await readdir(siteOutputPath)).sort();
 assert(
-  JSON.stringify(siteTopLevel) === JSON.stringify(["adapters", "app-stylr-reference.json", "assets", "index.html", "styles.css"]),
+  JSON.stringify(siteTopLevel) === JSON.stringify(["adapters", "app-stylr-reference.json", "assets", "index.html", "styles", "styles.css"]),
   "The public Netlify artifact must contain only the root Reference and its required assets."
 );
 await validateRelativeLinks(path.join(siteOutputPath, "index.html"), /(?:href|src)="([^"]+)"/g, siteOutputPath);

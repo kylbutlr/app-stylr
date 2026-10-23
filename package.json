@@ -1,6 +1,6 @@
 {
   "name": "app-stylr",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Shared design tokens, typography, and icons for web, browser-extension, and macOS products.",
   "license": "MIT",
   "author": "Kyle Butler",
@@ -43,7 +43,8 @@
     "LICENSE",
     "README.md",
     "SECURITY.md",
-    "SUPPORT.md"
+    "SUPPORT.md",
+    "styles"
   ],
   "exports": {
     "./package.json": "./package.json",
@@ -52,7 +53,8 @@
     "./tokens": "./tokens/app-stylr.json",
     "./assets/*": "./assets/*",
     "./templates/*": "./templates/*",
-    "./chrome-theme/*": "./chrome-theme/*"
+    "./chrome-theme/*": "./chrome-theme/*",
+    "./controls.css": "./styles/controls.css"
   },
   "bin": {
     "app-stylr-chrome-theme": "./scripts/build-chrome-theme.mjs",

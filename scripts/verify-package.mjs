@@ -76,7 +76,7 @@ try {
     const require = createRequire(import.meta.url);
     const tokens = require("app-stylr/tokens");
     if (tokens.version !== "${packed.version}") throw new Error("Token export version mismatch");
-    for (const name of ["app-stylr/css", "app-stylr/fonts.css", "app-stylr/assets/example-app-icon.svg", "app-stylr/templates/app-stylr.json", "app-stylr/chrome-theme/manifest.json", "app-stylr/package.json"]) {
+    for (const name of ["app-stylr/css", "app-stylr/fonts.css", "app-stylr/controls.css", "app-stylr/assets/example-app-icon.svg", "app-stylr/templates/app-stylr.json", "app-stylr/chrome-theme/manifest.json", "app-stylr/package.json"]) {
       await readFile(require.resolve(name));
     }
   `;

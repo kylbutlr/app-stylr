@@ -35,3 +35,7 @@ See [CLI reference](./cli.md).
 App Stylr has no account or hosted data store. Installed files remain in the consuming project. Commands read only the paths supplied by the user or the documented repository defaults, and write only to their documented output directories. They do not request platform permissions beyond local file access.
 
 See [Privacy](./privacy.md) for command-specific storage, network, and deletion details.
+
+## Optional native-control recipe
+
+`app-stylr/controls.css` opts in through `data-app-stylr-controls`. It is independent of generated token adapters and includes no JavaScript. See [form controls](form-controls.md) for the browser fallback contract.

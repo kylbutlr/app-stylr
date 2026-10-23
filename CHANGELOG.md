@@ -2,7 +2,9 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## [1.3.0] - 2026-10-22
+
+- Add opt-in native form-control CSS and dark/light dropdown reference examples, including long labels, disabled and invalid states, keyboard focus, and native-picker fallbacks.
 
 ### Fixed
 

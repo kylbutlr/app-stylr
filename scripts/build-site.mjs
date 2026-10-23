@@ -139,7 +139,7 @@ async function validateOutputPath(outputPath) {
   }
 
   const packageRoot = await realpath(repoRoot);
-  const sourceDirectories = ["reference", "scripts", "tokens", "adapters", "assets", "docs", "templates", "chrome-theme"];
+  const sourceDirectories = ["reference", "scripts", "tokens", "adapters", "assets", "styles", "docs", "templates", "chrome-theme"];
   for (const directory of sourceDirectories) {
     const sourcePath = path.join(packageRoot, directory);
     if (resolvedOutput === sourcePath || isChildPath(sourcePath, resolvedOutput) || isChildPath(resolvedOutput, sourcePath)) {
@@ -184,7 +184,7 @@ async function validateExistingOutput(outputPath) {
   }
 
   const allowedEntries = new Set(["index.html", "styles.css", "app-stylr-reference.json"]);
-  for (const directory of ["adapters", "assets"]) {
+  for (const directory of ["adapters", "assets", "styles"]) {
     allowedEntries.add(directory);
     for (const entry of await listEntries(path.join(repoRoot, directory), directory)) allowedEntries.add(entry);
   }
@@ -215,7 +215,7 @@ async function main() {
   const renderedCss = referenceCss.replaceAll(
     "../adapters/",
     publicPath(options.basePath, "adapters/")
-  );
+  ).replaceAll("../styles/", publicPath(options.basePath, "styles/"));
   const manifest = {
     name: "App Stylr Reference",
     version: tokens.version,
@@ -226,7 +226,7 @@ async function main() {
   await rm(options.output, { recursive: true, force: true });
   await mkdir(options.output, { recursive: true });
 
-  for (const directory of ["adapters", "assets"]) {
+  for (const directory of ["adapters", "assets", "styles"]) {
     await cp(path.join(repoRoot, directory), path.join(options.output, directory), {
       recursive: true
     });
