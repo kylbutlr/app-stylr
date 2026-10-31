@@ -4,6 +4,10 @@ All notable public changes to App Stylr are documented here. The project follows
 
 ## Unreleased
 
+### Documentation
+
+- Add the Visual Reference snapshot near the top of the README.
+
 ### Fixed
 
 - Reference builds now reject source-directory overlap, unrelated existing files, Git metadata, dependencies, and symbolic links inside previous output before deleting anything.
