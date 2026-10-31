@@ -6,6 +6,12 @@ App Stylr brings together semantic design tokens, CSS and Swift adapters, bundle
 
 [Explore the Visual Reference](https://kylbutlr.com/app-stylr) · [Read the documentation](#documentation) · [Report an issue](https://github.com/kylbutlr/app-stylr/issues)
 
+## Preview
+
+<img src="docs/images/app-preview.webp" width="640" alt="App Stylr Visual Reference showing its semantic colors, typography, and interface specimens">
+
+Visual Reference with illustrative interface specimens. [App overview](https://kylbutlr.com/apps/app-stylr).
+
 ## Release channels
 
 The installation examples use the **v1.2.0 GitHub tag** for the CSS, assets, command-line tools, and Swift package. They do not require publication to the npm registry. See the [release process](./docs/releases.md) for channel verification and publication.
