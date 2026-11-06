@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [1.4.2] - 2026-11-06
 
 - Clarify that small-size icon review does not limit source or export resolution. Keep the scalable SVG master and verify 128px/512px presentation as well as 16px/32px legibility.
 - Update the Chrome manifest template to retain small toolbar resources while routing management cards to 128px artwork and exposing the existing directly rendered 512px PNG. Document Chromium’s exact-48px selection behavior on high-density displays.
