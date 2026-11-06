@@ -3,7 +3,7 @@
 import SwiftUI
 
 public enum AppStylrTokens {
-  public static let version = "1.3.0"
+  public static let version = "1.4.0"
 
   public enum Brand {
     public static let ink = Color(red: 0.066667, green: 0.066667, blue: 0.066667)
@@ -630,5 +630,10 @@ public enum AppStylrTokens {
     public static let radius: CGFloat = 160
     public static let safeAreaPercent: CGFloat = 9
     public static let gradientAngleDegrees: Double = 135
+    public static let monochromeGradientAngleDegrees: Double = 135
+    public static let monochromeGradientStops: [Gradient.Stop] = [
+      .init(color: Color(red: 0.219608, green: 0.219608, blue: 0.219608), location: 0),
+      .init(color: Color(red: 0.12549, green: 0.12549, blue: 0.12549), location: 1)
+    ]
   }
 }

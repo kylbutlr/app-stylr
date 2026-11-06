@@ -7,7 +7,7 @@ const sections = {
   typography: ['Typography', 'Type & hierarchy', 'Geist Sans and Geist Mono, with a deliberate scale and quieter weights.'],
   controls: ['Controls', 'Controls & states', 'Real inputs, native choices, and inspectable states. Try changing a value or following the form with Tab.'],
   feedback: ['Feedback', 'Feedback & selection', 'Quiet surfaces, with text and symbols carrying each state’s meaning.'],
-  icons: ['Icons', 'Icon construction', 'Flat charcoal tiles, recognizable product glyphs, and exports designed from 16px upward.'],
+  icons: ['Icons', 'Icon construction', 'Neutral graphite tiles, recognizable product glyphs, and exports designed from 16px upward.'],
   layout: ['Layout & motion', 'Rhythm & response', 'Shared scales guide composition. Each product owns its layout.'],
   setup: ['Setup', 'Use the foundation', 'Install a pinned release, choose your theme and accent, and build the interface your product needs.']
 };
@@ -168,7 +168,19 @@ function swatches(roles){const t=theme();return`<div class="role-swatches${roles
 <span>${role.replace(/([A-Z])/g,' $1').toLowerCase()}</span>
 <code>${t[role]}</code>
 </button>`).join('')}</div>`;}
-function colors(){return`<section class="specimen-section"><div class="region-heading"><h2>Accent palettes</h2><span>Swatches show dark / light accents</span></div><div class="palette-grid">${Object.entries(accentPresets).map(([id,preset])=>{const colors=id==='mint'?canonical.themes:canonical.accents[id];return `<button type="button" class="palette-card" data-accent="${id}" aria-pressed="${state.accent===id}" style="--palette-accent:${colors[state.theme].focus}"><span class="palette-preview" aria-hidden="true"><i style="background:${colors.dark.accent}"></i><i style="background:${colors.light.accent}"></i></span><span><strong>${esc(preset.name)}</strong><small>${esc(preset.description)}</small></span></button>`;}).join('')}</div></section><section class="specimen-section">
+function paletteAppPreview(){return`<section class="palette-app-region" aria-labelledby="palette-app-title">
+<div class="region-heading"><h2 id="palette-app-title">App preview</h2><span>${accentNames[state.accent]} · ${toneNames[state.tone]} · ${state.theme}</span></div>
+<div class="palette-app">
+<aside class="palette-app-sidebar" aria-label="Example workspace sidebar">
+<span class="palette-app-sidebar-label">Workspace</span>
+<div class="palette-app-navigation"><span class="is-active">Project settings</span><span>Members</span><span>Activity</span></div>
+<span class="palette-app-sidebar-note">Personal workspace</span>
+</aside>
+${preview()}
+</div>
+</section>`;}
+function colors(){return`<div class="palette-workbench">
+<section class="palette-picker" aria-labelledby="accent-palettes-title"><div class="region-heading"><h2 id="accent-palettes-title">Accent palettes</h2><span>Choose a palette</span></div><div class="palette-grid">${Object.entries(accentPresets).map(([id,preset])=>{const colors=id==='mint'?canonical.themes:canonical.accents[id];return `<button type="button" class="palette-card" data-accent="${id}" aria-pressed="${state.accent===id}" style="--palette-accent:${colors[state.theme].focus}"><span class="palette-preview" aria-hidden="true"><i style="background:${colors.dark.accent}"></i><i style="background:${colors.light.accent}"></i></span><span><strong>${esc(preset.name)}</strong><small>${esc(preset.description)}</small></span></button>`;}).join('')}</div></section>${paletteAppPreview()}</div><section class="specimen-section">
 <div class="region-heading">
 <h2>Surfaces & hierarchy</h2>
 <span>${toneNames[state.tone]} surfaces · ${state.theme}</span>
@@ -341,17 +353,17 @@ function icons() {
   return `<div class="icon-layout">
     <section class="icon-construction specimen">
       <div class="region-heading">
-<h2>Flat icon construction</h2>
+<h2>Monochrome icon construction</h2>
 <span>Example glyph</span>
 </div>
       <div class="master-icons">
         <div>
 <span>Example symbol</span>
-<img src="${asset('assets/example-app-icon.svg')}" alt="Light example checkmark on a flat charcoal tile" width="192" height="192">
+<img src="${asset('assets/example-app-icon.svg')}" alt="Light example checkmark on a graphite tile" width="192" height="192">
 </div>
         <div>
 <span>Reusable base</span>
-<img src="${asset('assets/app-icon-flat-base.svg')}" alt="Flat charcoal icon base" width="192" height="192">
+<img src="${asset('assets/app-icon-monochrome-base.svg')}" alt="Monochrome graphite icon base" width="192" height="192">
 </div>
       </div>
       <div class="icon-measures">${[['Canvas', canonical.icon.canvas], ['Square', canonical.icon.square], ['Radius', canonical.icon.radius], ['Inset', canonical.icon.inset]].map(([name, value]) => `<div>
@@ -368,8 +380,8 @@ function icons() {
 <span>${size}px</span>
 <img src="${asset(`assets/platform-icons/reference/chrome/icon-${size}.png`)}" width="${size}" height="${size}" alt="Example icon at ${size} pixels">
 </div>`).join('')}</div>
-      <p class="region-note">Keep your product's identifying glyph. Use flat charcoal and a light foreground, with a dedicated 16px drawing when needed. Accent palettes do not recolor the icon. The checkmark demonstrates the recipe.</p>
-      <a class="text-link" href="${asset('assets/app-icon-flat-base.svg')}" download>Download flat base ↓</a>
+      <p class="region-note">Keep your product's identifying glyph. Use a restrained graphite gradient and a light foreground, with a dedicated 16px drawing when needed. Accent palettes do not recolor the icon. The checkmark demonstrates the recipe.</p>
+      <a class="text-link" href="${asset('assets/app-icon-monochrome-base.svg')}" download>Download monochrome base ↓</a>
     </section>
   </div>
   <section class="specimen-section">

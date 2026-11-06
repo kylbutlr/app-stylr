@@ -2,6 +2,17 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [1.4.0] - 2026-11-05
+
+### Added
+
+- A subtle monochrome icon base and canonical gradient roles for palette-independent graphite artwork. Flat charcoal and legacy Evening gradient assets remain available.
+- A live app specimen beside the Colors palette chooser, showing the selected accent, surface tone, theme and density in a responsive workspace with a sidebar, form controls and selected rows.
+
+### Changed
+
+- Give the example icon and Reference favicon a restrained graphite gradient while preserving their foreground drawings and actual-size rendering.
+
 ## [1.3.0] - 2026-11-05
 
 ### Added

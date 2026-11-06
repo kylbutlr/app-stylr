@@ -131,6 +131,14 @@ for (const accent of presetIds) for (const tone of Object.keys(tokens.surfaceTon
 }
 validateColorMap("icon", { background: tokens.icon.background, foreground: tokens.icon.foreground });
 assert(contrastRatio(tokens.icon.foreground, tokens.icon.background) >= 4.5, "The flat icon glyph must contrast with its tile.");
+const monochromeStops = tokens.icon.monochromeGradient.stops;
+assert(monochromeStops.length === 2 && monochromeStops[0].offset === 0 && monochromeStops[1].offset === 100, "The monochrome icon gradient must have two endpoint stops.");
+assert(tokens.icon.monochromeGradient.angle === 135, "The monochrome icon uses top-left to bottom-right lighting.");
+for (const stop of monochromeStops) {
+  const channels = stop.color?.match(/^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
+  assert(channels && channels[1].toLowerCase() === channels[2].toLowerCase() && channels[2].toLowerCase() === channels[3].toLowerCase(), "Monochrome icon stops must remain neutral grays.");
+  assert(contrastRatio(tokens.icon.foreground, stop.color) >= 4.5, "The icon glyph must contrast with every monochrome gradient stop.");
+}
 
 for (const [name, value] of Object.entries(tokens.radius ?? {})) {
   assert(value > 0, `radius.${name} must be positive.`);

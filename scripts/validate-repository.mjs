@@ -251,9 +251,16 @@ assert(fontLicense.includes("SIL OPEN FONT LICENSE Version 1.1"), "Bundled Geist
 
 const reference = await readFile(referencePath, "utf8");
 const referenceCss = await readFile(referenceCssPath, "utf8");
-for (const relativePath of ["assets/app-icon-flat-base.svg", "assets/example-app-icon.svg"]) {
+for (const relativePath of ["assets/app-icon-flat-base.svg"]) {
   const source = await readFile(path.join(repoRoot, relativePath), "utf8");
   assert(source.includes(`fill="${tokens.icon.background}"`) && source.includes(`rx="${tokens.icon.radius}"`), `${relativePath} must match the canonical flat icon values.`);
+}
+for (const relativePath of ["assets/app-icon-monochrome-base.svg", "assets/example-app-icon.svg", "assets/example-app-icon-16.svg"]) {
+  const source = await readFile(path.join(repoRoot, relativePath), "utf8");
+  assert(source.includes('<linearGradient id="icon-graphite" x1="0" y1="0" x2="1" y2="1">'), `${relativePath} must use the canonical diagonal monochrome lighting.`);
+  for (const stop of tokens.icon.monochromeGradient.stops) {
+    assert(source.includes(`offset="${stop.offset / 100}" stop-color="${stop.color}"`), `${relativePath} must match the canonical monochrome gradient.`);
+  }
 }
 const referenceScript = await readFile(path.join(repoRoot, "reference", "workbench.js"), "utf8");
 const referenceIds = [...reference.matchAll(/\bid="([^"]+)"/gu)].map((match) => match[1]);

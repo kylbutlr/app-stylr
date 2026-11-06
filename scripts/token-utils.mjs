@@ -149,6 +149,7 @@ ${renderCssProperties(tokens.profiles.game, "profile-game", (value, name) => `${
   --icon-background: ${tokens.icon.background};
   --icon-foreground: ${tokens.icon.foreground};
   --icon-gradient: linear-gradient(${tokens.icon.gradient.angle}deg, ${gradientStops});
+  --icon-monochrome-gradient: linear-gradient(${tokens.icon.monochromeGradient.angle}deg, ${tokens.icon.monochromeGradient.stops.map(stop => `${stop.color} ${stop.offset}%`).join(", ")});
 }
 
 :root,
@@ -324,6 +325,10 @@ ${Object.entries(tokens.profiles.game).map(([name, value]) => `    public static
     public static let radius: CGFloat = ${tokens.icon.radius}
     public static let safeAreaPercent: CGFloat = ${tokens.icon.safeAreaPercent}
     public static let gradientAngleDegrees: Double = ${tokens.icon.gradient.angle}
+    public static let monochromeGradientAngleDegrees: Double = ${tokens.icon.monochromeGradient.angle}
+    public static let monochromeGradientStops: [Gradient.Stop] = [
+${tokens.icon.monochromeGradient.stops.map(stop => `      .init(color: ${swiftColor(stop.color)}, location: ${stop.offset / 100})`).join(",\n")}
+    ]
   }
 }
 `;
