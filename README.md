@@ -80,13 +80,19 @@ Swift tools 5.9 is required. Supported platform floors are macOS 10.15, iOS 13, 
 
 Layouts, navigation, and application components stay in your product. Read the [design guidance](./docs/design-practice.md) for adapting the foundation.
 
+## Accent palettes
+
+Sage keeps the original sage/mint default. Ember, Slate, Royal, Amber, and Monochrome offer alternate accents. Choose an accent, then independently choose Lighter, Normal, or Darker surfaces. Normal preserves the original theme values; status meanings and icons stay consistent. Set both selections beside the theme attribute, such as `data-app-stylr-accent="royal" data-app-stylr-tone="lighter"`. See [accent palettes and surface tones](./docs/accent-palettes.md).
+
 ## Native form controls
 
 For optional native input and select styling, import `app-stylr/controls.css` after the tokens and add `data-app-stylr-controls` to your app root. The recipe supplies control padding, chevron clearance, focus and validation states, and a progressively enhanced option picker. Layout and application behavior remain yours. See [dropdowns and inputs](docs/form-controls.md) for keyboard behavior, density, light mode, and platform fallback limits.
 
 ## Generate icons
 
-Use one square master for all supported web and extension sizes:
+Use a flat charcoal tile and a light identifying glyph. Design at 16px first, then inspect larger exports. A dedicated `--source-16` drawing is optional; the icon stays the same across accent palettes.
+
+Generate the supported web and extension sizes:
 
 ```sh
 npx app-stylr-icons --source assets/app-icon.svg --output public/icons

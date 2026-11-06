@@ -251,22 +251,28 @@ assert(fontLicense.includes("SIL OPEN FONT LICENSE Version 1.1"), "Bundled Geist
 
 const reference = await readFile(referencePath, "utf8");
 const referenceCss = await readFile(referenceCssPath, "utf8");
-const requiredSections = ["main", "start", "palette", "themes", "typography", "controls", "feedback", "icons", "privacy"];
+for (const relativePath of ["assets/app-icon-flat-base.svg", "assets/example-app-icon.svg"]) {
+  const source = await readFile(path.join(repoRoot, relativePath), "utf8");
+  assert(source.includes(`fill="${tokens.icon.background}"`) && source.includes(`rx="${tokens.icon.radius}"`), `${relativePath} must match the canonical flat icon values.`);
+}
+const referenceScript = await readFile(path.join(repoRoot, "reference", "workbench.js"), "utf8");
 const referenceIds = [...reference.matchAll(/\bid="([^"]+)"/gu)].map((match) => match[1]);
 assert(new Set(referenceIds).size === referenceIds.length, "Reference element IDs must be unique.");
-for (const id of requiredSections) assert(referenceIds.includes(id), `Reference is missing the ${id} section.`);
+for (const section of ["overview", "colors", "typography", "controls", "feedback", "icons", "layout", "setup"]) {
+  assert(reference.includes(`href="?section=${section}"`), `Reference is missing the ${section} navigation link.`);
+}
+assert(referenceIds.includes("main") && referenceIds.includes("section-content"), "Reference must have a main specimen region.");
 for (const match of reference.matchAll(/href="#([^"]+)"/gu)) {
   assert(referenceIds.includes(match[1]), `Reference navigation targets missing section ${match[1]}.`);
 }
 assert((reference.match(/<h1\b/gu) ?? []).length === 1, "Reference must have one primary heading.");
 assert(reference.includes('aria-label="Reference sections"'), "Reference must include section navigation.");
 assert(reference.includes('class="skip-link"'), "Reference must provide a skip link.");
-assert(reference.includes(`github:kylbutlr/app-stylr#${installRef}`), "README and Reference install revisions must match.");
-assert(reference.includes('data-app-stylr-theme="light"') && reference.includes('data-app-stylr-theme="dark"'), "Reference must show both themes.");
+assert(referenceScript.includes('github:kylbutlr/app-stylr#v${canonical.version}'), "Reference must derive its install revision from the canonical tokens.");
+assert(referenceScript.includes("state.theme") && referenceScript.includes("appStylrTheme"), "Reference must support both themes.");
 assert(!reference.includes('href="#"'), "Reference must not contain empty links.");
-const controlsSection = reference.match(/<section[^>]+id="controls"[\s\S]*?<\/section>/u)?.[0];
-assert(controlsSection?.includes('<select') && controlsSection.includes('disabled') && controlsSection.includes('aria-invalid="true"'), "Reference must demonstrate working native selects and their states.");
-assert(!/<(?:button|input|select)\b/iu.test(reference.replace(controlsSection, '')), "Static specimens outside the interactive controls section must remain non-interactive.");
+assert(referenceScript.includes('<select') && referenceScript.includes('disabled') && referenceScript.includes('aria-invalid='), "Reference must demonstrate native selects and their states.");
+assert(referenceScript.includes("data-demo-form") && referenceScript.includes("preventDefault"), "Specimen forms must be handled locally.");
 for (const metadata of ['name="description"', 'property="og:url"', 'type="application/ld+json"']) {
   assert(reference.includes(metadata), `Reference is missing ${metadata}.`);
 }
@@ -461,7 +467,7 @@ assert(
 
 const siteTopLevel = (await readdir(siteOutputPath)).sort();
 assert(
-  JSON.stringify(siteTopLevel) === JSON.stringify(["adapters", "app-stylr-reference.json", "assets", "index.html", "styles", "styles.css"]),
+  JSON.stringify(siteTopLevel) === JSON.stringify(["adapters", "app-stylr-reference.json", "assets", "index.html", "styles", "styles.css", "tokens", "workbench.js"]),
   "The public Netlify artifact must contain only the root Reference and its required assets."
 );
 await validateRelativeLinks(path.join(siteOutputPath, "index.html"), /(?:href|src)="([^"]+)"/g, siteOutputPath);

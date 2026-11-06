@@ -2,30 +2,39 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
-## [1.3.0] - 2026-10-22
-
-- Add opt-in native form-control CSS and dark/light dropdown reference examples, including long labels, disabled and invalid states, keyboard focus, and native-picker fallbacks.
-
-### Fixed
-
-- Reference builds now reject source-directory overlap, unrelated existing files, Git metadata, dependencies, and symbolic links inside previous output before deleting anything.
-- Aligned the README, Reference, consumer templates, and Swift instructions to the v1.2.0 GitHub tag, with separate verification for GitHub, npm, and Swift release channels.
-- Corrected the Swift quickstart to use the public `AppStylrTokens.Spacing` namespace.
+## [1.3.0] - Unreleased
 
 ### Added
 
-- Reference section navigation, keyboard skip navigation, a downloadable icon base, and an in-page icon-generation example.
-- Executable CLI regression checks for safe output handling, repeat builds, and preservation of unrelated files.
-
-- Optional web text-wrapping guidance using a global `text-wrap-style: pretty` default, editable-text exceptions, and responsive, browser, performance, and print checks.
-- Optional Balanced composition guidance for transparent headers, charcoal surface reveals, stable navigation, darker background media, and reduced-motion behavior. Shared tokens and generated adapters are unchanged.
+- Six named accent palettes in JSON, generated CSS, and Swift: Sage (the original default), Ember, Slate, Royal, Amber, and Monochrome. Canonical display names are shared by the Reference and Swift.
+- Independent Lighter, Normal, and Darker surface tones for both themes, with a Reference selector, CSS attributes, a typed Swift composition method, and contrast checks for every combination.
+- Opt-in native form-control CSS with enhanced picker styling, keyboard/native fallback behavior, density, and validation states.
+- A responsive Reference workbench with live specimens, section navigation, token inspection, theme/density/accent selectors, and canonical downloads. Display selections appear in its URL; form values stay in memory.
+- A reusable flat icon base, canonical icon foreground/background colors, and an optional `--source-16` compact drawing for icon generation.
+- CLI regressions for compact icon exports, safe output handling, portable host paths, repeat builds, and preservation of unrelated files.
+- Accent, form-control, migration, and optional text-wrapping/Balanced composition guidance.
 
 ### Changed
 
-- Clarified that App Stylr apps are dark mode first, with dark mode as the default and an optional product-owned light mode toggle.
-- Simplified the public introduction and README around installation, practical examples, and shared visual assets. Consolidated Reference layout styles and replaced copy-specific validation with structural navigation and installation checks.
+- Apply the Precise type scale and weights, 4px control/button and 8/12px card/dialog radii, and 140/200ms control/panel motion. The original default theme maps and base brand colors are unchanged.
+- Use neutral surfaces and borders for all quiet feedback messages, with semantic colors on text and icons.
+- Recommend flat charcoal icon tiles with light identifying glyphs, independent of interface accent palettes. Legacy gradient assets and tokens remain available for compatibility.
+- Include the workbench module and canonical tokens/schema in portable Reference builds for root and subpath hosts.
+- Keep dark mode as the default, with product-owned light mode and accent switching.
+- Separate active palette roles from the original Sage primitives in a collapsed Brand reference section.
+- Use near-black action/selection fills in Monochrome dark mode and near-white fills in light mode, with contrasting labels, links, focus rings, and text carets.
+- Give Ember a warmer fire-red accent and Amber a muted champagne-gold accent.
+- Make Compact density reduce specimen padding, form gaps, row spacing, and section rhythm; retain 44px controls on touch devices.
+- Align package, consumer, Reference, and Swift instructions to v1.3.0, with separate verification of release channels.
 
-- Updated the optional icon gradient and generated exports to the approved C / Evening treatment, retaining the original broad gradient with darker, less saturated colors. Added self-contained favicon and small-size guidance.
+### Fixed
+
+- Use symmetric 12px enhanced-select insets while retaining the native fallback arrow allowance.
+- Match the specimen header to the card’s inner corner radius so its background does not obscure the rounded border.
+- Reject source-directory overlap, unrelated output files, Git metadata, dependencies, and symbolic links before rebuilding a Reference artifact.
+- Use the public `AppStylrTokens.Spacing` namespace in the Swift quickstart.
+
+This source version is prepared for review. Publishing its tag/package and updating a host's immutable dependency are separate release steps. See [the v1.3.0 migration](./docs/migrations/v1.3.0.md).
 
 ## [1.2.0] - 2026-09-19
 

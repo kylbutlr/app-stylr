@@ -45,7 +45,11 @@ try {
     "scripts/validate-macos-release.mjs",
     "reference/index.html",
     "reference/styles.css",
-    "tokens/app-stylr.json"
+    "reference/workbench.js",
+    "assets/app-icon-flat-base.svg",
+    "assets/example-app-icon-16.svg",
+    "tokens/app-stylr.json",
+    "tokens/app-stylr.schema.json"
   ];
 
   for (const requiredPath of requiredPaths) {
@@ -116,7 +120,7 @@ try {
   );
   assert(
     referenceHtml.includes('href="/app-stylr/styles.css"') &&
-      referenceHtml.includes('src="/app-stylr/assets/app-icon-gradient-base.svg"'),
+      referenceHtml.includes('src="/app-stylr/assets/example-app-icon.svg"'),
     "Generated Reference HTML does not use the requested base path."
   );
   assert(

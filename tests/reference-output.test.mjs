@@ -66,3 +66,19 @@ test("Reference builds reject symlinked source targets and symlinks inside previ
     assert.ok(await readFile(path.join(root, "tokens", "app-stylr.json")));
   });
 });
+
+test("Portable builds include the workbench and canonical tokens beneath the requested host path", async () => {
+  await fixture(async (root) => {
+    const result = spawnSync(process.execPath, ["scripts/build-site.mjs", "--output", "output", "--canonical-url", "https://example.com/app-stylr", "--base-path", "/app-stylr"], { cwd: root, encoding: "utf8", timeout: 10_000 });
+    assert.equal(result.status, 0, result.stderr);
+    const html = await readFile(path.join(root, "output", "index.html"), "utf8");
+    assert.match(html, /src="\/app-stylr\/workbench.js"/);
+    assert.match(html, /href="\/app-stylr\/tokens\/app-stylr.json"/);
+    assert.match(html, /href="\/app-stylr\/assets\/example-app-icon-16.svg/);
+    const tokens = JSON.parse(await readFile(path.join(root, "output", "tokens", "app-stylr.json"), "utf8"));
+    assert.ok(tokens.accents.ember && tokens.accents.blue);
+    await accessFile(path.join(root, "output", "workbench.js"));
+  });
+});
+
+async function accessFile(file) { assert.ok((await readFile(file)).length > 0); }

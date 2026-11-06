@@ -183,8 +183,8 @@ async function validateExistingOutput(outputPath) {
     throw new Error("--output is not a recognized App Stylr Reference build. Choose an empty output directory.");
   }
 
-  const allowedEntries = new Set(["index.html", "styles.css", "app-stylr-reference.json"]);
-  for (const directory of ["adapters", "assets", "styles"]) {
+  const allowedEntries = new Set(["index.html", "styles.css", "workbench.js", "app-stylr-reference.json"]);
+  for (const directory of ["adapters", "assets", "styles", "tokens"]) {
     allowedEntries.add(directory);
     for (const entry of await listEntries(path.join(repoRoot, directory), directory)) allowedEntries.add(entry);
   }
@@ -198,9 +198,10 @@ async function main() {
   options.output = await validateOutputPath(options.output);
   const tokens = await readTokens();
   const referenceRoot = path.join(repoRoot, "reference");
-  const [referenceHtml, referenceCss] = await Promise.all([
+  const [referenceHtml, referenceCss, referenceScript] = await Promise.all([
     readFile(path.join(referenceRoot, "index.html"), "utf8"),
-    readFile(path.join(referenceRoot, "styles.css"), "utf8")
+    readFile(path.join(referenceRoot, "styles.css"), "utf8"),
+    readFile(path.join(referenceRoot, "workbench.js"), "utf8")
   ]);
   const socialImageUrl = new URL(
     publicPath(options.basePath, "assets/platform-icons/reference/web/icon-512.png"),
@@ -211,6 +212,8 @@ async function main() {
     .replaceAll(defaultCanonicalUrl, options.canonicalUrl)
     .replaceAll("__APP_STYLR_SOCIAL_IMAGE_URL__", socialImageUrl)
     .replaceAll("../assets/", publicPath(options.basePath, "assets/"))
+    .replaceAll("../tokens/", publicPath(options.basePath, "tokens/"))
+    .replaceAll("./workbench.js", publicPath(options.basePath, "workbench.js"))
     .replaceAll("./styles.css", publicPath(options.basePath, "styles.css"));
   const renderedCss = referenceCss.replaceAll(
     "../adapters/",
@@ -226,7 +229,7 @@ async function main() {
   await rm(options.output, { recursive: true, force: true });
   await mkdir(options.output, { recursive: true });
 
-  for (const directory of ["adapters", "assets", "styles"]) {
+  for (const directory of ["adapters", "assets", "styles", "tokens"]) {
     await cp(path.join(repoRoot, directory), path.join(options.output, directory), {
       recursive: true
     });
@@ -235,6 +238,7 @@ async function main() {
   await Promise.all([
     writeFile(path.join(options.output, "index.html"), renderedHtml),
     writeFile(path.join(options.output, "styles.css"), renderedCss),
+    writeFile(path.join(options.output, "workbench.js"), referenceScript),
     writeFile(
       path.join(options.output, "app-stylr-reference.json"),
       `${JSON.stringify(manifest, null, 2)}\n`
