@@ -2,6 +2,12 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- A live app specimen beside the Colors palette chooser, showing the selected accent, surface tone, theme and density in a responsive workspace with a sidebar, form controls and selected rows.
+
 ## [1.3.0] - 2026-11-05
 
 ### Added

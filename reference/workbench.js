@@ -168,7 +168,19 @@ function swatches(roles){const t=theme();return`<div class="role-swatches${roles
 <span>${role.replace(/([A-Z])/g,' $1').toLowerCase()}</span>
 <code>${t[role]}</code>
 </button>`).join('')}</div>`;}
-function colors(){return`<section class="specimen-section"><div class="region-heading"><h2>Accent palettes</h2><span>Swatches show dark / light accents</span></div><div class="palette-grid">${Object.entries(accentPresets).map(([id,preset])=>{const colors=id==='mint'?canonical.themes:canonical.accents[id];return `<button type="button" class="palette-card" data-accent="${id}" aria-pressed="${state.accent===id}" style="--palette-accent:${colors[state.theme].focus}"><span class="palette-preview" aria-hidden="true"><i style="background:${colors.dark.accent}"></i><i style="background:${colors.light.accent}"></i></span><span><strong>${esc(preset.name)}</strong><small>${esc(preset.description)}</small></span></button>`;}).join('')}</div></section><section class="specimen-section">
+function paletteAppPreview(){return`<section class="palette-app-region" aria-labelledby="palette-app-title">
+<div class="region-heading"><h2 id="palette-app-title">App preview</h2><span>${accentNames[state.accent]} · ${toneNames[state.tone]} · ${state.theme}</span></div>
+<div class="palette-app">
+<aside class="palette-app-sidebar" aria-label="Example workspace sidebar">
+<span class="palette-app-sidebar-label">Workspace</span>
+<div class="palette-app-navigation"><span class="is-active">Project settings</span><span>Members</span><span>Activity</span></div>
+<span class="palette-app-sidebar-note">Personal workspace</span>
+</aside>
+${preview()}
+</div>
+</section>`;}
+function colors(){return`<div class="palette-workbench">
+<section class="palette-picker" aria-labelledby="accent-palettes-title"><div class="region-heading"><h2 id="accent-palettes-title">Accent palettes</h2><span>Choose a palette</span></div><div class="palette-grid">${Object.entries(accentPresets).map(([id,preset])=>{const colors=id==='mint'?canonical.themes:canonical.accents[id];return `<button type="button" class="palette-card" data-accent="${id}" aria-pressed="${state.accent===id}" style="--palette-accent:${colors[state.theme].focus}"><span class="palette-preview" aria-hidden="true"><i style="background:${colors.dark.accent}"></i><i style="background:${colors.light.accent}"></i></span><span><strong>${esc(preset.name)}</strong><small>${esc(preset.description)}</small></span></button>`;}).join('')}</div></section>${paletteAppPreview()}</div><section class="specimen-section">
 <div class="region-heading">
 <h2>Surfaces & hierarchy</h2>
 <span>${toneNames[state.tone]} surfaces · ${state.theme}</span>
