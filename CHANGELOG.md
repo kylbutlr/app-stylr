@@ -2,6 +2,12 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Fixed
+
+- Use the blank monochrome Graphite tile for the Reference favicon, including its PNG fallback. Keep the checkmark only in the separate icon examples. Both root and subpath Reference builds use the same artwork and refreshed favicon cache key.
+
 ## [1.4.0] - 2026-11-05
 
 ### Added

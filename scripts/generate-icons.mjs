@@ -136,10 +136,10 @@ async function main() {
     console.log(`Generated ${path.relative(repoRoot, destination)} (${iconExport.size}x${iconExport.size}).`);
   }
 
-  // Keep the Reference favicon consistent with the visible example icon.
+  // The Reference identifies the foundation with a blank tile, not the example glyph.
   if (options.source === defaultSource && options.output === defaultOutput) {
     const destination = path.join(repoRoot, "assets", "favicon-32.png");
-    const rendered = await renderIcon(options.source16 ?? defaultSource, 32);
+    const rendered = await renderIcon(path.join(repoRoot, "assets", "app-icon-monochrome-base.svg"), 32);
     if (options.check) {
       try {
         if (!(await readFile(destination)).equals(rendered)) mismatches.push("assets/favicon-32.png");

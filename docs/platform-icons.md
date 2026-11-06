@@ -12,6 +12,12 @@ The checkmark is a reusable example, not a mandatory product logo. Preserve a pr
 
 ### Favicons
 
+The App Stylr Reference intentionally uses the blank Graphite base, with no
+foreground symbol. Its SVG favicon points to `app-icon-monochrome-base.svg`;
+`assets/favicon-32.png` is generated from that same base. This applies to both
+root-hosted and subpath Reference builds. The checkmark belongs to the separate
+icon examples and their platform exports, not the Reference browser tab.
+
 - Use a self-contained SVG master with an explicit square viewBox. Convert letterforms to vector outlines instead of relying on external fonts, stylesheets, or linked images.
 - Keep the existing identifying symbol, intentional spacing, and sufficient contrast at actual 16px and 32px sizes on light and dark browser chrome.
 - Add a PNG fallback generated from the same master. Serve icon assets with stable paths and update the asset URL revision when changing them so cached favicons refresh.
