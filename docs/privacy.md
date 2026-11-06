@@ -14,7 +14,7 @@ App Stylr is a static reference and a package of local design assets and command
 
 ## Public Reference
 
-The Reference at [kylbutlr.com/app-stylr](https://kylbutlr.com/app-stylr) is a static HTML/CSS/JavaScript workbench. It loads its canonical token JSON from the same host. Interactive specimen forms prevent submission and keep entered values in memory for that tab. Theme, accent, surface tone, density, and section appear in the URL and may remain in browser history; workspace input values do not enter the URL. Copy buttons write to the clipboard only when clicked. There are no accounts, analytics scripts, cookies, browser storage, uploads, or application-data collection.
+The Reference at [kylbutlr.com/app-stylr](https://kylbutlr.com/app-stylr) is a static HTML/CSS/JavaScript workbench. It loads its canonical token JSON from the same host. Interactive specimen forms prevent submission and keep entered values in memory for that tab. Theme, accent, density, and section appear in the URL and may remain in browser history; explicit surface-tone overrides in existing links are preserved; workspace input values do not enter the URL. Copy buttons write to the clipboard only when clicked. There are no accounts, analytics scripts, cookies, browser storage, uploads, or application-data collection.
 
 The page is delivered through Netlify. Like other web hosts, Netlify may process standard connection information such as an IP address, browser details, requested pages, and timestamps to operate and secure its service. See [Netlify's privacy statement](https://www.netlify.com/privacy/) for its current practices and privacy-request options.
 

@@ -3,7 +3,7 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const asset = relativePath => new URL(relativePath, import.meta.url).pathname;
 const sections = {
   overview: ['Overview', 'System overview', 'A practical place to inspect, exercise, and reproduce the shared visual system.'],
-  colors: ['Colors', 'Color roles', 'Choose an accent and surface tone. Use the active semantic roles below.'],
+  colors: ['Colors', 'Color roles', 'Choose an accent. Use the active semantic roles below.'],
   typography: ['Typography', 'Type & hierarchy', 'Geist Sans and Geist Mono, with a deliberate scale and quieter weights.'],
   controls: ['Controls', 'Controls & states', 'Real inputs, native choices, and inspectable states. Try changing a value or following the form with Tab.'],
   feedback: ['Feedback', 'Feedback & selection', 'Quiet surfaces, with text and symbols carrying each state’s meaning.'],
@@ -26,7 +26,6 @@ const accentPresets = canonical.accentPresets;
 const accentNames = Object.fromEntries(Object.entries(accentPresets).map(([id, preset]) => [id, preset.name]));
 const toneNames = Object.fromEntries(Object.entries(canonical.surfaceTonePresets).map(([id, preset]) => [id, preset.name]));
 $('#accent-select').replaceChildren(...Object.entries(accentNames).map(([id, name]) => new Option(name, id)));
-$('#tone-select').replaceChildren(...Object.entries(toneNames).map(([id, name]) => new Option(name, id)));
 const initialSection = query.get('section') || aliases[location.hash.slice(1)] || location.hash.slice(1);
 const state = {
   accent: Object.hasOwn(accentNames, query.get('accent')) ? query.get('accent') : 'mint',
@@ -43,6 +42,9 @@ const kebab = text => text.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 const get = (object, path) => path.split('.').reduce((value, key) => value?.[key], object);
 const data = () => ({ ...canonical, themes: Object.fromEntries(['dark', 'light'].map(name => [name, { ...canonical.themes[name], ...canonical.accents[state.accent]?.[name], ...canonical.surfaceTones[state.tone]?.[name] }])) });
 const theme = () => data().themes[state.theme];
+// Preserve explicit legacy tone links; ordinary Reference navigation uses Normal.
+const toneQuery = () => state.tone === 'normal' ? '' : `&tone=${state.tone}`;
+const toneLabel = () => state.tone === 'normal' ? '' : ` · ${toneNames[state.tone]} surfaces`;
 const token = (path, label) => `<button class="token-chip" type="button" data-token="${path}">${esc(label || path.split('.').at(-1))}<span aria-hidden="true">↗</span></button>`;
 function cssName(path) {
   const parts = path.split('.');
@@ -60,7 +62,9 @@ function toast(message) {
 }
 function updateUrl() {
   const url = new URL(location.href);
-  for (const key of ['accent', 'tone', 'section', 'theme', 'density']) url.searchParams.set(key, state[key]);
+  for (const key of ['accent', 'section', 'theme', 'density']) url.searchParams.set(key, state[key]);
+  if (state.tone === 'normal') url.searchParams.delete('tone');
+  else url.searchParams.set('tone', state.tone);
   history.replaceState(null, '', url);
 }
 function status(kind, title, copy) {
@@ -137,7 +141,7 @@ function overview(){return`<div class="overview-layout">
 </div>
 <div class="changes">${summaryRows()}</div>
 <p class="region-note">Sharper geometry and a deliberate type scale over the charcoal foundation.</p>
-<a class="text-link" href="?accent=${state.accent}&section=typography&theme=${state.theme}&density=${state.density}&tone=${state.tone}" data-section="typography">Inspect the complete type scale <span aria-hidden="true">↗</span>
+<a class="text-link" href="?accent=${state.accent}&section=typography&theme=${state.theme}&density=${state.density}${toneQuery()}" data-section="typography">Inspect the complete type scale <span aria-hidden="true">↗</span>
 </a>
 </section>
 </div>
@@ -153,7 +157,7 @@ function overview(){return`<div class="overview-layout">
 <section>
 <div class="region-heading">
 <h2>One master, every size</h2>
-<a class="text-link" href="?accent=${state.accent}&section=icons&theme=${state.theme}&density=${state.density}&tone=${state.tone}" data-section="icons">Inspect icons ↗</a>
+<a class="text-link" href="?accent=${state.accent}&section=icons&theme=${state.theme}&density=${state.density}${toneQuery()}" data-section="icons">Inspect icons ↗</a>
 </div>
 <div class="inline-icons">${[16,32,48].map(s=>`<div>
 <span>${s}px</span>
@@ -169,7 +173,7 @@ function swatches(roles){const t=theme();return`<div class="role-swatches${roles
 <code>${t[role]}</code>
 </button>`).join('')}</div>`;}
 function paletteAppPreview(){return`<section class="palette-app-region" aria-labelledby="palette-app-title">
-<div class="region-heading"><h2 id="palette-app-title">App preview</h2><span>${accentNames[state.accent]} · ${toneNames[state.tone]} · ${state.theme}</span></div>
+<div class="region-heading"><h2 id="palette-app-title">App preview</h2><span>${accentNames[state.accent]} · ${state.theme}${toneLabel()}</span></div>
 <div class="palette-app">
 <aside class="palette-app-sidebar" aria-label="Example workspace sidebar">
 <span class="palette-app-sidebar-label">Workspace</span>
@@ -183,7 +187,7 @@ function colors(){return`<div class="palette-workbench">
 <section class="palette-picker" aria-labelledby="accent-palettes-title"><div class="region-heading"><h2 id="accent-palettes-title">Accent palettes</h2><span>Choose a palette</span></div><div class="palette-grid">${Object.entries(accentPresets).map(([id,preset])=>{const colors=id==='mint'?canonical.themes:canonical.accents[id];return `<button type="button" class="palette-card" data-accent="${id}" aria-pressed="${state.accent===id}" style="--palette-accent:${colors[state.theme].focus}"><span class="palette-preview" aria-hidden="true"><i style="background:${colors.dark.accent}"></i><i style="background:${colors.light.accent}"></i></span><span><strong>${esc(preset.name)}</strong><small>${esc(preset.description)}</small></span></button>`;}).join('')}</div></section>${paletteAppPreview()}</div><section class="specimen-section">
 <div class="region-heading">
 <h2>Surfaces & hierarchy</h2>
-<span>${toneNames[state.tone]} surfaces · ${state.theme}</span>
+<span>${state.tone === 'normal' ? 'Shared neutrals' : toneNames[state.tone] + ' surfaces'} · ${state.theme}</span>
 </div>${swatches(['canvas','sidebar','surface','surfaceRaised','border','borderStrong'])}</section>
 <section class="specimen-section">
 <div class="region-heading">
@@ -495,8 +499,8 @@ function setup() {
     <pre>@import "app-stylr/fonts.css";
 @import "app-stylr/css";
 @import "app-stylr/controls.css";</pre>
-    <pre>&lt;html lang="en" data-app-stylr-theme="${state.theme}" data-app-stylr-accent="${state.accent}" data-app-stylr-tone="${state.tone}" data-app-stylr-controls&gt;</pre>
-    <p>Choose an accent, then a surface tone: Lighter, Normal, or Darker. Normal keeps the original surfaces. Set all three appearance attributes on the same root, including independently themed islands.</p>
+    <pre>&lt;html lang="en" data-app-stylr-theme="${state.theme}" data-app-stylr-accent="${state.accent}"${state.tone === 'normal' ? '' : ` data-app-stylr-tone="${state.tone}"`} data-app-stylr-controls&gt;</pre>
+    <p>Choose light or dark mode and an accent palette. Shared neutral surfaces stay consistent. Set appearance attributes on the same root, including independently themed islands.</p>
     <a class="text-link" href="https://github.com/kylbutlr/app-stylr#quick-start">Read the package setup ↗</a>
   </section>
   <section class="specimen-section">
@@ -508,7 +512,7 @@ function setup() {
 <a class="btn btn--secondary" href="${asset('tokens/app-stylr.json')}" download>Download tokens ↓</a>
 <a class="btn btn--secondary" href="${asset('adapters/css/app-stylr.css')}" download>Download CSS ↓</a>
 </div>
-    <p class="region-note">Both downloads include every accent and surface tone. Native apps can combine them with AppStylrTokens.theme(appearance: .dark, accent: .royal, tone: .lighter).</p>
+    <p class="region-note">Both downloads include every accent and retain optional surface-tone overrides for compatibility. Native apps can choose AppStylrTokens.theme(appearance: .dark, accent: .royal).</p>
   </section>
   <section class="specimen-section" id="privacy">
     <div class="region-heading">
@@ -526,7 +530,7 @@ function setup() {
 </div>
 <div>
 <h3>Privacy</h3>
-<p>No account, upload, telemetry, or saved preferences. Specimen values stay in this tab. Theme, accent, surface tone, density, and section are reflected in the URL.</p>
+<p>No account, upload, telemetry, or saved preferences. Specimen values stay in this tab. Theme, accent, density, and section are reflected in the URL. Existing links with explicit surface-tone overrides remain supported.</p>
 </div>
 </div>
     <a class="text-link" href="https://github.com/kylbutlr/app-stylr/blob/main/docs/privacy.md">Privacy details ↗</a>
@@ -543,7 +547,7 @@ function renderInspector() {
   const sourcePath = isTone ? `surfaceTones.${state.tone}.${parts[1]}.${parts[2]}` : isAccent ? `accents.${state.accent}.${parts[1]}.${parts[2]}` : state.token;
   const raw = typeof value === 'object' ? JSON.stringify(value, null, 2) : String(value ?? '');
   $('#dialog-inspector').innerHTML = `
-    <p class="inspector-context">${esc(state.theme)} · ${accentNames[state.accent]} · ${toneNames[state.tone]} surfaces</p>
+    <p class="inspector-context">${esc(state.theme)} · ${accentNames[state.accent]}${toneLabel()}</p>
     <h3>${esc(parts.at(-1))}</h3>
     ${/^#[a-f\d]{6}$/i.test(raw) ? `<div class="inspector-color" style="background:${raw}"></div>` : ''}
     <code class="inspector-path">${esc(sourcePath)}</code>
@@ -565,8 +569,7 @@ function render() {
   $('#theme-toggle').setAttribute('aria-label', `Switch to ${state.theme === 'dark' ? 'light' : 'dark'} theme`);
   $('#density-select').value = state.density;
   $('#accent-select').value = state.accent;
-  $('#tone-select').value = state.tone;
-  $('#section-nav').innerHTML = Object.entries(sections).map(([key, [name]], index) => `<a href="?accent=${state.accent}&section=${key}&theme=${state.theme}&density=${state.density}&tone=${state.tone}" data-section="${key}"${key === state.section ? ' aria-current="page"' : ''}><span class="nav-number">${String(index + 1).padStart(2, '0')}</span>${name}</a>`).join('');
+  $('#section-nav').innerHTML = Object.entries(sections).map(([key, [name]], index) => `<a href="?accent=${state.accent}&section=${key}&theme=${state.theme}&density=${state.density}${toneQuery()}" data-section="${key}"${key === state.section ? ' aria-current="page"' : ''}><span class="nav-number">${String(index + 1).padStart(2, '0')}</span>${name}</a>`).join('');
   const navigation = $('#section-nav');
   const activeLink = navigation.querySelector('[aria-current]');
   const navBounds = navigation.getBoundingClientRect();
@@ -579,7 +582,7 @@ function render() {
   $('#section-description').textContent = description;
   $('#section-content').innerHTML = renderers[state.section]();
   $('#reference-version').textContent = `v${canonical.version}`;
-  $('#current-palette').textContent = `${accentNames[state.accent]} · ${toneNames[state.tone]} · ${state.theme}`;
+  $('#current-palette').textContent = `${accentNames[state.accent]} · ${state.theme}${toneLabel()}`;
   $('#json-download').href = asset('tokens/app-stylr.json');
   renderInspector();
   updateUrl();
@@ -661,7 +664,6 @@ document.addEventListener('change', event => {
     $('#choice-error').classList.toggle('invalid-help', state.invalid);
   }
   if (event.target.id === 'accent-select') { state.accent = event.target.value; render(); }
-  if (event.target.id === 'tone-select') { state.tone = event.target.value; render(); }
   if (event.target.id === 'density-select') { state.density = event.target.value; render(); }
 });
 $('#theme-toggle').addEventListener('click', () => {

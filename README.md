@@ -14,14 +14,14 @@ Visual Reference with illustrative interface specimens. [App overview](https://k
 
 ## Release channels
 
-The installation examples use the **v1.4.2 GitHub tag** for the CSS, assets, command-line tools, and Swift package. They do not require publication to the npm registry. See the [release process](./docs/releases.md) for channel verification and publication.
+The installation examples use the **v1.4.3 GitHub tag** for the CSS, assets, command-line tools, and Swift package. They do not require publication to the npm registry. See the [release process](./docs/releases.md) for channel verification and publication.
 
 ## Quick start
 
 Requires Node.js 20 or newer for the command-line tools.
 
 ```sh
-npm install "github:kylbutlr/app-stylr#v1.4.2"
+npm install "github:kylbutlr/app-stylr#v1.4.3"
 ```
 
 Import the fonts and tokens once in your application stylesheet:
@@ -53,7 +53,7 @@ Bundle the CSS and fonts with your extension. Use a Shadow DOM root for injected
 
 ### Swift and SwiftUI
 
-Add `https://github.com/kylbutlr/app-stylr` in Swift Package Manager using the exact version `1.4.2`, then add the `AppStylr` product to your target.
+Add `https://github.com/kylbutlr/app-stylr` in Swift Package Manager using the exact version `1.4.3`, then add the `AppStylr` product to your target.
 
 ```swift
 import AppStylr
@@ -88,7 +88,7 @@ Layouts, navigation, and application components stay in your product. Read the [
 
 ## Accent palettes
 
-Sage keeps the original sage/mint default. Ember, Slate, Royal, Amber, and Monochrome offer alternate accents. Choose an accent, then independently choose Lighter, Normal, or Darker surfaces. Normal preserves the original theme values; status meanings and icons stay consistent. Set both selections beside the theme attribute, such as `data-app-stylr-accent="royal" data-app-stylr-tone="lighter"`. See [accent palettes and surface tones](./docs/accent-palettes.md).
+Sage keeps the original sage/mint default. Ember, Slate, Royal, Amber, and Monochrome offer alternate accents. Choose an accent beside the theme attribute, such as `data-app-stylr-accent="royal"`. Shared neutral surfaces, status meanings and icons stay consistent. Optional surface-tone tokens and attributes remain available for existing consumers; the Reference toolbar focuses on theme, palette and density. See [accent palettes and optional surface tones](./docs/accent-palettes.md).
 
 ## Native form controls
 
@@ -124,7 +124,7 @@ The package also provides `app-stylr-reference` for portable reference builds, `
 
 - [Design practice](./docs/design-practice.md) and [conventions](./docs/conventions.md)
 - [Compatibility and upgrades](./docs/compatibility.md)
-- [v1.4.2 migration](./docs/migrations/v1.4.2.md), [v1.4.0 migration](./docs/migrations/v1.4.0.md), and [changelog](./CHANGELOG.md)
+- [v1.4.3 migration](./docs/migrations/v1.4.3.md), [v1.4.0 migration](./docs/migrations/v1.4.0.md), and [changelog](./CHANGELOG.md)
 - [Browser extensions](./docs/browser-extensions.md) and [platform icons](./docs/platform-icons.md)
 - [Public README guidelines](./docs/public-readmes.md) and [template](./templates/public-product-readme.md)
 - [Game Interface profile](./docs/games.md), [Balanced motion](./docs/balanced-motion.md), and [macOS release checks](./docs/macos-sparkle.md)

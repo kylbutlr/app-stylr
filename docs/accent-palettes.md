@@ -1,6 +1,6 @@
 # Accent palettes
 
-Choose an accent palette and a surface tone independently. Sage is App Stylr's original sage/mint default. Accents change accent, accent text/emphasis, link, focus, selection, and informational roles. Surface tones adjust the six neutral roles in both themes. Base brand primitives, success/warning/error meanings, and icons stay consistent.
+Choose an accent palette with the shared Normal neutral surfaces. Sage is App Stylr's original sage/mint default. Accents change accent, accent text/emphasis, link, focus, selection, and informational roles. Surface tones adjust the six neutral roles in both themes. Base brand primitives, success/warning/error meanings, and icons stay consistent.
 
 | Display name | Identifier | Color direction |
 | --- | --- | --- |
@@ -15,9 +15,11 @@ Display names and descriptions live in `accentPresets` in the canonical JSON. Th
 
 Choose one palette and use its semantic roles together with the shared neutral surfaces. The separate, collapsed Brand reference contains the original Sage primitives for reference, not additional accents to mix into another palette.
 
-Monochrome uses light labels on near-black action fills in dark mode, and dark labels on near-white fills in light mode. Links and focus rings have their own contrasting gray values. Use `accent` with `accentText` for filled actions, `link` for interactive text, and `focus` for focus indicators; an accent fill is not necessarily readable as text on a neutral surface. Choose its surface tone independently.
+Monochrome uses light labels on near-black action fills in dark mode, and dark labels on near-white fills in light mode. Links and focus rings have their own contrasting gray values. Use `accent` with `accentText` for filled actions, `link` for interactive text, and `focus` for focus indicators; an accent fill is not necessarily readable as text on a neutral surface. The Normal neutral surfaces are the default.
 
-## Surface tone
+## Optional surface-tone compatibility
+
+The Reference no longer presents a Surface tone selector. Existing products can keep their explicit overrides without changing neutral values or rewriting configuration. New products can omit the tone attribute and use Normal.
 
 | Display name | Identifier | Effect |
 | --- | --- | --- |
@@ -37,7 +39,7 @@ Import the generated CSS and set the appearance attributes on the product root:
 
 Use the identifiers from the tables above. Omitting the accent and tone attributes uses Sage and Normal. Set theme, accent, and tone on the same element; repeat all three attributes for independently themed islands. Change those attributes when implementing a product-owned switcher. App Stylr does not save the selection or add JavaScript to a consuming app.
 
-Use semantic properties such as `--ui-accent`, `--ui-link`, and `--ui-selected` rather than duplicating palette colors. The Reference's Accent palette and Surface tone selectors update the live specimens and record both selections in its URL. JSON and CSS downloads contain all presets.
+Use semantic properties such as `--ui-accent`, `--ui-link`, and `--ui-selected` rather than duplicating palette colors. The Reference toolbar exposes theme, accent palette and density. It uses Normal surfaces by default and omits the redundant normal-tone query parameter. Existing Reference URLs with an explicit `tone=lighter` or `tone=darker` override remain supported, including navigation and token inspection. JSON, CSS and Swift retain all surface-tone presets for existing consumers.
 
 ## Swift
 

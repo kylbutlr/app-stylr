@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.3] - 2026-11-06
+
+### Changed
+
+- Simplify the Reference toolbar to theme, accent palette and density, using the original Normal neutral surfaces by default.
+- Remove redundant Normal surface labels and tone parameters from ordinary Reference navigation.
+- Retain surface-tone tokens, CSS and Swift interfaces, downloads, and explicit legacy tone links for compatibility.
+
 ## [1.4.2] - 2026-11-06
 
 - Clarify that small-size icon review does not limit source or export resolution. Keep the scalable SVG master and verify 128px/512px presentation as well as 16px/32px legibility.
