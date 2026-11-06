@@ -9,7 +9,7 @@ import { repoRoot } from "../scripts/token-utils.mjs";
 async function fixture(run) {
   const root = await mkdtemp(path.join(os.tmpdir(), "app-stylr-output-"));
   try {
-    for (const directory of ["scripts", "tokens", "reference", "adapters", "assets"]) {
+    for (const directory of ["scripts", "tokens", "reference", "adapters", "assets", "styles"]) {
       await cp(path.join(repoRoot, directory), path.join(root, directory), { recursive: true });
     }
     const build = (output) => spawnSync(process.execPath, ["scripts/build-site.mjs", "--output", output], {
@@ -64,5 +64,35 @@ test("Reference builds reject symlinked source targets and symlinks inside previ
     await symlink(path.join(root, "tokens"), path.join(root, "output", "extra"));
     assert.equal(build("output").status, 1);
     assert.ok(await readFile(path.join(root, "tokens", "app-stylr.json")));
+  });
+});
+
+test("Portable builds include the workbench and canonical tokens beneath the requested host path", async () => {
+  await fixture(async (root) => {
+    const result = spawnSync(process.execPath, ["scripts/build-site.mjs", "--output", "output", "--canonical-url", "https://example.com/app-stylr", "--base-path", "/app-stylr"], { cwd: root, encoding: "utf8", timeout: 10_000 });
+    assert.equal(result.status, 0, result.stderr);
+    const html = await readFile(path.join(root, "output", "index.html"), "utf8");
+    assert.match(html, /src="\/app-stylr\/workbench.js"/);
+    assert.match(html, /href="\/app-stylr\/tokens\/app-stylr.json"/);
+    assert.match(html, /href="\/app-stylr\/assets\/example-app-icon-16.svg/);
+    const tokens = JSON.parse(await readFile(path.join(root, "output", "tokens", "app-stylr.json"), "utf8"));
+    assert.ok(tokens.accents.ember && tokens.accents.blue);
+    await accessFile(path.join(root, "output", "workbench.js"));
+  });
+});
+
+async function accessFile(file) { assert.ok((await readFile(file)).length > 0); }
+
+test("Root-hosted mirrors keep sharing images beneath the canonical Reference route", async () => {
+  await fixture(async root => {
+    const result = spawnSync(process.execPath, ["scripts/build-site.mjs", "--output", "mirror", "--canonical-url", "https://example.com/app-stylr", "--base-path", "/"], { cwd: root, encoding: "utf8", timeout: 10_000 });
+    assert.equal(result.status, 0, result.stderr);
+    const html = await readFile(path.join(root, "mirror", "index.html"), "utf8");
+    const socialImage = "https://example.com/app-stylr/assets/platform-icons/reference/web/icon-512.png";
+    assert.ok(html.includes(`<meta property="og:image" content="${socialImage}"`));
+    assert.ok(html.includes(`<meta name="twitter:image" content="${socialImage}"`));
+    assert.match(html, /src="\/workbench.js"/);
+    assert.match(html, /href="\/styles.css"/);
+    assert.match(html, /rel="canonical" href="https:\/\/example.com\/app-stylr"/);
   });
 });

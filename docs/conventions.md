@@ -19,7 +19,9 @@ These rules keep shared meanings stable across adapters and make an App Stylr ve
 - Use bundled Geist Sans and Geist Mono when they suit the product voice.
 - Use the [web text-wrapping default](#web-text-wrapping) to reduce awkwardly short final lines, with stable wrapping for editable text.
 - Use the provided spacing, radius, size, and motion scales as coordinated starting points.
-- Build product icons from the charcoal-to-mint base.
+- Keep Sage as the original default accent, with optional [accent palettes](./accent-palettes.md).
+- Use quiet neutral feedback surfaces with semantic colors on text and icons.
+- Build product icons from the flat charcoal base with a light identifying glyph, reviewing 16px first.
 - Adopt the Game Interface profile for canvas-first browser games.
 - Use the generated Chrome theme or Sparkle release checker.
 

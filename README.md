@@ -8,20 +8,20 @@ App Stylr brings together semantic design tokens, CSS and Swift adapters, bundle
 
 ## Preview
 
-<img src="docs/images/app-preview.webp" width="640" alt="App Stylr Visual Reference showing its semantic colors, typography, and interface specimens">
+<img src="docs/images/app-preview.webp" width="640" alt="App Stylr Reference workbench showing a Sage workspace, appearance controls, and shared typography and geometry">
 
 Visual Reference with illustrative interface specimens. [App overview](https://kylbutlr.com/apps/app-stylr).
 
 ## Release channels
 
-The installation examples use the **v1.2.0 GitHub tag** for the CSS, assets, command-line tools, and Swift package. They do not require publication to the npm registry. See the [release process](./docs/releases.md) for channel verification and publication.
+The installation examples use the **v1.3.0 GitHub tag** for the CSS, assets, command-line tools, and Swift package. They do not require publication to the npm registry. See the [release process](./docs/releases.md) for channel verification and publication.
 
 ## Quick start
 
 Requires Node.js 20 or newer for the command-line tools.
 
 ```sh
-npm install "github:kylbutlr/app-stylr#v1.2.0"
+npm install "github:kylbutlr/app-stylr#v1.3.0"
 ```
 
 Import the fonts and tokens once in your application stylesheet:
@@ -53,7 +53,7 @@ Bundle the CSS and fonts with your extension. Use a Shadow DOM root for injected
 
 ### Swift and SwiftUI
 
-Add `https://github.com/kylbutlr/app-stylr` in Swift Package Manager using the exact version `1.2.0`, then add the `AppStylr` product to your target.
+Add `https://github.com/kylbutlr/app-stylr` in Swift Package Manager using the exact version `1.3.0`, then add the `AppStylr` product to your target.
 
 ```swift
 import AppStylr
@@ -86,9 +86,19 @@ Swift tools 5.9 is required. Supported platform floors are macOS 10.15, iOS 13, 
 
 Layouts, navigation, and application components stay in your product. Read the [design guidance](./docs/design-practice.md) for adapting the foundation.
 
+## Accent palettes
+
+Sage keeps the original sage/mint default. Ember, Slate, Royal, Amber, and Monochrome offer alternate accents. Choose an accent, then independently choose Lighter, Normal, or Darker surfaces. Normal preserves the original theme values; status meanings and icons stay consistent. Set both selections beside the theme attribute, such as `data-app-stylr-accent="royal" data-app-stylr-tone="lighter"`. See [accent palettes and surface tones](./docs/accent-palettes.md).
+
+## Native form controls
+
+For optional native input and select styling, import `app-stylr/controls.css` after the tokens and add `data-app-stylr-controls` to your app root. The recipe supplies control padding, chevron clearance, focus and validation states, and a progressively enhanced option picker. Layout and application behavior remain yours. See [dropdowns and inputs](docs/form-controls.md) for keyboard behavior, density, light mode, and platform fallback limits.
+
 ## Generate icons
 
-Use one square master for all supported web and extension sizes:
+Use a flat charcoal tile and a light identifying glyph. Design at 16px first, then inspect larger exports. A dedicated `--source-16` drawing is optional; the icon stays the same across accent palettes.
+
+Generate the supported web and extension sizes:
 
 ```sh
 npx app-stylr-icons --source assets/app-icon.svg --output public/icons
@@ -114,7 +124,7 @@ The package also provides `app-stylr-reference` for portable reference builds, `
 
 - [Design practice](./docs/design-practice.md) and [conventions](./docs/conventions.md)
 - [Compatibility and upgrades](./docs/compatibility.md)
-- [v1.2.0 migration](./docs/migrations/v1.2.0.md) and [changelog](./CHANGELOG.md)
+- [v1.3.0 migration](./docs/migrations/v1.3.0.md) and [changelog](./CHANGELOG.md)
 - [Browser extensions](./docs/browser-extensions.md) and [platform icons](./docs/platform-icons.md)
 - [Public README guidelines](./docs/public-readmes.md) and [template](./templates/public-product-readme.md)
 - [Game Interface profile](./docs/games.md), [Balanced motion](./docs/balanced-motion.md), and [macOS release checks](./docs/macos-sparkle.md)

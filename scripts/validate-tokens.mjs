@@ -4,6 +4,7 @@ import {
   getPath,
   readJson,
   readTokens,
+  resolveTheme,
   repoRoot
 } from "./token-utils.mjs";
 
@@ -75,6 +76,61 @@ for (const [name, value] of Object.entries(tokens.spacing ?? {})) {
   assert(Number(name) === value, `spacing.${name} must equal its pixel value.`);
   assert(value > 0, `spacing.${name} must be positive.`);
 }
+
+const accentRoles = ["accent", "accentText", "accentStrong", "link", "focus", "selected", "selectedText", "info", "infoSurface"];
+const presetIds = ["mint", ...Object.keys(tokens.accents ?? {})];
+assert(JSON.stringify(Object.keys(tokens.accentPresets ?? {}).sort()) === JSON.stringify([...presetIds].sort()), "Every accent must have one display name and description.");
+const presetNames = Object.values(tokens.accentPresets ?? {}).map(preset => preset.name);
+assert(new Set(presetNames).size === presetNames.length, "Accent display names must be unique.");
+for (const [id, preset] of Object.entries(tokens.accentPresets ?? {})) {
+  assert(typeof preset.name === "string" && preset.name.trim().length > 0, `${id} must have a display name.`);
+  assert(typeof preset.description === "string" && preset.description.trim().length > 0, `${id} must have a description.`);
+}
+for (const [name, themes] of Object.entries(tokens.accents ?? {})) {
+  assert(name !== "mint", "The original mint default must not be replaced by an overlay.");
+  assert(/^[a-z][a-z0-9-]*$/.test(name), `Invalid accent name: ${name}.`);
+  for (const themeName of ["dark", "light"]) {
+    validateColorMap(`accents.${name}.${themeName}`, themes[themeName]);
+    assert(Object.keys(themes[themeName] ?? {}).every(role => accentRoles.includes(role)), `Accent ${name} must not replace neutral or success/warning/error roles.`);
+  }
+}
+
+const neutralRoles = ["canvas", "sidebar", "surface", "surfaceRaised", "border", "borderStrong"];
+assert(JSON.stringify(Object.keys(tokens.surfaceTonePresets ?? {})) === JSON.stringify(["lighter", "normal", "darker"]), "Surface tone presets must be Lighter, Normal, and Darker in order.");
+assert(JSON.stringify(Object.keys(tokens.surfaceTones ?? {}).sort()) === JSON.stringify(["darker", "lighter"]), "Only Lighter and Darker override the original Normal surfaces.");
+for (const [tone, modes] of Object.entries(tokens.surfaceTones ?? {})) {
+  for (const mode of ["dark", "light"]) {
+    validateColorMap(`surfaceTones.${tone}.${mode}`, modes[mode]);
+    assert(JSON.stringify(Object.keys(modes[mode] ?? {}).sort()) === JSON.stringify([...neutralRoles].sort()), `${tone}/${mode} must define exactly the six neutral surface roles.`);
+    for (const role of neutralRoles) {
+      const originalBrightness = contrastRatio(tokens.themes[mode][role], "#000000");
+      const brightness = contrastRatio(modes[mode]?.[role] ?? "#000000", "#000000");
+      assert(tone === "lighter" ? brightness >= originalBrightness : brightness <= originalBrightness, `${tone}/${mode}/${role} must follow the named brightness direction.`);
+    }
+  }
+}
+for (const [id, preset] of Object.entries(tokens.surfaceTonePresets ?? {})) {
+  assert(typeof preset.name === "string" && preset.name.trim().length > 0, `${id} must have a surface-tone display name.`);
+  assert(typeof preset.description === "string" && preset.description.trim().length > 0, `${id} must have a surface-tone description.`);
+}
+for (const accent of presetIds) for (const tone of Object.keys(tokens.surfaceTonePresets ?? {})) for (const mode of ["dark", "light"]) {
+  const theme = resolveTheme(tokens, { theme: mode, accent, tone });
+  assert(contrastRatio(theme.accentText, theme.accentStrong) >= 4.5, `${accent}/${tone}/${mode} accentStrong action labels must meet 4.5:1.`);
+  const resolved = { ...tokens, themes: { ...tokens.themes, [mode]: theme } };
+  for (const pair of tokens.accessibility.contrastPairs.filter(pair => pair.foreground.startsWith(`themes.${mode}.`))) {
+    const ratio = contrastRatio(getPath(resolved, pair.foreground), getPath(resolved, pair.background));
+    assert(ratio >= pair.minimum, `${accent}/${tone} ${pair.name} is ${ratio.toFixed(2)}:1, below ${pair.minimum}:1.`);
+  }
+  for (const background of ["canvas", "sidebar", "surface", "surfaceRaised"]) {
+    for (const foreground of ["text", "textMuted", "link", "success", "warning", "danger", "info", "focus", "borderStrong"]) {
+      const minimum = ["focus", "borderStrong"].includes(foreground) ? 3 : 4.5;
+      const ratio = contrastRatio(theme[foreground], theme[background]);
+      assert(ratio >= minimum, `${accent}/${tone}/${mode} ${foreground} on ${background} is ${ratio.toFixed(2)}:1, below ${minimum}:1.`);
+    }
+  }
+}
+validateColorMap("icon", { background: tokens.icon.background, foreground: tokens.icon.foreground });
+assert(contrastRatio(tokens.icon.foreground, tokens.icon.background) >= 4.5, "The flat icon glyph must contrast with its tile.");
 
 for (const [name, value] of Object.entries(tokens.radius ?? {})) {
   assert(value > 0, `radius.${name} must be positive.`);
