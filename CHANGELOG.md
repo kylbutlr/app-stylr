@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Clarify that small-size icon review does not limit source or export resolution. Keep the scalable SVG master and verify 128px/512px presentation as well as 16px/32px legibility.
+- Update the Chrome manifest template to retain small toolbar resources while routing management cards to 128px artwork and exposing the existing directly rendered 512px PNG. Document Chromium’s exact-48px selection behavior on high-density displays.
+
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
 ## [1.4.1] - 2026-11-05

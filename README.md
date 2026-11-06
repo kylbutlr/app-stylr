@@ -96,7 +96,7 @@ For optional native input and select styling, import `app-stylr/controls.css` af
 
 ## Generate icons
 
-Use a restrained monochrome graphite tile and a light identifying glyph. Design at 16px first, then inspect larger exports. A dedicated `--source-16` drawing is optional; the icon stays the same across accent palettes.
+Use a restrained monochrome graphite tile and a light identifying glyph. Keep a scalable SVG master, generate each PNG directly at its target size, and review both 16/32px legibility and 128/512px sharpness. Small-size review is a design constraint, not a resolution limit. A dedicated `--source-16` drawing is optional; the icon stays the same across accent palettes.
 
 Generate the supported web and extension sizes:
 

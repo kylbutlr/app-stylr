@@ -4,7 +4,7 @@ App Stylr generates browser-extension and installable-site icons from a square p
 
 ## Neutral icon treatment
 
-Keep the existing product symbol. Start at **16px**, adjusting detail, optical weight, and spacing for that size before inspecting larger exports. The default base uses a 1024px canvas and square, no outer inset, and a 160px radius, equivalent to 2.5px at 16px. The top-left `#383838` to bottom-right `#202020` fade and foreground `#F5F5F5` are recorded in the canonical icon tokens. Use two neutral stops, without a glow, gloss, highlight stripe or accent tint. Render each export at its actual size so the glyph stays crisp. Transparent corners remain intact.
+Keep the existing product symbol in a scalable SVG master. Start design review at **16px**, adjusting detail, optical weight, and spacing, then independently inspect the 32px, 128px and 512px exports. The small-size check does not limit source or output resolution. A 512px raster supports a 256px display at 2× density; the vector remains the source for larger uses. The default base uses a 1024px canvas and square, no outer inset, and a 160px radius, equivalent to 2.5px at 16px. The top-left `#383838` to bottom-right `#202020` fade and foreground `#F5F5F5` are recorded in the canonical icon tokens. Use two neutral stops, without a glow, gloss, highlight stripe or accent tint. Render each export at its actual size so the glyph stays crisp. Transparent corners remain intact.
 
 Icons stay the same across interface accent palettes. New artwork can start with [`app-icon-monochrome-base.svg`](../assets/app-icon-monochrome-base.svg). The solid [`app-icon-flat-base.svg`](../assets/app-icon-flat-base.svg), its `icon.background` fallback, and the legacy green [`app-icon-gradient-base.svg`](../assets/app-icon-gradient-base.svg) remain available for deliberate compatibility. The neutral treatment has its own `icon.monochromeGradient` values, CSS `--icon-monochrome-gradient`, and Swift `Icon.monochromeGradientStops`; it does not repurpose the existing colored gradient contract.
 
@@ -57,15 +57,17 @@ The `chrome/` and `web/` subdirectories are stable parts of the interface. Keep 
 
 ## Chrome browser extensions
 
-Chrome requires square raster extension icons and does not support SVGs in manifest icon declarations. The standard set is `16`, `32`, `48`, and `128` pixels. Generate into the extension's `icons` directory, then merge [`chrome-extension-icons.json`](../templates/chrome-extension-icons.json) into the extension manifest:
+Chrome requires square raster extension icons and does not support SVGs in manifest icon declarations. The generator retains the standard `16`, `32`, `48`, and `128` pixel PNGs and also renders `web/icon-512.png` directly from the same master. The Chrome template references that existing 512px PNG for larger uses; its directory name does not limit it to web pages. Generate into the extension's `icons` directory, then merge [`chrome-extension-icons.json`](../templates/chrome-extension-icons.json) into the extension manifest:
 
 ```sh
 npx app-stylr-icons --source assets/app-icon.svg --output icons
 ```
 
-- Use the 16px and 32px files for the toolbar action.
-- Use the complete set for the top-level manifest `icons` field.
-- Inspect 16px and 32px manually. If the product symbol disappears, simplify the master symbol instead of introducing unrelated artwork.
+- Declare 16, 32, 48 and 128px files in the toolbar action for small and high-density toolbar contexts.
+- Declare 16, 32, 128 and 512px in the top-level manifest. Keep the 48px file generated, but omit it from this top-level map so the management-page lookup selects the 128px resource.
+- Review 16/32px at actual size and 128/512px without enlarging a smaller bitmap. Preserve transparent corners and the same glyph silhouette.
+
+Chromium’s [management icon loader](https://github.com/chromium/chromium/blob/main/chrome/browser/extensions/api/developer_private/extension_info_generator.cc) asks for a resource at least 48px wide, then retains source image dimensions up to 128px. An exact 48px declaration therefore wins over a supplied 128px file and can look soft when its management card is enlarged on a high-density display. The supplied top-level mapping deliberately selects 128px for that surface. Supplying a 512px file alone does not override an existing exact 48px match. Confirm actual image selection in an installed browser.
 
 See Chrome's official [extension icon configuration](https://developer.chrome.com/docs/extensions/develop/ui/configure-icons) and [`icons` manifest reference](https://developer.chrome.com/docs/extensions/reference/manifest/icons).
 

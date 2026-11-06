@@ -7,7 +7,7 @@ const sections = {
   typography: ['Typography', 'Type & hierarchy', 'Geist Sans and Geist Mono, with a deliberate scale and quieter weights.'],
   controls: ['Controls', 'Controls & states', 'Real inputs, native choices, and inspectable states. Try changing a value or following the form with Tab.'],
   feedback: ['Feedback', 'Feedback & selection', 'Quiet surfaces, with text and symbols carrying each state’s meaning.'],
-  icons: ['Icons', 'Icon construction', 'Neutral graphite tiles, recognizable product glyphs, and exports designed from 16px upward.'],
+  icons: ['Icons', 'Icon construction', 'Neutral graphite tiles, recognizable product glyphs, and scalable masters, and crisp exports from 16px through 512px.'],
   layout: ['Layout & motion', 'Rhythm & response', 'Shared scales guide composition. Each product owns its layout.'],
   setup: ['Setup', 'Use the foundation', 'Install a pinned release, choose your theme and accent, and build the interface your product needs.']
 };
@@ -158,7 +158,7 @@ function overview(){return`<div class="overview-layout">
 <div class="inline-icons">${[16,32,48].map(s=>`<div>
 <span>${s}px</span>
 <img src="${asset(`assets/platform-icons/reference/chrome/icon-${s}.png`)}" width="${s}" height="${s}" alt="Example icon at ${s} pixels">
-</div>`).join('')}<p>Start at 16px.<br>Keep the identifying glyph.</p>
+</div>`).join('')}<p>Check 16px and 512px.<br>Keep the identifying glyph.</p>
 </div>
 </section>
 </div>`;}
@@ -374,7 +374,7 @@ function icons() {
     <section class="icon-size-panel">
       <div class="region-heading">
 <h2>Actual export sizes</h2>
-<span>Start at 16px</span>
+<span>Small-size legibility</span>
 </div>
       <div class="actual-sizes">${[16,32,48,128].map(size => `<div>
 <span>${size}px</span>
@@ -384,6 +384,15 @@ function icons() {
       <a class="text-link" href="${asset('assets/app-icon-monochrome-base.svg')}" download>Download monochrome base ↓</a>
     </section>
   </div>
+  <section class="specimen-section">
+    <div class="region-heading">
+<h2>Large and Retina exports</h2>
+<span>512px PNG at 256px / 2×</span>
+</div>
+    <p class="region-note">Keep a scalable SVG master and render every PNG directly at its target resolution. Small-size legibility and large-size sharpness are separate checks. Never enlarge a 16px or 32px bitmap to create larger artwork.</p>
+    <img class="large-icon-export" src="${asset('assets/platform-icons/reference/web/icon-512.png')}" width="256" height="256" alt="512 pixel example icon displayed at 256 pixels for Retina review">
+    <a class="text-link" href="${asset('assets/platform-icons/reference/web/icon-512.png')}" download>Download 512px PNG ↓</a>
+  </section>
   <section class="specimen-section">
     <div class="region-heading">
 <h2>Browser chrome</h2>
@@ -400,7 +409,7 @@ function icons() {
   </section>
   <details class="reference-details">
 <summary>Platform exports &amp; generation</summary>
-    <p>Use a square master for web, extension, touch, and installable-site exports. A compact source can supply the 16px export. Check actual browser and installed-app presentation separately.</p>
+    <p>Use a scalable square master for web, extension, touch, and installable-site exports. A compact source can supply the 16px export. Check actual browser and installed-app presentation separately.</p>
     <pre>npx app-stylr-icons --source assets/app-icon.svg --source-16 assets/app-icon-16.svg --output public/icons</pre>
     <a class="text-link" href="https://github.com/kylbutlr/app-stylr/blob/main/docs/platform-icons.md">Platform icon guidance ↗</a>
   </details>`;

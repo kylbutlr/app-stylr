@@ -21,7 +21,7 @@ These rules keep shared meanings stable across adapters and make an App Stylr ve
 - Use the provided spacing, radius, size, and motion scales as coordinated starting points.
 - Keep Sage as the original default accent, with optional [accent palettes](./accent-palettes.md).
 - Use quiet neutral feedback surfaces with semantic colors on text and icons.
-- Build product icons from the flat charcoal base with a light identifying glyph, reviewing 16px first.
+- Build product icons from the neutral Graphite base with a light identifying glyph. Retain a scalable vector master; review 16/32px legibility and 128/512px sharpness independently.
 - Adopt the Game Interface profile for canvas-first browser games.
 - Use the generated Chrome theme or Sparkle release checker.
 

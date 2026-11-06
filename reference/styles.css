@@ -2751,3 +2751,5 @@ dialog::backdrop {
 @media(pointer:coarse) {
   :root[data-app-stylr-density="compact"] { --specimen-control:var(--size-control); }
 }
+
+.large-icon-export { display:block; width:256px; height:auto; max-width:100%; margin:24px 0; }
