@@ -2530,6 +2530,9 @@ dialog::backdrop {
   .global-controls .density-control {
     min-width:0;
   }
+  .global-controls .accent-control {
+    grid-column:1 / -1;
+  }
   .global-controls select {
     width:100%;
     min-width:0;
