@@ -8,7 +8,7 @@ App Stylr brings together semantic design tokens, CSS and Swift adapters, bundle
 
 ## Preview
 
-<img src="docs/images/app-preview.webp" width="640" alt="App Stylr Visual Reference showing its semantic colors, typography, and interface specimens">
+<img src="docs/images/app-preview.webp" width="640" alt="App Stylr Reference workbench showing a Sage workspace, appearance controls, and shared typography and geometry">
 
 Visual Reference with illustrative interface specimens. [App overview](https://kylbutlr.com/apps/app-stylr).
 

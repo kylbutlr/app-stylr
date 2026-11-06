@@ -82,3 +82,17 @@ test("Portable builds include the workbench and canonical tokens beneath the req
 });
 
 async function accessFile(file) { assert.ok((await readFile(file)).length > 0); }
+
+test("Root-hosted mirrors keep sharing images beneath the canonical Reference route", async () => {
+  await fixture(async root => {
+    const result = spawnSync(process.execPath, ["scripts/build-site.mjs", "--output", "mirror", "--canonical-url", "https://example.com/app-stylr", "--base-path", "/"], { cwd: root, encoding: "utf8", timeout: 10_000 });
+    assert.equal(result.status, 0, result.stderr);
+    const html = await readFile(path.join(root, "mirror", "index.html"), "utf8");
+    const socialImage = "https://example.com/app-stylr/assets/platform-icons/reference/web/icon-512.png";
+    assert.ok(html.includes(`<meta property="og:image" content="${socialImage}"`));
+    assert.ok(html.includes(`<meta name="twitter:image" content="${socialImage}"`));
+    assert.match(html, /src="\/workbench.js"/);
+    assert.match(html, /href="\/styles.css"/);
+    assert.match(html, /rel="canonical" href="https:\/\/example.com\/app-stylr"/);
+  });
+});

@@ -204,7 +204,7 @@ async function main() {
     readFile(path.join(referenceRoot, "workbench.js"), "utf8")
   ]);
   const socialImageUrl = new URL(
-    publicPath(options.basePath, "assets/platform-icons/reference/web/icon-512.png"),
+    publicPath(normalizeBasePath(new URL(options.canonicalUrl).pathname), "assets/platform-icons/reference/web/icon-512.png"),
     options.canonicalUrl
   ).toString();
 

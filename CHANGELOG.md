@@ -34,6 +34,7 @@ All notable public changes to App Stylr are documented here. The project follows
 - Match the specimen header to the card’s inner corner radius so its background does not obscure the rounded border.
 - Reject source-directory overlap, unrelated output files, Git metadata, dependencies, and symbolic links before rebuilding a Reference artifact.
 - Use the public `AppStylrTokens.Spacing` namespace in the Swift quickstart.
+- Resolve mirror sharing images beneath the canonical Reference route, independently of the mirror's hosting path.
 
 GitHub tags and Swift Package Manager use the same source release. The hosted Reference is versioned separately by its deployment and the host's immutable dependency. See [the v1.3.0 migration](./docs/migrations/v1.3.0.md) and [release process](./docs/releases.md) for channel verification.
 
