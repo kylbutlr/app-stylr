@@ -2,7 +2,7 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
-## [1.3.0] - Unreleased
+## [1.3.0] - 2026-11-05
 
 ### Added
 
@@ -13,6 +13,7 @@ All notable public changes to App Stylr are documented here. The project follows
 - A reusable flat icon base, canonical icon foreground/background colors, and an optional `--source-16` compact drawing for icon generation.
 - CLI regressions for compact icon exports, safe output handling, portable host paths, repeat builds, and preservation of unrelated files.
 - Accent, form-control, migration, and optional text-wrapping/Balanced composition guidance.
+- A Visual Reference snapshot near the top of the README.
 
 ### Changed
 
@@ -34,7 +35,7 @@ All notable public changes to App Stylr are documented here. The project follows
 - Reject source-directory overlap, unrelated output files, Git metadata, dependencies, and symbolic links before rebuilding a Reference artifact.
 - Use the public `AppStylrTokens.Spacing` namespace in the Swift quickstart.
 
-This source version is prepared for review. Publishing its tag/package and updating a host's immutable dependency are separate release steps. See [the v1.3.0 migration](./docs/migrations/v1.3.0.md).
+GitHub tags and Swift Package Manager use the same source release. The hosted Reference is versioned separately by its deployment and the host's immutable dependency. See [the v1.3.0 migration](./docs/migrations/v1.3.0.md) and [release process](./docs/releases.md) for channel verification.
 
 ## [1.2.0] - 2026-09-19
 
