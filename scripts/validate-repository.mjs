@@ -486,16 +486,16 @@ assert(siteManifest.basePath === "/", "Default Reference base path must be root.
 
 const chromeIconTemplate = await readJson(chromeIconTemplatePath);
 assert(
-  JSON.stringify(Object.keys(chromeIconTemplate.icons)) === JSON.stringify(["16", "32", "48", "128"]),
-  "Chrome manifest template must declare 16, 32, 48, and 128 pixel icons."
+  JSON.stringify(Object.keys(chromeIconTemplate.icons)) === JSON.stringify(["16", "32", "128", "512"]),
+  "Chrome management icons must use high-resolution resources without a 48px match."
 );
 assert(
-  Object.values(chromeIconTemplate.icons).every((iconPath) => iconPath.startsWith("icons/chrome/")),
-  "Chrome manifest icon paths must target the generated icons/chrome directory."
+  Object.entries(chromeIconTemplate.icons).every(([size, iconPath]) => iconPath === (size === "512" ? "icons/web/icon-512.png" : `icons/chrome/icon-${size}.png`)),
+  "Chrome manifest icon paths must reference the directly rendered platform exports."
 );
 assert(
-  JSON.stringify(Object.keys(chromeIconTemplate.action.default_icon)) === JSON.stringify(["16", "32"]),
-  "Chrome action template must declare 16 and 32 pixel toolbar icons."
+  JSON.stringify(Object.keys(chromeIconTemplate.action.default_icon)) === JSON.stringify(["16", "32", "48", "128"]),
+  "Chrome toolbar action must retain small and high-density icon resources."
 );
 
 const webIconTemplate = await readJson(webIconTemplatePath);

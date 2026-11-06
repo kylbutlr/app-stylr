@@ -1,0 +1,39 @@
+{
+  "capturedAt": "2026-11-06T08:34:07.816Z",
+  "sourceVersion": "1.4.2",
+  "sourceRevision": "5f8a2f4916abe100dd17abcae45ce4aff289ba6d",
+  "appStylrVersion": "1.4.2",
+  "fictionalData": true,
+  "capture": {
+    "width": 1280,
+    "height": 900,
+    "method": "Viewport-only PNG frames of the actual generated Reference in one isolated headless Chromium tab."
+  },
+  "animation": {
+    "width": 960,
+    "height": 675,
+    "frames": 4,
+    "durationMs": 6400
+  },
+  "source": "Actual Colors workbench. Selecting Sage, Ember and Royal updates the existing live app specimen; the loop returns to Sage. Dark/Normal/Comfortable preset.",
+  "edits": "Resized screenshots and encoded GIF/WebP with presentation pauses. No retouching, text replacement or invented controls.",
+  "coverageLimits": "A visual demonstration of the Reference workbench, not evidence of an installed consumer application.",
+  "rawFrameSHA256": [
+    "3a8b6042158f4984557a45b6d51c913d4d37cb2855778fe0745aed1421908122",
+    "c1fbeb74d01570bb2e8155b4d775a257f2878ff8915f8856e982a8f02200b701",
+    "d74a06391ce8628f474bab463f8f8fd4508938a68aa1d9905ee346d1c56986d1",
+    "fbf4c59b8f2b1eb73e2ea1ee0336bf9bf0725f77feac17f5e911f1b6f78b8222"
+  ],
+  "files": [
+    {
+      "file": "app-preview.webp",
+      "bytes": 33492,
+      "sha256": "14478b7817e02b44df966d928ce43a264dab83d139ebc0049a21b936f14624e8"
+    },
+    {
+      "file": "app-preview.gif",
+      "bytes": 116204,
+      "sha256": "777106743f8f96ec14a962dcea7dd3ef17b963c40c688227324e7cf459a0a962"
+    }
+  ]
+}
