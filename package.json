@@ -1,6 +1,6 @@
 {
   "name": "app-stylr",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Shared design tokens, typography, and icons for web, browser-extension, and macOS products.",
   "license": "MIT",
   "author": "Kyle Butler",

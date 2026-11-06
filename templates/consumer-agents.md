@@ -1,6 +1,6 @@
 ## App Stylr
 
-This application follows the [App Stylr v1.4.0](https://github.com/kylbutlr/app-stylr/tree/v1.4.0).
+This application follows the [App Stylr v1.4.1](https://github.com/kylbutlr/app-stylr/tree/v1.4.1).
 
 ### Required compatibility contract
 

@@ -74,7 +74,9 @@ test("Portable builds include the workbench and canonical tokens beneath the req
     const html = await readFile(path.join(root, "output", "index.html"), "utf8");
     assert.match(html, /src="\/app-stylr\/workbench.js"/);
     assert.match(html, /href="\/app-stylr\/tokens\/app-stylr.json"/);
-    assert.match(html, /href="\/app-stylr\/assets\/example-app-icon-16.svg/);
+    assert.match(html, /id="favicon" rel="icon" href="\/app-stylr\/assets\/app-icon-monochrome-base\.svg\?v=graphite-blank-1"/);
+    assert.match(html, /rel="icon" href="\/app-stylr\/assets\/favicon-32\.png\?v=graphite-blank-1"/);
+    assert.doesNotMatch(html, /rel="icon"[^>]*example-app-icon/);
     const tokens = JSON.parse(await readFile(path.join(root, "output", "tokens", "app-stylr.json"), "utf8"));
     assert.ok(tokens.accents.ember && tokens.accents.blue);
     await accessFile(path.join(root, "output", "workbench.js"));
@@ -94,5 +96,8 @@ test("Root-hosted mirrors keep sharing images beneath the canonical Reference ro
     assert.match(html, /src="\/workbench.js"/);
     assert.match(html, /href="\/styles.css"/);
     assert.match(html, /rel="canonical" href="https:\/\/example.com\/app-stylr"/);
+    assert.match(html, /id="favicon" rel="icon" href="\/assets\/app-icon-monochrome-base\.svg\?v=graphite-blank-1"/);
+    assert.match(html, /rel="icon" href="\/assets\/favicon-32\.png\?v=graphite-blank-1"/);
+    assert.doesNotMatch(html, /rel="icon"[^>]*example-app-icon/);
   });
 });

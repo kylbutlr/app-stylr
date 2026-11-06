@@ -14,14 +14,14 @@ Visual Reference with illustrative interface specimens. [App overview](https://k
 
 ## Release channels
 
-The installation examples use the **v1.4.0 GitHub tag** for the CSS, assets, command-line tools, and Swift package. They do not require publication to the npm registry. See the [release process](./docs/releases.md) for channel verification and publication.
+The installation examples use the **v1.4.1 GitHub tag** for the CSS, assets, command-line tools, and Swift package. They do not require publication to the npm registry. See the [release process](./docs/releases.md) for channel verification and publication.
 
 ## Quick start
 
 Requires Node.js 20 or newer for the command-line tools.
 
 ```sh
-npm install "github:kylbutlr/app-stylr#v1.4.0"
+npm install "github:kylbutlr/app-stylr#v1.4.1"
 ```
 
 Import the fonts and tokens once in your application stylesheet:
@@ -53,7 +53,7 @@ Bundle the CSS and fonts with your extension. Use a Shadow DOM root for injected
 
 ### Swift and SwiftUI
 
-Add `https://github.com/kylbutlr/app-stylr` in Swift Package Manager using the exact version `1.4.0`, then add the `AppStylr` product to your target.
+Add `https://github.com/kylbutlr/app-stylr` in Swift Package Manager using the exact version `1.4.1`, then add the `AppStylr` product to your target.
 
 ```swift
 import AppStylr
@@ -124,7 +124,7 @@ The package also provides `app-stylr-reference` for portable reference builds, `
 
 - [Design practice](./docs/design-practice.md) and [conventions](./docs/conventions.md)
 - [Compatibility and upgrades](./docs/compatibility.md)
-- [v1.4.0 migration](./docs/migrations/v1.4.0.md) and [changelog](./CHANGELOG.md)
+- [v1.4.1 migration](./docs/migrations/v1.4.1.md), [v1.4.0 migration](./docs/migrations/v1.4.0.md), and [changelog](./CHANGELOG.md)
 - [Browser extensions](./docs/browser-extensions.md) and [platform icons](./docs/platform-icons.md)
 - [Public README guidelines](./docs/public-readmes.md) and [template](./templates/public-product-readme.md)
 - [Game Interface profile](./docs/games.md), [Balanced motion](./docs/balanced-motion.md), and [macOS release checks](./docs/macos-sparkle.md)

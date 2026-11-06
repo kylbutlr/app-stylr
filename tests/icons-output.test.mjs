@@ -9,6 +9,22 @@ import { repoRoot } from "../scripts/token-utils.mjs";
 
 const square = (color, width = 16, height = width) => `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="${color}"/></svg>`;
 
+test("The Reference favicon is a blank neutral tile while example exports retain their glyph", async () => {
+  const result = spawnSync(process.execPath, ["scripts/generate-icons.mjs", "--check"], { cwd: repoRoot, encoding: "utf8", timeout: 20_000 });
+  assert.equal(result.status, 0, result.stderr);
+  const base = await readFile(path.join(repoRoot, "assets", "app-icon-monochrome-base.svg"), "utf8");
+  assert.doesNotMatch(base, /<(?:path|circle|ellipse|polygon|polyline|text|line)\b/);
+  const pixels = await sharp(path.join(repoRoot, "assets", "favicon-32.png")).ensureAlpha().raw().toBuffer();
+  for (let index = 0; index < pixels.length; index += 4) {
+    if (!pixels[index + 3]) continue;
+    assert.equal(pixels[index], pixels[index + 1]);
+    assert.equal(pixels[index + 1], pixels[index + 2]);
+    assert.ok(pixels[index] <= 56, "The Reference favicon must not contain a light foreground glyph.");
+  }
+  const example = await sharp(path.join(repoRoot, "assets", "platform-icons", "reference", "chrome", "icon-16.png")).removeAlpha().raw().toBuffer();
+  assert.ok(example.some(value => value > 200), "The separate example still demonstrates a light glyph.");
+});
+
 test("A dedicated 16px source only replaces the 16px export and participates in stale checks", async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), "app-stylr-small-icon-"));
   try {
