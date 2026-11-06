@@ -2,7 +2,7 @@
 
 All notable public changes to App Stylr are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## [1.4.1] - 2026-11-05
 
 ### Fixed
 
