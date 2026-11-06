@@ -96,7 +96,7 @@ For optional native input and select styling, import `app-stylr/controls.css` af
 
 ## Generate icons
 
-Use a flat charcoal tile and a light identifying glyph. Design at 16px first, then inspect larger exports. A dedicated `--source-16` drawing is optional; the icon stays the same across accent palettes.
+Use a restrained monochrome graphite tile and a light identifying glyph. Design at 16px first, then inspect larger exports. A dedicated `--source-16` drawing is optional; the icon stays the same across accent palettes.
 
 Generate the supported web and extension sizes:
 

@@ -82,6 +82,7 @@
   --icon-background: #262626;
   --icon-foreground: #F5F5F5;
   --icon-gradient: linear-gradient(135deg, #0D0D0D 0%, #3B4145 48%, #899F98 100%);
+  --icon-monochrome-gradient: linear-gradient(135deg, #383838 0%, #202020 100%);
 }
 
 :root,

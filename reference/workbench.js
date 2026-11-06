@@ -7,7 +7,7 @@ const sections = {
   typography: ['Typography', 'Type & hierarchy', 'Geist Sans and Geist Mono, with a deliberate scale and quieter weights.'],
   controls: ['Controls', 'Controls & states', 'Real inputs, native choices, and inspectable states. Try changing a value or following the form with Tab.'],
   feedback: ['Feedback', 'Feedback & selection', 'Quiet surfaces, with text and symbols carrying each state’s meaning.'],
-  icons: ['Icons', 'Icon construction', 'Flat charcoal tiles, recognizable product glyphs, and exports designed from 16px upward.'],
+  icons: ['Icons', 'Icon construction', 'Neutral graphite tiles, recognizable product glyphs, and exports designed from 16px upward.'],
   layout: ['Layout & motion', 'Rhythm & response', 'Shared scales guide composition. Each product owns its layout.'],
   setup: ['Setup', 'Use the foundation', 'Install a pinned release, choose your theme and accent, and build the interface your product needs.']
 };
@@ -353,17 +353,17 @@ function icons() {
   return `<div class="icon-layout">
     <section class="icon-construction specimen">
       <div class="region-heading">
-<h2>Flat icon construction</h2>
+<h2>Monochrome icon construction</h2>
 <span>Example glyph</span>
 </div>
       <div class="master-icons">
         <div>
 <span>Example symbol</span>
-<img src="${asset('assets/example-app-icon.svg')}" alt="Light example checkmark on a flat charcoal tile" width="192" height="192">
+<img src="${asset('assets/example-app-icon.svg')}" alt="Light example checkmark on a graphite tile" width="192" height="192">
 </div>
         <div>
 <span>Reusable base</span>
-<img src="${asset('assets/app-icon-flat-base.svg')}" alt="Flat charcoal icon base" width="192" height="192">
+<img src="${asset('assets/app-icon-monochrome-base.svg')}" alt="Monochrome graphite icon base" width="192" height="192">
 </div>
       </div>
       <div class="icon-measures">${[['Canvas', canonical.icon.canvas], ['Square', canonical.icon.square], ['Radius', canonical.icon.radius], ['Inset', canonical.icon.inset]].map(([name, value]) => `<div>
@@ -380,8 +380,8 @@ function icons() {
 <span>${size}px</span>
 <img src="${asset(`assets/platform-icons/reference/chrome/icon-${size}.png`)}" width="${size}" height="${size}" alt="Example icon at ${size} pixels">
 </div>`).join('')}</div>
-      <p class="region-note">Keep your product's identifying glyph. Use flat charcoal and a light foreground, with a dedicated 16px drawing when needed. Accent palettes do not recolor the icon. The checkmark demonstrates the recipe.</p>
-      <a class="text-link" href="${asset('assets/app-icon-flat-base.svg')}" download>Download flat base ↓</a>
+      <p class="region-note">Keep your product's identifying glyph. Use a restrained graphite gradient and a light foreground, with a dedicated 16px drawing when needed. Accent palettes do not recolor the icon. The checkmark demonstrates the recipe.</p>
+      <a class="text-link" href="${asset('assets/app-icon-monochrome-base.svg')}" download>Download monochrome base ↓</a>
     </section>
   </div>
   <section class="specimen-section">

@@ -1,12 +1,12 @@
 # Platform icon exports
 
-App Stylr generates browser-extension and installable-site icons from a square product master, with an optional dedicated 16px source. The recommended recipe is a flat charcoal tile and a light identifying glyph.
+App Stylr generates browser-extension and installable-site icons from a square product master, with an optional dedicated 16px source. The recommended recipe is a restrained monochrome graphite gradient and a light identifying glyph.
 
-## Flat icon treatment
+## Neutral icon treatment
 
-Keep the existing product symbol. Start at **16px**, adjusting detail, optical weight, and spacing for that size before inspecting larger exports. The default base uses a 1024px canvas and square, no outer inset, and a 160px radius, equivalent to 2.5px at 16px. Charcoal `#262626` and foreground `#F5F5F5` are recorded in the canonical icon tokens. Transparent corners remain intact.
+Keep the existing product symbol. Start at **16px**, adjusting detail, optical weight, and spacing for that size before inspecting larger exports. The default base uses a 1024px canvas and square, no outer inset, and a 160px radius, equivalent to 2.5px at 16px. The top-left `#383838` to bottom-right `#202020` fade and foreground `#F5F5F5` are recorded in the canonical icon tokens. Use two neutral stops, without a glow, gloss, highlight stripe or accent tint. Render each export at its actual size so the glyph stays crisp. Transparent corners remain intact.
 
-Icons stay the same across interface accent palettes. Avoid gradients and accent tinting in the default recipe. The legacy [`app-icon-gradient-base.svg`](../assets/app-icon-gradient-base.svg) and gradient tokens remain available for existing imports; new artwork can start with [`app-icon-flat-base.svg`](../assets/app-icon-flat-base.svg).
+Icons stay the same across interface accent palettes. New artwork can start with [`app-icon-monochrome-base.svg`](../assets/app-icon-monochrome-base.svg). The solid [`app-icon-flat-base.svg`](../assets/app-icon-flat-base.svg), its `icon.background` fallback, and the legacy green [`app-icon-gradient-base.svg`](../assets/app-icon-gradient-base.svg) remain available for deliberate compatibility. The neutral treatment has its own `icon.monochromeGradient` values, CSS `--icon-monochrome-gradient`, and Swift `Icon.monochromeGradientStops`; it does not repurpose the existing colored gradient contract.
 
 The checkmark is a reusable example, not a mandatory product logo. Preserve a product's identifying glyph rather than replacing it with the example. Platform-specific presentation remains product-owned.
 
@@ -25,7 +25,7 @@ Install the pinned App Stylr release, then run the packaged generator from the c
 npx app-stylr-icons --source assets/app-icon.svg --output public/icons
 ```
 
-The source may be SVG, PNG, or another format supported by Sharp. It must be square because every generated target is square. A product may start from [`app-icon-flat-base.svg`](../assets/app-icon-flat-base.svg) or supply its own artwork. Keep any intentional transparent space consistent across exports.
+The source may be SVG, PNG, or another format supported by Sharp. It must be square because every generated target is square. A product may start from [`app-icon-monochrome-base.svg`](../assets/app-icon-monochrome-base.svg) or supply its own artwork. Keep any intentional transparent space consistent across exports.
 
 For a dedicated compact drawing, add `--source-16 assets/app-icon-16.svg`. Only the 16px export uses that source; all larger sizes use the main master. Both sources are checked before generation begins. The package example automatically uses its included compact checkmark when generating from the default example source.
 

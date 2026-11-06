@@ -47,6 +47,7 @@ try {
     "reference/styles.css",
     "reference/workbench.js",
     "assets/app-icon-flat-base.svg",
+    "assets/app-icon-monochrome-base.svg",
     "assets/example-app-icon-16.svg",
     "tokens/app-stylr.json",
     "tokens/app-stylr.schema.json"
