@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.4] - 2026-11-07
+
+### Fixed
+
+- Update the image-processing dependency to sharp 0.35.5. Token values, public commands, and platform compatibility remain unchanged.
+
 ## [1.4.3] - 2026-11-06
 
 ### Changed

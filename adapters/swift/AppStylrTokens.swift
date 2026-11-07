@@ -3,7 +3,7 @@
 import SwiftUI
 
 public enum AppStylrTokens {
-  public static let version = "1.4.3"
+  public static let version = "1.4.4"
 
   public enum Brand {
     public static let ink = Color(red: 0.066667, green: 0.066667, blue: 0.066667)

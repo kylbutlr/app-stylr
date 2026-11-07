@@ -12,7 +12,7 @@ All channels use the same semantic version. A Git tag alone does not prove npm p
 
 ## Versioned installation
 
-The README, Reference, consumer template, schema ID, and consumer instructions target the `v1.4.3` GitHub tag. These links become usable only when that tag is public. Verify an empty-directory Git install and a clean Swift consumer against the public tag before declaring this channel released. Do not infer npm publication from source version numbers or GitHub tags.
+The README, Reference, consumer template, schema ID, and consumer instructions target the `v1.4.4` GitHub tag. These links become usable only when that tag is public. Verify an empty-directory Git install and a clean Swift consumer against the public tag before declaring this channel released. Do not infer npm publication from source version numbers or GitHub tags.
 
 When restoring an existing release after repository-history consolidation, tag the preserved release contents without making removed history reachable again. New releases tag their reviewed merge commit. Consumers pinned to an old commit must migrate to the surviving tag before their next install or build.
 
